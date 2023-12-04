@@ -48,7 +48,7 @@ ROOT_URLCONF = "petpreneur.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -90,9 +90,11 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 LANGUAGE_CODE = "ru"
-TIME_ZONE = "UTC"
+TIME_ZONE = "Europe/Moscow"
 USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = "static/"
+STATIC_ROOT = BASE_DIR / "static"
+STATICFILES_DIRS = [BASE_DIR / "static_dev"]
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
