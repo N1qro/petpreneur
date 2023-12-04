@@ -1,0 +1,25 @@
+[flake8]
+exclude =
+    .git,
+    __pycache__,
+    old,
+    build,
+    dist,
+    venv,
+    .venv,
+    */migrations/*,
+
+inline-quotes = double
+import-order-style = google
+application-import-order = stdlib,third-party,first-party,application
+application-import-names = 
+    core,
+    petpreneur,
+    about,
+    categories,
+    feedback,
+    home,
+    jobs,
+    matcher,
+    resume,
+    users

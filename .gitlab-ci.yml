@@ -1,0 +1,33 @@
+stages:
+  - dependencies
+  - linting
+  - formatting
+  - testing
+
+pipinstall:
+  stage: dependencies
+  image: python:latest
+  script:
+    - cd requirements
+    - pip install -r prod.txt
+    - pip install -r test.txt
+    - pip install -r dev.txt
+
+flake8:
+  stage: linting
+  image: registry.gitlab.com/pipeline-components/flake8:latest
+  script:
+    - flake8 --verbose --config=.flake8 .
+
+black:
+  stage: formatting
+  image: registry.gitlab.com/pipeline-components/black:latest
+  script:
+    - black --check -l 79 .
+
+django-tests:
+  stage: testing
+  image: python:latest
+  script:
+    - cd lyceum
+    - python manage.py test
