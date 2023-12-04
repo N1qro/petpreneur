@@ -29,5 +29,5 @@ django-tests:
   stage: testing
   image: python:latest
   script:
-    - cd lyceum
+    - cd petpreneur
     - python manage.py test
