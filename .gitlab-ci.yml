@@ -1,22 +1,13 @@
 stages:
-  - dependencies
   - linting
   - formatting
   - testing
-
-pipinstall:
-  stage: dependencies
-  image: python:latest
-  script:
-    - cd requirements
-    - pip install -r prod.txt
-    - pip install -r test.txt
-    - pip install -r dev.txt
 
 flake8:
   stage: linting
   image: registry.gitlab.com/pipeline-components/flake8:latest
   script:
+    - pip install -r requirements/test.txt
     - flake8 --verbose --config=.flake8 .
 
 black:
@@ -29,5 +20,8 @@ django-tests:
   stage: testing
   image: python:latest
   script:
-    - cd petpreneur
+    - cd requirements
+    - pip install -r prod.txt
+    - pip install -r test.txt
+    - cd ../petpreneur
     - python manage.py test
