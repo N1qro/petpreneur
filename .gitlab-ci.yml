@@ -14,14 +14,12 @@ black:
   stage: formatting
   image: registry.gitlab.com/pipeline-components/black:latest
   script:
-    - black --check -l 79 .
+    - black --check --config .black .
 
 django-tests:
   stage: testing
   image: python:latest
   script:
-    - cd requirements
-    - pip install -r prod.txt
-    - pip install -r test.txt
-    - cd ../petpreneur
+    - pip install -r requirements/test.txt
+    - cd petpreneur
     - python manage.py test
