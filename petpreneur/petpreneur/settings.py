@@ -1,19 +1,30 @@
+import os
 import pathlib
 
-import environ
+import dotenv
+
+dotenv.load_dotenv()
+
+
+def load_bool(name, default):
+    env_value = os.getenv(name, str(default)).lower()
+    return env_value in ("t", "true", "yes", "1", "y")
 
 
 BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
-env = environ.Env(
-    DJANGO_DEBUG=(bool, True),
-    DJANGO_SECRET_KEY=(str, "DJANGO_DEFAULT_KEY"),
-    DJANGO_ALLOWED_HOSTS=(list, ["127.0.0.1", "localhost"]),
-)
-env.read_env(BASE_DIR.parent / ".env")
 
-SECRET_KEY = env("DJANGO_SECRET_KEY")
-DEBUG = env("DJANGO_DEBUG")
-ALLOWED_HOSTS = env("DJANGO_ALLOWED_HOSTS")
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "secret_key")
+
+DEBUG = load_bool("DJANGO_DEBUG", True)
+
+ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "*").split(",")
+
+MAIL = os.getenv("DJANGO_MAIL", "example@mail.com")
+
+if DEBUG:
+    DEFAULT_USER_IS_ACTIVE = load_bool("DEFAULT_USER_IS_ACTIVE", True)
+else:
+    DEFAULT_USER_IS_ACTIVE = load_bool("DEFAULT_USER_IS_ACTIVE", False)
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -22,6 +33,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django_cleanup.apps.CleanupConfig",
+    "sorl.thumbnail",
     "about.apps.AboutConfig",
     "categories.apps.CategoriesConfig",
     "core.apps.CoreConfig",
@@ -42,6 +55,12 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
+
+if DEBUG:
+    INSTALLED_APPS.append("debug_toolbar")
+    MIDDLEWARE.append("debug_toolbar.middleware.DebugToolbarMiddleware")
+    INTERNAL_IPS = ["127.0.0.1"]
 
 ROOT_URLCONF = "petpreneur.urls"
 
@@ -72,12 +91,15 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        "NAME": "django.contrib.auth.password_validation."
-        "UserAttributeSimilarityValidator",
+        "NAME": (
+            "django.contrib.auth.password_validation."
+            "UserAttributeSimilarityValidator"
+        ),
     },
     {
-        "NAME": "django.contrib.auth.password_validation."
-        "MinimumLengthValidator",
+        "NAME": (
+            "django.contrib.auth.password_validation.MinimumLengthValidator"
+        ),
     },
     {
         "NAME": "django.contrib.auth.password_validation."
@@ -89,12 +111,28 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTH_USER_MODEL = "users.User"
+
+LOGIN_URL = "/auth/login/"
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = LOGIN_URL
+
 LANGUAGE_CODE = "ru"
 TIME_ZONE = "Europe/Moscow"
 USE_I18N = True
 USE_TZ = True
 
+MEDIA_ROOT = BASE_DIR / "media"
+MEDIA_URL = "/media/"
+
 STATIC_URL = "static/"
 STATIC_ROOT = BASE_DIR / "static"
 STATICFILES_DIRS = [BASE_DIR / "static_dev"]
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+
+EMAIL_FILE_PATH = BASE_DIR / "send_mail"
+
+
+__all__ = []
