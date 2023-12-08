@@ -1,4 +1,4 @@
-{% load static %}
+{% load static buttons %}
 <header>
     <div class="navbar--brand">
         <img src="{% static "img/logo.svg" %}" alt="site-brand">
@@ -9,5 +9,5 @@
         <a class="text-style-navtext" href="#">Биржа проектов</a>
         <a class="text-style-navtext" href="#">Секция 3</a>
     </nav>
-    {% include "includes/button.html" %}
+    {% link_button "Регистрация" %}
 </header>
