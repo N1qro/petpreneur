@@ -1,5 +1,5 @@
-import django.db.models
 import django.core.exceptions
+import django.db.models
 import django.utils.text
 import transliterate
 
@@ -39,7 +39,7 @@ class Subcategory(django.db.models.Model):
         Category,
         on_delete=django.db.models.CASCADE,
         verbose_name="категория",
-        related_name="subcategory"
+        related_name="subcategory",
     )
 
     name = django.db.models.CharField(
@@ -104,3 +104,6 @@ class Skill(django.db.models.Model):
     def save(self, *args, **kwargs):
         self.normalized_name = normalize_name(self.name)
         super().save(*args, **kwargs)
+
+
+__all__ = []
