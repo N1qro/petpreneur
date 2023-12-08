@@ -10,7 +10,9 @@ ButtonColor = typing.Literal["default", "black"]
 
 @register.inclusion_tag("includes/button.html")
 def button(
-    text: str, state: StateType = "primary", color: ButtonColor = "default",
+    text: str,
+    state: StateType = "primary",
+    color: ButtonColor = "default",
 ):
     return {
         "tag": "button",
