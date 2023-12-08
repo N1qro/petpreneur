@@ -5,7 +5,7 @@ import sorl.thumbnail
 
 class User(django.contrib.auth.models.AbstractUser):
     def _profile_imgae_upload_to(self, filename):
-        return f"users/" f"images/{self.id}/" f"{filename}"
+        return f"users/images/{self.id}/{filename}"
 
     email = django.db.models.EmailField(
         verbose_name="почта",
@@ -19,9 +19,8 @@ class User(django.contrib.auth.models.AbstractUser):
         blank=True,
     )
 
-    contacts = django.db.models.CharField(
+    contacts = django.db.models.TextField(
         verbose_name="контакты",
-        max_length=150,
         blank=True,
         null=True,
     )
