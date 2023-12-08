@@ -1,0 +1,28 @@
+/* button */
+
+.button {
+    padding: 7px 19px;
+    border-radius: 17px;
+    border: 2px solid var(--background-color);
+    width: fit-content;
+}
+
+.button-primary {
+
+}
+
+.button-hovered {
+    background-color: var(--background-color);
+}
+
+.button-focused {
+
+}
+
+.button-color-default {
+    --background-color: #6C63FF;
+}
+
+.button-color-black {
+    --background-color: #000;
+}
