@@ -1,11 +1,40 @@
 {% extends "base.html" %}
+{% load static buttons %}
 
 {% block content %}
-    <h1>Загляните в шаблон "home/index.html"</h1>
-    <p>Если вам нужен интерфейс для работы, то можете накидать свой</p>
-    <p>Позже я подправлю =)</p>
-    <br>
-    <hr>
-    <br>
-    <p>Но всё же лучше пока заниматься структурой бд, архитектурой приложений и т.д. Это точно важнее, чем кодинг.</p>
+    <section class="hero">
+        <h2>Платформа для совместных проектов и потенциальных стартапов</h2>
+        <p>Найдите единомышленников для вашего проекта или реализуйте себя в другом</p>
+        <img src="{% static "img/landing_main.png" %}" alt="landing-main">
+    </section>
+    <section class="quote-of-the-day">
+        <p id="quote-title">Фраза дня:</p>
+        <p>"Talent wins games, but teamwork and intelligence win championships." - Michael Jordan</p>
+    </section>
+    <section class="grid-split-2">
+        <div>
+            <h2>Оставьте заявку о поиске людей на свой проект</h2>
+            <p>lorem lorem lorem lorem lorem lorem lorem lorem</p>
+        </div>
+        <img src="{% static "img/landing_note.png" %}" alt="landing-note">
+    </section>
+    <section class="grid-split-2">
+        <img src="{% static "img/landing_resume.png" %}" alt="landing-resume">
+        <div>
+            <h2>Выложи своё резюме с навыками в профиль</h2>
+            <p>lorem lorem lorem lorem lorem lorem lorem lorem</p>
+        </div>
+    </section>
+    <section class="grid-split-2">
+        <div>
+            <h2>Запусти свой проект в кратчайшие сроки</h2>
+            <p>lorem lorem lorem lorem lorem lorem lorem lorem</p>
+        </div>
+        <img class="temp-size-restrict" src="{% static "img/landing_launch.png" %}" alt="landing-launch">
+    </section>
+    <section class="call-to-action">
+        <p>Вы готовы?</p>
+        <h1>Станьте частью чего-то большего</h1>
+        {% link_button "Подобрать команду" "#" state="hovered" color="black" %}
+    </section>
 {% endblock content %}
