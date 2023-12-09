@@ -1,13 +1,25 @@
 {% load static buttons %}
 <header>
-    <div class="navbar--brand">
+    <a href="{% url "home:home" %}" class="navbar--brand">
         <img src="{% static "img/logo.svg" %}" alt="site-brand">
         <h3 class="navbar--text">petpreneur</h3>
-    </div>
+    </a>
     <nav>
         <a class="text-style-navtext" href="#">Резюме людей</a>
         <a class="text-style-navtext" href="#">Биржа проектов</a>
-        <a class="text-style-navtext" href="#">Секция 3</a>
     </nav>
-    {% link_button "Регистрация" %}
+
+    {% if request.user.is_authenticated %}
+        {% url "users:profile" as profile_link %}
+        <a href="{{profile_link}}">
+            <p>Добро пожаловать, {{request.user.username}}</p>
+        </a>
+    {% else %}
+        {% url "users:signup" as signup_url %}
+        {% url "users:login" as login_url %}
+        <div>
+            {% link_button "Войти" login_url state="hovered" %}
+            {% link_button "Регистрация" signup_url %}
+        </div>
+    {% endif %}
 </header>
