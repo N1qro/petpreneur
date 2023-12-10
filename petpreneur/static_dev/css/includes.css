@@ -1,6 +1,7 @@
 /* button */
 
 .button {
+    display: block;
     padding: 7px 19px;
     border-radius: 17px;
     border: 2px solid var(--background-color);
@@ -25,4 +26,8 @@
 
 .button-color-black {
     --background-color: #000;
+}
+
+.button-color-red {
+    --background-color: #FC4D4D;
 }

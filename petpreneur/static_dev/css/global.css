@@ -31,6 +31,10 @@ a {
     text-decoration: none;
 }
 
+.active {
+    font-weight: 600;
+}
+
 .grid-split-2 {
     display: grid;
     place-items: center;
@@ -173,13 +177,15 @@ header > nav {
     background: linear-gradient(180deg, #3A38BE 0%, #63B4FF 100%);
 }
 
-.profile-navigation {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
+.profile-navigation {    
+    padding: 17px 0px 17px 58px;
     border-radius: 55px;
     border: 3px solid #000;
     background: #1B1D5E;
+}
+
+.profile-navigation > nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }

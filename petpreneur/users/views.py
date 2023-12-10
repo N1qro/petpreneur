@@ -1,3 +1,5 @@
+import django.http
+
 import django.conf
 import django.contrib.auth.decorators
 import django.contrib.auth.models
@@ -112,6 +114,48 @@ class ActivateView(django.views.generic.RedirectView):
 
         except django.core.signing.SignatureExpired:
             raise django.http.Http404()
+
+
+@django.contrib.auth.decorators.login_required()
+def resume_view(request: django.http.HttpRequest):
+    context = {}
+    template_name = "users/profile.html"
+    return django.shortcuts.render(request, template_name, context)
+
+
+@django.contrib.auth.decorators.login_required()
+def requests_view(request: django.http.HttpRequest):
+    context = {}
+    template_name = "users/profile.html"
+    return django.shortcuts.render(request, template_name, context)
+
+
+@django.contrib.auth.decorators.login_required()
+def participate_view(request: django.http.HttpRequest):
+    context = {}
+    template_name = "users/profile.html"
+    return django.shortcuts.render(request, template_name, context)
+
+
+@django.contrib.auth.decorators.login_required()
+def profile_view(request: django.http.HttpRequest):
+    context = {}
+    template_name = "users/profile.html"
+    return django.shortcuts.render(request, template_name, context)
+
+
+@django.contrib.auth.decorators.login_required()
+def projects_view(request: django.http.HttpRequest):
+    context = {}
+    template_name = "users/profile.html"
+    return django.shortcuts.render(request, template_name, context)
+
+
+@django.contrib.auth.decorators.login_required()
+def recruit_view(request: django.http.HttpRequest):
+    context = {}
+    template_name = "users/profile.html"
+    return django.shortcuts.render(request, template_name, context)
 
 
 __all__ = []

@@ -1,15 +1,43 @@
 {% extends "base.html" %}
+{% load buttons %}
 
 {% block content %}
     <div class="profile-container">
-        <nav class="profile-navigation">
-            <p>Исполнитель</p>
-            <a href="">Резюме</a>
-            <a href="">Заявки</a>
-            <a href="">Участвую в</a>
-            <a href="">Обо мне</a>
-            <a href="">Проекты</a>
-            <a href="">Отклики</a>
-        </nav>
+        {% with request.resolver_match.view_name as view_name %}
+        <div class="profile-navigation">
+            <p>Навигация</p>
+            <nav>
+            <a
+                class="{% if view_name == "users:resumes" %}active{% endif %}"
+                href="{% url "users:resumes" %}"
+            >Резюме</a>
+            <a 
+                class="{% if view_name == "users:requests" %}active{% endif %}"
+                href="{% url "users:requests" %}"
+            >Заявки</a>
+            <a
+                class="{% if view_name == "users:participating" %}active{% endif %}"
+                href="{% url "users:participating" %}"
+            >Участвую в</a>
+            <a
+                class="{% if view_name == "users:profile" %}active{% endif %}"
+                href="{% url "users:profile" %}"
+            >Обо мне</a>
+            <a
+                class="{% if view_name == "users:projects" %}active{% endif %}"
+                href="{% url "users:projects" %}"
+            >Проекты</a>
+            <a
+                class="{% if view_name == "users:recruit" %}active{% endif %}"
+                href="{% url "users:recruit" %}"
+            >Отклики</a>
+            </nav>
+
+            {% url "users:logout" as logout_url %}
+            {% link_button "Найти проект" %}
+            {% link_button "Создать проект" color="black" state="hovered" %}
+            {% link_button "Выйти" logout_url color="red"%}
+        </div>
+        {% endwith %}
     </div>
 {% endblock content %}
