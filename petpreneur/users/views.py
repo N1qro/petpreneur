@@ -1,5 +1,3 @@
-import django.http
-
 import django.conf
 import django.contrib.auth.decorators
 import django.contrib.auth.models
@@ -7,6 +5,7 @@ import django.contrib.messages
 import django.contrib.sites.shortcuts
 import django.core.mail
 import django.core.signing
+import django.http
 import django.shortcuts
 import django.utils.decorators
 import django.utils.timezone
