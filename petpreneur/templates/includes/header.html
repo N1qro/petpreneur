@@ -17,7 +17,7 @@
     {% else %}
         {% url "users:signup" as signup_url %}
         {% url "users:login" as login_url %}
-        <div>
+        <div class="navbar--buttons">
             {% link_button "Войти" login_url state="hovered" %}
             {% link_button "Регистрация" signup_url %}
         </div>

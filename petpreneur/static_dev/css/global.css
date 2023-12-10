@@ -4,12 +4,20 @@
     box-sizing: border-box;
 }
 
-h2 {
+h2, .h2 {
     font-family: "Outfit", sans-serif;
     font-size: min(3.5vw, 3.5rem);
     font-style: normal;
     font-weight: 600;
     letter-spacing: -0.1vw;
+}
+
+h5, .h5 {
+    font-family: Inter;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
 }
 
 body {
@@ -85,38 +93,6 @@ footer {
 
 /* Navbar */
 
-header {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    align-items: center;
-
-    border-radius: 0px 0px 25.8px 25.8px;
-    background: rgba(108, 99, 255, 0.25);
-
-    padding: 21px 40px;
-}
-
-header > nav {
-    display: flex;
-    gap: 44px;
-}
-
-.navbar--text {
-    font-size: 1.5rem;
-    font-weight: 400;
-    letter-spacing: 4.8px;
-    text-transform: uppercase;
-}
-
-.navbar--brand {
-    display: flex;
-    align-items: center;
-}
-.navbar--brand > img {
-    max-width: 40px;
-}
-
 /* landing */
 
 #quote-title {
@@ -167,7 +143,7 @@ header > nav {
 
 .profile-container {
     display: grid;
-    grid-template-columns: minmax(200px, 1fr) 3fr;
+    grid-template-columns: minmax(240px, 1fr) 3fr;
 
     margin-block: auto;
     height: 70vh;
@@ -177,8 +153,13 @@ header > nav {
     background: linear-gradient(180deg, #3A38BE 0%, #63B4FF 100%);
 }
 
-.profile-navigation {    
-    padding: 17px 0px 17px 58px;
+.profile-navigation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 17px 20px;
     border-radius: 55px;
     border: 3px solid #000;
     background: #1B1D5E;
@@ -188,4 +169,32 @@ header > nav {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    gap: 0.4rem;
+    font-size: 1.25rem;
+}
+
+.profile-navigation > nav:first-of-type {
+    width: fit-content;
+    font-size: 25px;
+}
+
+.profile-navigation .button {
+    align-self: center;
+}
+
+@media (max-width: 760px) {
+    .profile-container {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        margin-block: 2rem;
+    }
+
+    .profile-container h5 {
+        margin-bottom: 1rem;
+    }
+
+    .profile-navigation .button {
+        display: none;
+    }   
 }
