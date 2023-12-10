@@ -20,6 +20,10 @@ h5, .h5 {
     line-height: normal;
 }
 
+.text-center {
+    text-align: center;
+}
+
 body {
     --light-text-color: #FFF;
     --main-dark-color: #000235;
@@ -142,8 +146,13 @@ footer {
 /* profile */
 
 .profile-container {
-    display: grid;
-    grid-template-columns: minmax(240px, 1fr) 3fr;
+    /* display: grid;
+    grid-template-columns: minmax(240px, 1fr) 3fr; */
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 2rem;
 
     margin-block: auto;
     height: 70vh;
@@ -151,6 +160,7 @@ footer {
     border: 14px solid #1B1D5E;
     padding: 20px 45px;
     background: linear-gradient(180deg, #3A38BE 0%, #63B4FF 100%);
+    overflow-y: auto;
 }
 
 .profile-navigation {
@@ -182,13 +192,36 @@ footer {
     align-self: center;
 }
 
+.profile--skills {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile--skills--container {
+    max-height: 600px;
+    flex: 1;
+    background-color: white;
+}
+
+.profile--resume {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    flex: 1;
+}
+
+.profile--resume > textarea {
+    flex: 1;
+}
+
 @media (max-width: 760px) {
-    .profile-container {
+    /* .profile-container {
         display: flex;
         flex-direction: column;
         flex-wrap: wrap;
         margin-block: 2rem;
-    }
+    } */
 
     .profile-container h5 {
         margin-bottom: 1rem;

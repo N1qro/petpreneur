@@ -119,42 +119,42 @@ class ActivateView(django.views.generic.RedirectView):
 @django.contrib.auth.decorators.login_required()
 def resume_view(request: django.http.HttpRequest):
     context = {}
-    template_name = "users/profile.html"
+    template_name = "users/profile/resumes.html"
     return django.shortcuts.render(request, template_name, context)
 
 
 @django.contrib.auth.decorators.login_required()
 def requests_view(request: django.http.HttpRequest):
     context = {}
-    template_name = "users/profile.html"
+    template_name = "users/profile/requests.html"
     return django.shortcuts.render(request, template_name, context)
 
 
 @django.contrib.auth.decorators.login_required()
 def participate_view(request: django.http.HttpRequest):
     context = {}
-    template_name = "users/profile.html"
+    template_name = "users/profile/participating.html"
     return django.shortcuts.render(request, template_name, context)
 
 
 @django.contrib.auth.decorators.login_required()
 def profile_view(request: django.http.HttpRequest):
     context = {}
-    template_name = "users/profile.html"
+    template_name = "users/profile/profile.html"
     return django.shortcuts.render(request, template_name, context)
 
 
 @django.contrib.auth.decorators.login_required()
 def projects_view(request: django.http.HttpRequest):
     context = {}
-    template_name = "users/profile.html"
+    template_name = "users/profile/projects.html"
     return django.shortcuts.render(request, template_name, context)
 
 
 @django.contrib.auth.decorators.login_required()
 def recruit_view(request: django.http.HttpRequest):
     context = {}
-    template_name = "users/profile.html"
+    template_name = "users/profile/recruit.html"
     return django.shortcuts.render(request, template_name, context)
 
 

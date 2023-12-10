@@ -58,6 +58,9 @@
 				{% link_button "Выйти" logout_url color="red"%}
 			</nav>
 		</div>
+		{% block profile_content %}
+			переопределите profile_content
+		{% endblock profile_content %}
 		{% endwith %}
 	</div>
 {% endblock content %}

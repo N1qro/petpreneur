@@ -1,0 +1,18 @@
+{% extends "users/profile/profile_base.html" %}
+{% load buttons %}
+
+
+{% block profile_content %}
+<div class="profile--resume">
+    <h5 class="text-center">Моё резюме</h5>
+    <textarea name="resume" cols="30" rows="10">Я начинающий специалист...</textarea>
+    {% button "Сохранить" color="black" state="hovered" %}
+</div>
+<div class="profile--skills">
+    <h5 class="text-center">Мои навыки</h5>
+    <p class="text-center">Сюда же входит опыт работы с программами*</p>
+    <div class="profile--skills--container"></div>
+    <input type="text">
+    {% button "Добавить" %}
+</div>
+{% endblock profile_content %}

@@ -1,11 +1,16 @@
 /* button */
 
 .button {
+    all: unset;
     display: block;
     padding: 7px 19px;
     border-radius: 17px;
     border: 2px solid var(--background-color);
     width: fit-content;
+}
+
+.button:hover {
+    cursor: pointer;
 }
 
 .button-primary {
