@@ -49,10 +49,14 @@ class AbstractIsActiveUserIdCategoryIdSubcategoryId(django.db.models.Model):
     category = django.db.models.ForeignKey(
         to="categories.Category",
         on_delete=django.db.models.CASCADE,
+        null=True,
+        blank=True,
     )
     subcategory = django.db.models.ForeignKey(
         to="categories.Subcategory",
         on_delete=django.db.models.CASCADE,
+        null=True,
+        blank=True,
     )
 
     class Meta:
