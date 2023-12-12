@@ -11,6 +11,7 @@ import django.utils.decorators
 import django.utils.timezone
 import django.views.generic
 
+import resume.models
 import users.forms
 import users.models
 
@@ -28,6 +29,13 @@ class SignUpView(
         form_save = form.save(commit=False)
         form_save.is_active = django.conf.settings.DEFAULT_USER_IS_ACTIVE
         form_save.save()
+
+        user_resume = resume.models.Resume(
+            is_active=False,
+            text="Начинающий специалист...",
+            user=form_save,
+        )
+        user_resume.save()
 
         signer = django.core.signing.TimestampSigner()
 
