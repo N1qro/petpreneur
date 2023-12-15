@@ -1,10 +1,17 @@
 /* button */
 
 .button {
+    all: unset;
+    display: block;
     padding: 7px 19px;
     border-radius: 17px;
     border: 2px solid var(--background-color);
     width: fit-content;
+    text-align: center;
+}
+
+.button:hover {
+    cursor: pointer;
 }
 
 .button-primary {
@@ -25,4 +32,68 @@
 
 .button-color-black {
     --background-color: #000;
+}
+
+.button-color-red {
+    --background-color: #FC4D4D;
+}
+
+/* navbar */
+
+header {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+
+    border-radius: 0px 0px 25.8px 25.8px;
+    background: rgba(108, 99, 255, 0.25);
+
+    padding: 21px 40px;
+}
+
+header > nav {
+    display: flex;
+    gap: 44px;
+}
+
+.navbar--buttons {
+    display: flex;
+    gap: 0.25rem;
+}
+
+.navbar--text {
+    font-size: 1.5rem;
+    font-weight: 400;
+    letter-spacing: 4.8px;
+    text-transform: uppercase;
+}
+
+.navbar--brand {
+    display: flex;
+    align-items: center;
+}
+.navbar--brand > img {
+    max-width: 40px;
+}
+
+.navbar--message {
+    text-align: center;
+    font-size: 1.1rem;
+    border-radius: 10px;
+    border: 2px solid white;
+    padding: 10px;
+    background-color: #FC4D4D;
+}
+
+.message--error {
+    background-color: #FC4D4D;
+}
+
+.message--success {
+    background-color: #25bf72;
+}
+
+.navbar--message > * {
+    display: inline;
 }

@@ -36,7 +36,6 @@ class UserChangeForm(
             model.first_name.field.name,
             model.last_name.field.name,
             model.image.field.name,
-            model.contacts.field.name,
         )
 
         labels = {
@@ -46,6 +45,12 @@ class UserChangeForm(
         widgets = {
             model.image.field.name: PictureWidget,
         }
+
+
+class UserContactsForm(django.forms.ModelForm):
+    class Meta:
+        model = users.models.User
+        fields = (users.models.User.contacts.field.name,)
 
 
 __all__ = []

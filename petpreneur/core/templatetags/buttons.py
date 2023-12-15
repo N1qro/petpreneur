@@ -5,7 +5,7 @@ import django.template
 
 register = django.template.Library()
 StateType = typing.Literal["primary", "hovered", "focused"]
-ButtonColor = typing.Literal["default", "black"]
+ButtonColor = typing.Literal["default", "black", "red"]
 
 
 @register.inclusion_tag("includes/button.html")
@@ -35,6 +35,23 @@ def link_button(
         "state": state,
         "color": color,
         "href": href,
+    }
+
+
+@register.inclusion_tag("includes/button.html")
+def submit_button(
+    text: str,
+    state: StateType = "hovered",
+    color: ButtonColor = "black",
+    name: str = "submit",
+):
+    return {
+        "tag": "button",
+        "type": "submit",
+        "text": text,
+        "state": state,
+        "color": color,
+        "name": name,
     }
 
 

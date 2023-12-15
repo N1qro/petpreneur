@@ -35,6 +35,11 @@
     <section class="call-to-action">
         <p>Вы готовы?</p>
         <h1>Станьте частью чего-то большего</h1>
-        {% link_button "Подобрать команду" "#" state="hovered" color="black" %}
+        {% if request.user.is_authenticated %}
+            {% url "users:profile" as redirect_url %}
+        {% else %}
+            {% url "users:login" as redirect_url %}
+        {% endif %}
+        {% link_button "Подобрать команду" redirect_url state="hovered" color="black" %}
     </section>
 {% endblock content %}
