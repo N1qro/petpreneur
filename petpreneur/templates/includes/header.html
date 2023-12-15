@@ -12,7 +12,7 @@
     {% if request.user.is_authenticated %}
         {% url "users:profile" as profile_link %}
         <a href="{{profile_link}}">
-            <p>Добро пожаловать, {{request.user.username}}</p>
+            <p>Добро пожаловать, <strong>{{request.user.username}}</strong></p>
         </a>
     {% else %}
         {% url "users:signup" as signup_url %}
@@ -23,3 +23,13 @@
         </div>
     {% endif %}
 </header>
+{% if messages %}
+{% for message in messages %}
+{% if forloop.first %}
+<article class="navbar--message message--{{message.tags}}">
+    <i class="fi fi-rr-info"></i>
+    <p>{{message}}</p>
+</article>
+{% endif %}
+{% endfor %}
+{% endif %}

@@ -1,5 +1,6 @@
 import django.conf
 import django.contrib.auth.decorators
+import django.contrib.auth.forms
 import django.contrib.auth.models
 import django.contrib.messages
 import django.contrib.sites.shortcuts
@@ -7,10 +8,12 @@ import django.core.mail
 import django.core.signing
 import django.http
 import django.shortcuts
+import django.urls
 import django.utils.decorators
 import django.utils.timezone
 import django.views.generic
 
+import resume.forms
 import resume.models
 import users.forms
 import users.models
@@ -125,7 +128,21 @@ class ActivateView(django.views.generic.RedirectView):
 
 @django.contrib.auth.decorators.login_required()
 def resume_view(request: django.http.HttpRequest):
-    context = {}
+    resume_object = resume.models.Resume.objects.get(user_id=request.user.id)
+    if request.method == "POST":
+        form = resume.forms.ResumeForm(
+            request.POST or None,
+            instance=resume_object,
+        )
+        if form.is_valid():
+            form.save()
+            return django.shortcuts.redirect(
+                django.urls.reverse("users:resumes"),
+            )
+    else:
+        form = resume.forms.ResumeForm(instance=resume_object)
+
+    context = {"form": form}
     template_name = "users/profile/resumes.html"
     return django.shortcuts.render(request, template_name, context)
 
@@ -146,7 +163,55 @@ def participate_view(request: django.http.HttpRequest):
 
 @django.contrib.auth.decorators.login_required()
 def profile_view(request: django.http.HttpRequest):
-    context = {}
+    password_change_form = django.contrib.auth.forms.PasswordChangeForm(
+        user=request.user,
+        data=request.POST or None,
+    )
+    user_contacts_form = users.forms.UserContactsForm(
+        instance=request.user,
+        data=request.POST or None,
+    )
+    user_change_form = users.forms.UserChangeForm(
+        instance=request.user,
+        data=request.POST or None,
+        files=request.FILES or None,
+    )
+
+    if request.method == "POST":
+        if (
+            "password_change" in request.POST
+            and password_change_form.is_valid()
+        ):
+            password_change_form.save()
+            django.contrib.messages.add_message(
+                request,
+                django.contrib.messages.SUCCESS,
+                "Проверьте почту, там лежит ссылка",
+            )
+        elif (
+            "contacts_change" in request.POST and user_contacts_form.is_valid()
+        ):
+            user_contacts_form.save()
+            django.contrib.messages.add_message(
+                request,
+                django.contrib.messages.SUCCESS,
+                "Контакты успешно изменены!",
+            )
+        elif "user_change" in request.POST:
+            if user_change_form.is_valid():
+                user_change_form.save()
+                django.contrib.messages.add_message(
+                    request,
+                    django.contrib.messages.SUCCESS,
+                    "Данные пользователя успешно изменены!",
+                )
+        return django.shortcuts.redirect(django.urls.reverse("users:profile"))
+
+    context = {
+        "password_form": password_change_form,
+        "contacts_form": user_contacts_form,
+        "user_form": user_change_form,
+    }
     template_name = "users/profile/profile.html"
     return django.shortcuts.render(request, template_name, context)
 

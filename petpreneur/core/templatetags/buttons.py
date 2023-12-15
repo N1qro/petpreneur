@@ -38,4 +38,21 @@ def link_button(
     }
 
 
+@register.inclusion_tag("includes/button.html")
+def submit_button(
+    text: str,
+    state: StateType = "hovered",
+    color: ButtonColor = "black",
+    name: str = "submit",
+):
+    return {
+        "tag": "button",
+        "type": "submit",
+        "text": text,
+        "state": state,
+        "color": color,
+        "name": name,
+    }
+
+
 __all__ = []

@@ -7,6 +7,7 @@
     border-radius: 17px;
     border: 2px solid var(--background-color);
     width: fit-content;
+    text-align: center;
 }
 
 .button:hover {
@@ -74,4 +75,25 @@ header > nav {
 }
 .navbar--brand > img {
     max-width: 40px;
+}
+
+.navbar--message {
+    text-align: center;
+    font-size: 1.1rem;
+    border-radius: 10px;
+    border: 2px solid white;
+    padding: 10px;
+    background-color: #FC4D4D;
+}
+
+.message--error {
+    background-color: #FC4D4D;
+}
+
+.message--success {
+    background-color: #25bf72;
+}
+
+.navbar--message > * {
+    display: inline;
 }
