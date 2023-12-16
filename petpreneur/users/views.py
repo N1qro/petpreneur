@@ -67,36 +67,6 @@ class SignUpView(
         return django.urls.reverse("users:signup")
 
 
-@django.utils.decorators.method_decorator(
-    django.contrib.auth.decorators.login_required,
-    name="dispatch",
-)
-class ProfileView(django.views.generic.TemplateView):
-    template_name = "users/profile.html"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        if "forms" not in context:
-            forms = (
-                users.forms.UserChangeForm(
-                    self.request.POST or None,
-                    self.request.FILES or None,
-                    instance=self.request.user,
-                ),
-            )
-            context["forms"] = forms
-        return context
-
-    def post(self, request, *args, **kwargs):
-        context = self.get_context_data()
-        if all(form.is_valid() for form in context["forms"]):
-            [form.save() for form in context["forms"]]
-            return django.shortcuts.redirect(
-                django.shortcuts.reverse("users:profile"),
-            )
-        return django.shortcuts.render(request, self.template_name, context)
-
-
 class ActivateView(django.views.generic.RedirectView):
     pattern_name = "users:login"
 
@@ -126,58 +96,104 @@ class ActivateView(django.views.generic.RedirectView):
             raise django.http.Http404()
 
 
-@django.contrib.auth.decorators.login_required()
-def resume_view(request: django.http.HttpRequest):
-    resume_object = resume.models.Resume.objects.get(user_id=request.user.id)
-    if request.method == "POST":
-        form = resume.forms.ResumeForm(
-            request.POST or None,
-            instance=resume_object,
-        )
-        if form.is_valid():
-            form.save()
-            return django.shortcuts.redirect(
-                django.urls.reverse("users:resumes"),
-            )
-    else:
-        form = resume.forms.ResumeForm(instance=resume_object)
-
-    context = {"form": form}
+@django.utils.decorators.method_decorator(
+    django.contrib.auth.decorators.login_required,
+    name="dispatch",
+)
+class ProfileResumeView(django.views.generic.TemplateView):
     template_name = "users/profile/resumes.html"
-    return django.shortcuts.render(request, template_name, context)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if "form" not in context:
+            resume_object = resume.models.Resume.objects.get(
+                user=self.request.user,
+            )
+
+            form = resume.forms.ResumeForm(
+                self.request.POST or None,
+                instance=resume_object,
+            )
+            context["form"] = form
+
+        return context
+
+    def post(self, request, *args, **kwargs):
+        context = self.get_context_data()
+
+        form = context["form"]
+
+        if "form" in request.POST and form.is_valid():
+            form.save()
+        else:
+            return django.shortcuts.render(
+                request,
+                self.template_name,
+                context,
+            )
+
+        return django.shortcuts.redirect(django.urls.reverse("users:resumes"))
 
 
-@django.contrib.auth.decorators.login_required()
-def requests_view(request: django.http.HttpRequest):
-    context = {}
+@django.utils.decorators.method_decorator(
+    django.contrib.auth.decorators.login_required,
+    name="dispatch",
+)
+class ProfileRequestsView(django.views.generic.TemplateView):
     template_name = "users/profile/requests.html"
-    return django.shortcuts.render(request, template_name, context)
 
 
-@django.contrib.auth.decorators.login_required()
-def participate_view(request: django.http.HttpRequest):
-    context = {}
+@django.utils.decorators.method_decorator(
+    django.contrib.auth.decorators.login_required,
+    name="dispatch",
+)
+class ProfileParticipateView(django.views.generic.TemplateView):
     template_name = "users/profile/participating.html"
-    return django.shortcuts.render(request, template_name, context)
 
 
-@django.contrib.auth.decorators.login_required()
-def profile_view(request: django.http.HttpRequest):
-    password_change_form = django.contrib.auth.forms.PasswordChangeForm(
-        user=request.user,
-        data=request.POST or None,
-    )
-    user_contacts_form = users.forms.UserContactsForm(
-        instance=request.user,
-        data=request.POST or None,
-    )
-    user_change_form = users.forms.UserChangeForm(
-        instance=request.user,
-        data=request.POST or None,
-        files=request.FILES or None,
-    )
+@django.utils.decorators.method_decorator(
+    django.contrib.auth.decorators.login_required,
+    name="dispatch",
+)
+class ProfileView(django.views.generic.TemplateView):
+    template_name = "users/profile/profile.html"
 
-    if request.method == "POST":
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if (
+            "password_change" not in context
+            and "user_contacts" not in context
+            and "user_change" not in context
+        ):
+            password_change_form = (
+                django.contrib.auth.forms.PasswordChangeForm(
+                    user=self.request.user,
+                    data=self.request.POST or None,
+                )
+            )
+            user_contacts_form = users.forms.UserContactsForm(
+                instance=self.request.user,
+                data=self.request.POST or None,
+            )
+            user_change_form = users.forms.UserChangeForm(
+                instance=self.request.user,
+                data=self.request.POST or None,
+                files=self.request.FILES or None,
+            )
+
+            context["password_change"] = password_change_form
+            context["contacts_change"] = user_contacts_form
+            context["user_change"] = user_change_form
+
+        return context
+
+    def post(self, request, *args, **kwargs):
+        context = self.get_context_data()
+
+        password_change_form = context["password_change"]
+        user_contacts_form = context["contacts_change"]
+        user_change_form = context["user_change"]
+
         if (
             "password_change" in request.POST
             and password_change_form.is_valid()
@@ -205,29 +221,29 @@ def profile_view(request: django.http.HttpRequest):
                     django.contrib.messages.SUCCESS,
                     "Данные пользователя успешно изменены!",
                 )
+        else:
+            return django.shortcuts.render(
+                request,
+                self.template_name,
+                context,
+            )
         return django.shortcuts.redirect(django.urls.reverse("users:profile"))
 
-    context = {
-        "password_form": password_change_form,
-        "contacts_form": user_contacts_form,
-        "user_form": user_change_form,
-    }
-    template_name = "users/profile/profile.html"
-    return django.shortcuts.render(request, template_name, context)
 
-
-@django.contrib.auth.decorators.login_required()
-def projects_view(request: django.http.HttpRequest):
-    context = {}
+@django.utils.decorators.method_decorator(
+    django.contrib.auth.decorators.login_required,
+    name="dispatch",
+)
+class ProfileProjectsView(django.views.generic.TemplateView):
     template_name = "users/profile/projects.html"
-    return django.shortcuts.render(request, template_name, context)
 
 
-@django.contrib.auth.decorators.login_required()
-def recruit_view(request: django.http.HttpRequest):
-    context = {}
+@django.utils.decorators.method_decorator(
+    django.contrib.auth.decorators.login_required,
+    name="dispatch",
+)
+class ProfileRecruitView(django.views.generic.TemplateView):
     template_name = "users/profile/recruit.html"
-    return django.shortcuts.render(request, template_name, context)
 
 
 __all__ = []

@@ -1,10 +1,9 @@
 import django.shortcuts
+import django.views.generic
 
 
-def home(request):
+class HomeView(django.views.generic.TemplateView):
     template_name = "home/index.html"
-    context = {}
-    return django.shortcuts.render(request, template_name, context)
 
 
 __all__ = []

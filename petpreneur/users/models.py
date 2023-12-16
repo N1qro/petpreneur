@@ -46,7 +46,7 @@ class User(django.contrib.auth.models.AbstractUser):
     image_tmb.allow_tags = True
 
     def __str__(self):
-        return self.name
+        return self.username
 
 
 __all__ = []
