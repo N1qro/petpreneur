@@ -13,6 +13,7 @@ import django.utils.decorators
 import django.utils.timezone
 import django.views.generic
 
+import jobs.models
 import resume.forms
 import resume.models
 import users.forms
@@ -142,13 +143,25 @@ class ProfileResumeView(django.views.generic.TemplateView):
 class ProfileRequestsView(django.views.generic.TemplateView):
     template_name = "users/profile/requests.html"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["job_requests"] = users.models.User.objects.get_request_jobs(
+            self.request.user.pk,
+        )
+        return context
+
 
 @django.utils.decorators.method_decorator(
     django.contrib.auth.decorators.login_required,
     name="dispatch",
 )
-class ProfileParticipateView(django.views.generic.TemplateView):
+class ProfileParticipateView(django.views.generic.ListView):
+    model = jobs.models.JobRequests
     template_name = "users/profile/participating.html"
+    context_object_name = "jobs"
+
+    def get_queryset(self):
+        return users.models.User.objects.get_current_jobs(self.request.user.pk)
 
 
 @django.utils.decorators.method_decorator(
@@ -234,8 +247,16 @@ class ProfileView(django.views.generic.TemplateView):
     django.contrib.auth.decorators.login_required,
     name="dispatch",
 )
-class ProfileProjectsView(django.views.generic.TemplateView):
+class ProfileProjectsView(django.views.generic.ListView):
+    model = jobs.models.Job
     template_name = "users/profile/projects.html"
+    context_object_name = "jobs"
+
+    def get_queryset(self):
+        return self.model.objects.filter(user=self.request.user).only(
+            self.model.text.field.name,
+            self.model.created_at.field.name,
+        )
 
 
 @django.utils.decorators.method_decorator(

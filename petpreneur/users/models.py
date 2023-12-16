@@ -2,6 +2,8 @@ import django.contrib.auth.models
 import django.db.models
 import sorl.thumbnail
 
+import users.manager
+
 
 class User(django.contrib.auth.models.AbstractUser):
     def _profile_imgae_upload_to(self, filename):
@@ -26,6 +28,8 @@ class User(django.contrib.auth.models.AbstractUser):
     )
 
     REQUIRED_FIELDS = ["email"]
+
+    objects = users.manager.UserManager()
 
     def image_tmb(self):
         if self.image:
