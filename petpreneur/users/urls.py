@@ -73,32 +73,32 @@ urlpatterns = [
     ),
     django.urls.path(
         "profile/",
-        users.views.profile_view,
+        users.views.ProfileView.as_view(),
         name="profile",
     ),
     django.urls.path(
         "profile/resume/",
-        users.views.resume_view,
+        users.views.ProfileResumeView.as_view(),
         name="resumes",
     ),
     django.urls.path(
         "profile/requests/",
-        users.views.requests_view,
+        users.views.ProfileRequestsView.as_view(),
         name="requests",
     ),
     django.urls.path(
         "profile/participating/",
-        users.views.participate_view,
+        users.views.ProfileParticipateView.as_view(),
         name="participating",
     ),
     django.urls.path(
         "profile/projects/",
-        users.views.projects_view,
+        users.views.ProfileProjectsView.as_view(),
         name="projects",
     ),
     django.urls.path(
         "profile/recruit/",
-        users.views.recruit_view,
+        users.views.ProfileRecruitView.as_view(),
         name="recruit",
     ),
 ]
