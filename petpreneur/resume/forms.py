@@ -6,7 +6,7 @@ import resume.models
 class ResumeForm(django.forms.ModelForm):
     class Meta:
         model = resume.models.Resume
-        fields = ("text",)
+        fields = (model.text.field.name,)
 
 
 __all__ = []
