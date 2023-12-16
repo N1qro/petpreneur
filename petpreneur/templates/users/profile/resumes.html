@@ -1,0 +1,17 @@
+{% extends "users/profile/profile_base.html" %}
+{% load buttons %}
+
+
+{% block profile_content %}
+<form class="profile--resume" method="POST">
+    {% csrf_token %}
+    <h5 class="text-center">Моё резюме</h5>
+    {{form.text}}
+    {% submit_button "Сохранить" %}
+</form>
+<div class="profile--skills">
+    <h5 class="text-center">Мои навыки</h5>
+    <p class="text-center">Сюда же входит опыт работы с программами*</p>
+    <div class="profile--skills--container"></div>
+</div>
+{% endblock profile_content %}

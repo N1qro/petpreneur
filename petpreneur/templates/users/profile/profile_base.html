@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load buttons %}
+
+{% block content %}
+	<div class="profile-container">
+		{% with request.resolver_match.view_name as view_name %}
+		<div class="profile-navigation">
+			<h5>Навигация</h5>
+			<nav>
+				<div>
+					<i class="fi fi-rr-document"></i>
+					<a
+						class="{% if view_name == "users:resumes" %}active{% endif %}"
+						href="{% url "users:resumes" %}"
+					>Резюме</a>
+				</div>
+				<div>
+					<i class="fi fi-rr-globe"></i>
+					<a 
+						class="{% if view_name == "users:requests" %}active{% endif %}"
+						href="{% url "users:requests" %}"
+					>Заявки</a>
+				</div>
+				<div>
+					<i class="fi fi-rr-diagram-project"></i>
+					<a
+						class="{% if view_name == "users:participating" %}active{% endif %}"
+						href="{% url "users:participating" %}"
+					>Участвую в</a>
+				</div>
+				<div>
+					<i class="fi fi-rr-user"></i>
+					<a
+						class="{% if view_name == "users:profile" %}active{% endif %}"
+						href="{% url "users:profile" %}"
+					>Обо мне</a>
+				</div>
+				<div>
+					<i class="fi fi-rr-edit-alt"></i>
+					<a
+						class="{% if view_name == "users:projects" %}active{% endif %}"
+						href="{% url "users:projects" %}"
+					>Проекты</a>
+				</div>
+				<div>
+					<i class="fi fi-rr-envelope-plus"></i>
+					<a
+							class="{% if view_name == "users:recruit" %}active{% endif %}"
+							href="{% url "users:recruit" %}"
+					>Отклики</a>
+				</div>
+			</nav>
+
+			{% url "users:logout" as logout_url %}
+			<nav>
+				{% link_button "Найти проект" %}
+				{% link_button "Создать проект" color="black" state="hovered" %}
+				{% link_button "Выйти" logout_url color="red"%}
+			</nav>
+		</div>
+		{% block profile_content %}
+			переопределите profile_content
+		{% endblock profile_content %}
+		{% endwith %}
+	</div>
+{% endblock content %}

@@ -1,0 +1,39 @@
+{% extends "users/profile/profile_base.html" %}
+{% load buttons %}
+
+{% block profile_content %}
+<div class="flex-col-grow">
+    <form class="profile--section form-styled" method="POST">
+        <h5>Смена пароля</h5>
+        {% csrf_token %}
+        {% for field in password_form %}
+            <p>
+                <label for="{{ field.id_for_label }}">{{field.label}}:</label>
+                <br>
+                {{field}}
+            </p>
+        {% endfor %}
+        {% submit_button "Изменить" name="password_change" %}
+    </form>
+    <form class="profile--section form-styled" method="POST">
+        <h5>Мои контакты</h5>
+        {% csrf_token %}
+        {{contacts_form.contacts}}
+        {% submit_button "Сохранить" name="contacts_change" %}
+    </form>
+</div>
+<div class="profile--section flex-grow">
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h5>Личные данные</h5>
+        {% for field in user_form %}
+        <p>
+            <label for="{{field.id_for_label}}">{{field.label}}</label>
+            <br>
+            {{field}}
+        </p>
+        {% endfor %}
+        {% submit_button "Сохранить" name="user_change" %}
+    </form>
+</div>
+{% endblock profile_content %}

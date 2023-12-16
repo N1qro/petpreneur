@@ -15,10 +15,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
 
     <!-- CSS -->
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
     <link rel="stylesheet" href="{% static 'css/global.css' %}">
     <link rel="stylesheet" href="{% static 'css/includes.css' %}">
 </head>
-<body>
+{% static 'img/site-bg.png' as background_url %}
+<body style="background: url({{background_url}}); background-color: var(--main-dark-color);">
     <div class="site-container">
         {% include "includes/header.html" %}
         {% block content %}
