@@ -6,6 +6,7 @@ import django.contrib.messages
 import django.contrib.sites.shortcuts
 import django.core.mail
 import django.core.signing
+import django.forms
 import django.http
 import django.shortcuts
 import django.urls
@@ -13,6 +14,7 @@ import django.utils.decorators
 import django.utils.timezone
 import django.views.generic
 
+import jobs.forms
 import jobs.models
 import resume.forms
 import resume.models
@@ -141,10 +143,12 @@ class ProfileResumeView(django.views.generic.TemplateView):
     name="dispatch",
 )
 class ProfileRequestsView(django.views.generic.TemplateView):
-    template_name = "users/profile/requests.html"
+    template_name = "users/profile/project_view.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context["button_text"] = "Отозвать"
+        context["tab_label"] = "Отправленные заявки"
         context["job_requests"] = users.models.User.objects.get_request_jobs(
             self.request.user.pk,
         )
@@ -157,8 +161,14 @@ class ProfileRequestsView(django.views.generic.TemplateView):
 )
 class ProfileParticipateView(django.views.generic.ListView):
     model = jobs.models.JobRequests
-    template_name = "users/profile/participating.html"
+    template_name = "users/profile/project_view.html"
     context_object_name = "jobs"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["button_text"] = "Детали"
+        context["tab_label"] = "Проекты, в которых я состою"
+        return context
 
     def get_queryset(self):
         return users.models.User.objects.get_current_jobs(self.request.user.pk)
@@ -249,11 +259,30 @@ class ProfileView(django.views.generic.TemplateView):
 )
 class ProfileProjectsView(django.views.generic.ListView):
     model = jobs.models.Job
-    template_name = "users/profile/projects.html"
+    template_name = "users/profile/project_view.html"
     context_object_name = "jobs"
+
+    def post(self, request):
+        job_id = request.POST.get("id")
+        if job_id:
+            job = django.shortcuts.get_object_or_404(
+                self.model,
+                id=job_id,
+                user_id=request.user.id,
+            )
+            job.delete()
+
+        return self.get(request)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["button_text"] = "Удалить"
+        context["tab_label"] = "Созданные мной проекты"
+        return context
 
     def get_queryset(self):
         return self.model.objects.filter(user=self.request.user).only(
+            self.model.title.field.name,
             self.model.text.field.name,
             self.model.created_at.field.name,
         )

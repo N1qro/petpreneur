@@ -252,6 +252,16 @@ footer {
     width: auto;
 }
 
+.profile--project--related {
+    flex: 1;
+}
+
+.profile--projects--container {
+    margin-top: 1rem;
+    overflow-y: auto;
+    max-height: 55vh;
+}
+
 @media (max-width: 760px) {
     /* .profile-container {
         display: flex;

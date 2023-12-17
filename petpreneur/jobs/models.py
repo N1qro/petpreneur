@@ -16,6 +16,11 @@ class Job(
             f"{self.user_id}_{django.utils.timezone.now().day}/{filename}"
         )
 
+    title = django.db.models.CharField(
+        max_length=200,
+        verbose_name="название",
+    )
+
     image = django.db.models.ImageField(
         upload_to=_job_image_upload_to,
         verbose_name="изображение",

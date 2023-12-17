@@ -44,6 +44,7 @@ def submit_button(
     state: StateType = "hovered",
     color: ButtonColor = "black",
     name: str = "submit",
+    value: typing.Union[str, None] = None,
 ):
     return {
         "tag": "button",
@@ -52,6 +53,7 @@ def submit_button(
         "state": state,
         "color": color,
         "name": name,
+        "value": value,
     }
 
 

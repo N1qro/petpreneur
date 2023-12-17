@@ -1,0 +1,11 @@
+{% load buttons %}
+
+<div class="project--small">
+    <img src="https://s3-alpha-sig.figma.com/img/4ce7/41d7/22864d1148cda367a2717503a8dab34b?Expires=1703462400&Signature=posm6YKa1FV2fmM~hqLUX-VUKndSwqN6HJdX6Na~IhWuUg11mtXulJjU9hMBQCUVpMkRtu5siPoMoKto~Jr1UBPce4Ny3iNWCJcLthLA9Sa~uTJL5QnwwDnklfxq8dGB5I5Ihq~kmJ2I7E2MCbHdmDquZE~crzdLo~tGHuXBYjYeNehqUE1jIeNAXl8zInhQS6-jDn-ldzgdk08gFX92b9mGQWsS5TF8wAJ5JFata~M5aKpFv2EZFHot94Tic~BMUyY17GG95d7369--bReWyq9e~zh1r2r0Faah2C58chtU2DLGkiQluoy~kWCCniEaPb0lwpvj9xxJWtuoFdgOUw__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4" alt="">
+    <p class="text-style-navtext">{{job.title}}</p>
+    <form method="POST">
+        {% csrf_token %}
+        {% submit_button button_text name="id" value=job.id color="red" %}
+        <time datetime="{{job.created_at}}">{{job.created_at}}</time>
+    </form>
+</div>
