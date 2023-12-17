@@ -27,6 +27,15 @@ class Job(
         related_name="job",
     )
 
+    class Meta:
+        verbose_name = "работа"
+        verbose_name_plural = "работы"
+
+    def __str__(self) -> str:
+        if len(str(self.text)) > 20:
+            return f"{self.text[:20]}..."
+        return self.text[:20]
+
 
 class JobRequests(core.models.AbstractTextCreatedAtModel):
     status = django.db.models.IntegerField(
@@ -36,6 +45,7 @@ class JobRequests(core.models.AbstractTextCreatedAtModel):
             (3, "Отклонено"),
         ),
         verbose_name="статус",
+        default=1,
     )
 
     resume = django.db.models.ForeignKey(
@@ -51,6 +61,15 @@ class JobRequests(core.models.AbstractTextCreatedAtModel):
         related_name="job_requests",
         verbose_name="работа",
     )
+
+    class Meta:
+        verbose_name = "заявка"
+        verbose_name_plural = "заявки"
+
+    def __str__(self) -> str:
+        if len(str(self.text)) > 20:
+            return f"{self.text[:20]}..."
+        return self.text[:20]
 
 
 __all__ = []

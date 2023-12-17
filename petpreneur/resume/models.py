@@ -17,5 +17,12 @@ class Resume(
         related_name="resume",
     )
 
+    class Meta:
+        verbose_name = "резюме"
+        verbose_name_plural = "резюме"
+
+    def __str__(self) -> str:
+        return self.user.username
+
 
 __all__ = []
