@@ -20,6 +20,9 @@ class AbstractNameSlugModel(django.db.models.Model):
     class Meta:
         abstract = True
 
+    def __str__(self) -> str:
+        return self.name
+
 
 class AbstractTextCreatedAtModel(django.db.models.Model):
     text = django.db.models.TextField(
@@ -45,16 +48,19 @@ class AbstractIsActiveUserIdCategoryIdSubcategoryId(django.db.models.Model):
     user = django.db.models.ForeignKey(
         django.conf.settings.AUTH_USER_MODEL,
         on_delete=django.db.models.CASCADE,
+        verbose_name="пользователь",
     )
     category = django.db.models.ForeignKey(
         to="categories.Category",
         on_delete=django.db.models.CASCADE,
+        verbose_name="категория",
         null=True,
         blank=True,
     )
     subcategory = django.db.models.ForeignKey(
         to="categories.Subcategory",
         on_delete=django.db.models.CASCADE,
+        verbose_name="подкатегория",
         null=True,
         blank=True,
     )
