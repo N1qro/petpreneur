@@ -7,7 +7,9 @@
             <img src="{{thumb.url}}" alt="project-image">
         {% endthumbnail %}
     {% else %}
-        <img src="{{job.default_image_url}}" alt="project-image">
+        {% thumbnail job.default_image_url "100x57" as thumb %}
+            <img src="{{thumb.url}}" alt="project-image">
+        {% endthumbnail %}
     {% endif %}
     <p class="text-style-navtext">{{job.title}}</p>
     <form method="POST">
