@@ -265,12 +265,23 @@ class ProfileProjectsView(django.views.generic.ListView):
     def post(self, request):
         job_id = request.POST.get("id")
         if job_id:
-            job = django.shortcuts.get_object_or_404(
-                self.model,
-                id=job_id,
-                user_id=request.user.id,
-            )
-            job.delete()
+            try:
+                job = django.shortcuts.get_object_or_404(
+                    self.model,
+                    id=job_id,
+                    user_id=request.user.id,
+                )
+                job.delete()
+            except django.http.Http404:
+                django.contrib.messages.error(
+                    request,
+                    "Во время удаления возникла ошибка. Попробуйте позднее",
+                )
+            else:
+                django.contrib.messages.success(
+                    request,
+                    "Проект был успешно закрыт",
+                )
 
         return self.get(request)
 

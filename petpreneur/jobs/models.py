@@ -10,6 +10,11 @@ class Job(
     core.models.AbstractTextCreatedAtModel,
     core.models.AbstractIsActiveUserIdCategoryIdSubcategoryId,
 ):
+    default_image_url = (
+        "https://abrakadabra.fun/uploads/posts/2021-12/"
+        "1639258991_5-abrakadabra-fun-p-znak-voprosa-na-chernom-fone-5.png"
+    )
+
     def _job_image_upload_to(self, filename):
         return (
             f"jobs/images/"
