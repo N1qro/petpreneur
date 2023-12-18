@@ -1,0 +1,20 @@
+{% load buttons %}
+{% load thumbnail %}
+
+<div class="project--small">
+    {% if job.image %}
+        {% thumbnail job.image "100x57" as thumb %}
+            <img src="{{thumb.url}}" alt="project-image">
+        {% endthumbnail %}
+    {% else %}
+        {% thumbnail job.default_image_url "100x57" as thumb %}
+            <img src="{{thumb.url}}" alt="project-image">
+        {% endthumbnail %}
+    {% endif %}
+    <p class="text-style-navtext">{{job.title}}</p>
+    <form method="POST">
+        {% csrf_token %}
+        {% submit_button button_text name="id" value=job.id color="red" %}
+        <time datetime="{{job.created_at}}">{{job.created_at}}</time>
+    </form>
+</div>

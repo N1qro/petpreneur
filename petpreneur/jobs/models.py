@@ -10,15 +10,26 @@ class Job(
     core.models.AbstractTextCreatedAtModel,
     core.models.AbstractIsActiveUserIdCategoryIdSubcategoryId,
 ):
+    default_image_url = (
+        "https://abrakadabra.fun/uploads/posts/2021-12/"
+        "1639258991_5-abrakadabra-fun-p-znak-voprosa-na-chernom-fone-5.png"
+    )
+
     def _job_image_upload_to(self, filename):
         return (
             f"jobs/images/"
             f"{self.user_id}_{django.utils.timezone.now().day}/{filename}"
         )
 
+    title = django.db.models.CharField(
+        max_length=200,
+        verbose_name="название",
+    )
+
     image = django.db.models.ImageField(
         upload_to=_job_image_upload_to,
         verbose_name="изображение",
+        blank=True,
     )
 
     skills = django.db.models.ManyToManyField(

@@ -1,1 +1,14 @@
 {% extends "users/profile/profile_base.html" %}
+
+{% block profile_content %}
+    <div class="profile--project--related">
+        <h5 class="text-center">{{tab_label}}</h5>
+        <div class="profile--projects--container">
+            {% for job in jobs %}
+                {% include "users/includes/project.html" with job=job.job button_text=button_text %}
+            {% empty %}
+                Пустая переменная jobs...
+            {% endfor %}
+        </div>
+    </div>
+{% endblock profile_content %}

@@ -39,7 +39,46 @@ h5, .h5 {
 }
 
 .form-styled {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
 
+    justify-content: space-between;
+}
+
+.form-styled textarea,
+.form-styled input:not([type="checkbox"]):not([type="file"])
+{
+    width: 100%;
+    border-radius: 8px;
+    border: 2px solid rgba(0, 2, 53, 0.80);
+    background: #FFF;
+    min-height: 34px;
+}
+
+.form-styled textarea {
+    height: 100%;
+}
+
+.form-styled > p {
+    margin-block: 10px;
+}
+
+.form-styled > p:has(textarea) {
+    flex-grow: 1;
+}
+
+.form-styled button[type="submit"] {
+    width: 100%;
+}
+
+.form-styled span.field--required {
+    color: red;
+}
+
+.form-styled label {
+    margin-left: 0.3rem;
 }
 
 body {
@@ -252,6 +291,16 @@ footer {
     width: auto;
 }
 
+.profile--project--related {
+    flex: 1;
+}
+
+.profile--projects--container {
+    margin-top: 1rem;
+    overflow-y: auto;
+    max-height: 55vh;
+}
+
 @media (max-width: 760px) {
     /* .profile-container {
         display: flex;
@@ -267,4 +316,23 @@ footer {
     .profile-navigation .button {
         display: none;
     }   
+}
+
+/* job-creation */
+
+.job-creation {
+    flex-wrap: nowrap;
+}
+
+.job-creation > * {
+    flex: 1;
+}
+
+.job-creation-form-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.job-creation-form-container > form {
+    flex: 1;
 }

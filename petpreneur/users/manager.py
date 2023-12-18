@@ -19,10 +19,14 @@ class UserManager(django.contrib.auth.models.BaseUserManager):
             .filter(status=2)
             .only(
                 f"{jobs.models.JobRequests.job.field.name}"
-                f"__{jobs.models.Job.text.field.name}",
+                f"__{jobs.models.Job.title.field.name}",
+                f"{jobs.models.JobRequests.job.field.name}"
+                f"__{jobs.models.Job.image.field.name}",
+                f"{jobs.models.JobRequests.job.field.name}"
+                f"__{jobs.models.Job.created_at.field.name}",
                 f"{jobs.models.JobRequests.job.field.name}"
                 f"__{jobs.models.Job.text.field.name}",
-            ),
+            )
         )
 
     def get_request_jobs(self, user_id):
@@ -31,10 +35,14 @@ class UserManager(django.contrib.auth.models.BaseUserManager):
             .filter(status=1)
             .only(
                 f"{jobs.models.JobRequests.job.field.name}"
-                f"__{jobs.models.Job.text.field.name}",
+                f"__{jobs.models.Job.title.field.name}",
+                f"{jobs.models.JobRequests.job.field.name}"
+                f"__{jobs.models.Job.image.field.name}",
+                f"{jobs.models.JobRequests.job.field.name}"
+                f"__{jobs.models.Job.created_at.field.name}",
                 f"{jobs.models.JobRequests.job.field.name}"
                 f"__{jobs.models.Job.text.field.name}",
-            ),
+            )
         )
 
 
