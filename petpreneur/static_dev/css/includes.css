@@ -8,6 +8,7 @@
     border: 2px solid var(--background-color);
     width: fit-content;
     text-align: center;
+    box-sizing: border-box;
 }
 
 .button:hover {

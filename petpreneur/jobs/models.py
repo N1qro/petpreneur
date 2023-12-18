@@ -24,6 +24,7 @@ class Job(
     image = django.db.models.ImageField(
         upload_to=_job_image_upload_to,
         verbose_name="изображение",
+        blank=True,
     )
 
     skills = django.db.models.ManyToManyField(

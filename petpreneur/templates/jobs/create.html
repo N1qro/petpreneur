@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load buttons %}
+
+{% block content %}
+<div class="profile-container job-creation">
+    <div class="flex-grow job-creation-form-container">
+        <h5 class="text-center">Информация</h5>
+        <form method="POST" enctype="multipart/form-data" class="form-styled">
+            {% csrf_token %}
+            {% for field in form %}
+                <p>
+                    <label for="{{field.id_for_label}}">{{field.label}}:</label>
+                    {% if field.field.required %}<span class="field--required"> *</span>{% endif %}
+                    {% if field.field.widget.input_type != "checkbox" %}<br>{% endif %}
+                    {{field}}
+                </p>
+            {% endfor %}
+            {% submit_button "Сохранить" %}
+        </form>
+    </div>
+    <div class="flex-grow">
+        <h5 class="text-center">Превью</h5>
+        <p>TODO</p>
+        <!-- Другой контент -->
+        <h5 class="text-center">Предупреждение</h5>
+        <ul class="text-style-navtext">
+            <li>Не использовать NSFW изображения для фотографий проекта</li>
+            <li>Описание не должно содержать никаких ссылок</li>
+            <li>
+                После создания проекта должно пройти не менее 4 часов,
+                чтобы можно было повторно создать проект
+            </li>
+        </ul>
+    </div>
+</div>
+{% endblock content %}

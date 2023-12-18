@@ -8,6 +8,7 @@ urlpatterns = [
     django.urls.path("", django.urls.include("home.urls")),
     django.urls.path("auth/", django.urls.include("users.urls")),
     django.urls.path("auth/", django.urls.include(django.contrib.auth.urls)),
+    django.urls.path("jobs/", django.urls.include("jobs.urls")),
     django.urls.path("admin/", django.contrib.admin.site.urls),
     django.urls.path("feedback/", django.urls.include("feedback.urls")),
 ]
