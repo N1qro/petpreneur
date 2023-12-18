@@ -3,7 +3,7 @@
 {% block profile_content %}
 <div class="flex-col-grow">
     <form class="profile--section form-styled" method="POST">
-        <h5>Смена пароля</h5>
+        <h5 class="text-center">Смена пароля</h5>
         {% csrf_token %}
         {% for field in password_change %}
             <p>
@@ -15,16 +15,16 @@
         {% submit_button "Изменить" name="password_change" %}
     </form>
     <form class="profile--section form-styled" method="POST">
-        <h5>Мои контакты</h5>
+        <h5 class="text-center">Мои контакты</h5>
         {% csrf_token %}
         {{contacts_change.contacts}}
         {% submit_button "Сохранить" name="contacts_change" %}
     </form>
 </div>
 <div class="profile--section flex-grow">
-    <form method="POST" enctype="multipart/form-data">
+    <form method="POST" enctype="multipart/form-data" class="form-styled">
         {% csrf_token %}
-        <h5>Личные данные</h5>
+        <h5 class="text-center">Личные данные</h5>
         {% for field in user_change %}
         <p>
             <label for="{{field.id_for_label}}">{{field.label}}</label>

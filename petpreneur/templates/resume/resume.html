@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% load buttons %}
+
+{% block content %}
+{% for resume in resumes %} {{ resume }} {% endfor %}
+{% endblock content %}

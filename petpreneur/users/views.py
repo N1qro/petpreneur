@@ -6,6 +6,7 @@ import django.contrib.messages
 import django.contrib.sites.shortcuts
 import django.core.mail
 import django.core.signing
+import django.forms
 import django.http
 import django.shortcuts
 import django.urls
@@ -13,6 +14,7 @@ import django.utils.decorators
 import django.utils.timezone
 import django.views.generic
 
+import jobs.forms
 import jobs.models
 import resume.forms
 import resume.models
@@ -140,15 +142,41 @@ class ProfileResumeView(django.views.generic.TemplateView):
     django.contrib.auth.decorators.login_required,
     name="dispatch",
 )
-class ProfileRequestsView(django.views.generic.TemplateView):
+class ProfileRequestsView(django.views.generic.ListView):
+    model = jobs.models.JobRequests
     template_name = "users/profile/requests.html"
+    context_object_name = "jobs"
+
+    def post(self, request):
+        job_request_id = request.POST.get("id")
+        if job_request_id:
+            try:
+                job_request = django.shortcuts.get_object_or_404(
+                    self.model,
+                    id=job_request_id,
+                )
+                job_request.delete()
+            except django.http.Http404:
+                django.contrib.messages.error(
+                    request,
+                    "Во время отмены возникла ошибка. Попробуйте позднее",
+                )
+            else:
+                django.contrib.messages.success(
+                    request,
+                    "Заявка была успешно отозвана",
+                )
+
+        return self.get(request)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["job_requests"] = users.models.User.objects.get_request_jobs(
-            self.request.user.pk,
-        )
+        context["button_text"] = "Отозвать"
+        context["tab_label"] = "Отправленные заявки"
         return context
+
+    def get_queryset(self):
+        return users.models.User.objects.get_request_jobs(self.request.user.pk)
 
 
 @django.utils.decorators.method_decorator(
@@ -159,6 +187,28 @@ class ProfileParticipateView(django.views.generic.ListView):
     model = jobs.models.JobRequests
     template_name = "users/profile/participating.html"
     context_object_name = "jobs"
+
+    def post(self, request):
+        job_id = request.POST.get("id")
+        if job_id:
+            try:
+                return django.shortcuts.redirect(
+                    django.urls.reverse("jobs:job", args=[job_id]),
+                )
+
+            except django.http.Http404:
+                django.contrib.messages.error(
+                    request,
+                    "Возникла ошибка. Попробуйте позднее",
+                )
+
+        return self.get(request)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["button_text"] = "Детали"
+        context["tab_label"] = "Проекты, в которых я состою"
+        return context
 
     def get_queryset(self):
         return users.models.User.objects.get_current_jobs(self.request.user.pk)
@@ -249,11 +299,41 @@ class ProfileView(django.views.generic.TemplateView):
 )
 class ProfileProjectsView(django.views.generic.ListView):
     model = jobs.models.Job
-    template_name = "users/profile/projects.html"
+    template_name = "users/profile/project_view.html"
     context_object_name = "jobs"
+
+    def post(self, request):
+        job_id = request.POST.get("id")
+        if job_id:
+            try:
+                job = django.shortcuts.get_object_or_404(
+                    self.model,
+                    id=job_id,
+                    user_id=request.user.id,
+                )
+                job.delete()
+            except django.http.Http404:
+                django.contrib.messages.error(
+                    request,
+                    "Во время удаления возникла ошибка. Попробуйте позднее",
+                )
+            else:
+                django.contrib.messages.success(
+                    request,
+                    "Проект был успешно закрыт",
+                )
+
+        return self.get(request)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["button_text"] = "Удалить"
+        context["tab_label"] = "Созданные мной проекты"
+        return context
 
     def get_queryset(self):
         return self.model.objects.filter(user=self.request.user).only(
+            self.model.title.field.name,
             self.model.text.field.name,
             self.model.created_at.field.name,
         )
@@ -263,7 +343,7 @@ class ProfileProjectsView(django.views.generic.ListView):
     django.contrib.auth.decorators.login_required,
     name="dispatch",
 )
-class ProfileRecruitView(django.views.generic.TemplateView):
+class ProfileRecruitView(django.views.generic.ListView):
     template_name = "users/profile/recruit.html"
 
 
