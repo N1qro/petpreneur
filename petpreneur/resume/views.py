@@ -19,22 +19,42 @@ class ResumeView(django.views.generic.ListView):
     paginate_by = 20
 
     def get_queryset(self):
+        query = self.request.GET.get("q")
+        if query:
+            return self.model.objects.filter(
+                django.db.models.Q(text__icontains=query),
+            )
+
         return self.model.objects.filter(is_active=True)
 
 
 class ResumeCategoryView(ResumeView):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["category"] = self.kwargs["category"]
+        return context
+
     def get_queryset(self):
         self.category = django.shortcuts.get_object_or_404(
             categories.models.Category,
             name=self.kwargs["category"],
         )
-        return self.model.objects.filter(
-            category=self.category,
-            is_active=True,
+        return (
+            super()
+            .get_queryset()
+            .filter(
+                category=self.category,
+            )
         )
 
 
 class ResumeSubcategoryView(ResumeView):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["category"] = self.kwargs["category"]
+        context["subcategory"] = self.kwargs["subcategory"]
+        return context
+
     def get_queryset(self):
         self.category = django.shortcuts.get_object_or_404(
             categories.models.Category,
@@ -45,10 +65,13 @@ class ResumeSubcategoryView(ResumeView):
             name=self.kwargs["subcategory"],
         )
 
-        return self.model.objects.filter(
-            category=self.category,
-            subcategory=self.subcategory,
-            is_active=True,
+        return (
+            super()
+            .get_queryset()
+            .filter(
+                category=self.category,
+                subcategory=self.subcategory,
+            )
         )
 
 
