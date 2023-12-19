@@ -30,6 +30,30 @@ class JobCreationView(django.views.generic.FormView):
         return django.urls.reverse("users:projects")
 
 
+@django.utils.decorators.method_decorator(
+    django.contrib.auth.decorators.login_required,
+    name="dispatch",
+)
+class JobEditView(django.views.generic.UpdateView):
+    template_name = "jobs/create.html"
+    form_class = jobs.forms.CreateJobForm
+    model = jobs.models.Job
+
+    def form_valid(self, form):
+        form_data = form.save(commit=False)
+        form_data.user = self.request.user
+        form_data.save()
+
+        django.contrib.messages.success(
+            self.request,
+            "Проект успешно изменен!",
+        )
+        return super().form_valid(form)
+
+    def get_success_url(self) -> str:
+        return django.urls.reverse("jobs:jobs")
+
+
 class JobsView(django.views.generic.ListView):
     model = jobs.models.Job
     template_name = "jobs/jobs.html"

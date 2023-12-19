@@ -11,6 +11,11 @@ urlpatterns = [
         name="create",
     ),
     django.urls.path(
+        "edit/<int:pk>",
+        jobs.views.JobEditView.as_view(),
+        name="edit",
+    ),
+    django.urls.path(
         "",
         jobs.views.JobsView.as_view(),
         name="jobs",

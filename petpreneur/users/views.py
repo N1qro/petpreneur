@@ -109,7 +109,10 @@ class ProfileResumeView(django.views.generic.TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         if "form" not in context:
-            resume_object = resume.models.Resume.objects.get(
+            resume_object = resume.models.Resume.objects.only(
+                resume.models.Resume.text.field.name,
+                resume.models.Resume.created_at.field.name,
+            ).get(
                 user=self.request.user,
             )
 
@@ -336,6 +339,7 @@ class ProfileProjectsView(django.views.generic.ListView):
             self.model.title.field.name,
             self.model.text.field.name,
             self.model.created_at.field.name,
+            self.model.image.field.name,
         )
 
 
