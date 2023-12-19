@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load buttons %}
+
+{% block content %}
+{% with request.resolver_match.view_name as view_name %}
+{% if view_name == "resume:resume" %}
+    <form action="{% url "resume:resume" %}" method="get">
+        <input name="q" type="text" placeholder="Search...">
+    </form>
+{% endif %}
+
+{% if view_name == "resume:category" %}
+    <form action="{% url 'resume:category' category %}" method="get">
+        <input name="q" type="text" placeholder="Search...">
+    </form>
+{% endif %}
+
+{% if view_name == "resume:subcategory" %}
+    <form action="{% url "resume:subcategory" category subcategory  %}" method="get">
+        <input name="q" type="text" placeholder="Search...">
+    </form>
+{% endif %}
+
+{% endwith %}
+{% for resume in resumes %} {{ resume }} {% endfor %}
+{% endblock content %}

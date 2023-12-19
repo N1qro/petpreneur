@@ -109,7 +109,10 @@ class ProfileResumeView(django.views.generic.TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         if "form" not in context:
-            resume_object = resume.models.Resume.objects.get(
+            resume_object = resume.models.Resume.objects.only(
+                resume.models.Resume.text.field.name,
+                resume.models.Resume.created_at.field.name,
+            ).get(
                 user=self.request.user,
             )
 
@@ -143,16 +146,40 @@ class ProfileResumeView(django.views.generic.TemplateView):
     name="dispatch",
 )
 class ProfileRequestsView(django.views.generic.TemplateView):
+    model = jobs.models.JobRequests
     template_name = "users/profile/project_view.html"
+    context_object_name = "jobs"
+
+    def post(self, request):
+        job_request_id = request.POST.get("id")
+        if job_request_id:
+            try:
+                job_request = django.shortcuts.get_object_or_404(
+                    self.model,
+                    id=job_request_id,
+                )
+                job_request.delete()
+            except django.http.Http404:
+                django.contrib.messages.error(
+                    request,
+                    "Во время отмены возникла ошибка. Попробуйте позднее",
+                )
+            else:
+                django.contrib.messages.success(
+                    request,
+                    "Заявка была успешно отозвана",
+                )
+
+        return self.get(request)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["button_text"] = "Отозвать"
         context["tab_label"] = "Отправленные заявки"
-        context["job_requests"] = users.models.User.objects.get_request_jobs(
-            self.request.user.pk,
-        )
         return context
+
+    def get_queryset(self):
+        return users.models.User.objects.get_request_jobs(self.request.user.pk)
 
 
 @django.utils.decorators.method_decorator(
@@ -163,6 +190,22 @@ class ProfileParticipateView(django.views.generic.ListView):
     model = jobs.models.JobRequests
     template_name = "users/profile/project_view.html"
     context_object_name = "jobs"
+
+    def post(self, request):
+        job_id = request.POST.get("id")
+        if job_id:
+            try:
+                return django.shortcuts.redirect(
+                    django.urls.reverse("jobs:job", args=[job_id]),
+                )
+
+            except django.http.Http404:
+                django.contrib.messages.error(
+                    request,
+                    "Возникла ошибка. Попробуйте позднее",
+                )
+
+        return self.get(request)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -296,6 +339,7 @@ class ProfileProjectsView(django.views.generic.ListView):
             self.model.title.field.name,
             self.model.text.field.name,
             self.model.created_at.field.name,
+            self.model.image.field.name,
         )
 
 
@@ -303,7 +347,7 @@ class ProfileProjectsView(django.views.generic.ListView):
     django.contrib.auth.decorators.login_required,
     name="dispatch",
 )
-class ProfileRecruitView(django.views.generic.TemplateView):
+class ProfileRecruitView(django.views.generic.ListView):
     template_name = "users/profile/recruit.html"
 
 
