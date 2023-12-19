@@ -6,12 +6,25 @@
 <form class="profile--resume" method="POST">
     {% csrf_token %}
     <h5 class="text-center">Моё резюме</h5>
-    {{form.text}}
-    {% submit_button "Сохранить" %}
+    {{resumeform.text}}
+    {% submit_button "Сохранить" name="resume" %}
 </form>
 <div class="profile--skills">
     <h5 class="text-center">Мои навыки</h5>
     <p class="text-center">Сюда же входит опыт работы с программами*</p>
-    <div class="profile--skills--container"></div>
+    <form method="POST" class="profile--skills--container">
+        {% csrf_token %}
+        {% for skill in skills %}
+            <span class="profile--skill">{{skill}} <button type="submit" name="skill_delete" value="{{skill}}">X</button></span>
+        {% endfor %}
+    </form>
+    <form method="POST" class="form-styled flex-row">
+        {% csrf_token %}
+        {% for field in skillform %}
+            <label for="{{field.id_for_field}}">{{field.label}}</label>
+            {{field}}
+        {% endfor %}
+        {% submit_button "Добавить" name="skill" %}
+    </form>
 </div>
 {% endblock profile_content %}

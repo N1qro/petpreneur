@@ -18,6 +18,7 @@ import jobs.forms
 import jobs.models
 import resume.forms
 import resume.models
+import categories.models
 import users.forms
 import users.models
 
@@ -106,37 +107,51 @@ class ActivateView(django.views.generic.RedirectView):
 class ProfileResumeView(django.views.generic.TemplateView):
     template_name = "users/profile/resumes.html"
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        if "form" not in context:
-            resume_object = resume.models.Resume.objects.only(
+    def get_resume_form(self):
+        return resume.forms.ResumeForm(
+            self.request.POST or None,
+            instance=resume.models.Resume.objects.only(
                 resume.models.Resume.text.field.name,
                 resume.models.Resume.created_at.field.name,
             ).get(
                 user=self.request.user,
-            )
+            ),
+        )
 
-            form = resume.forms.ResumeForm(
-                self.request.POST or None,
-                instance=resume_object,
-            )
-            context["form"] = form
-
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["skillform"] = resume.forms.SkillAddForm()
+        context["resumeform"] = self.get_resume_form()
+        context["skills"] = self.get_queryset().all()
         return context
 
-    def post(self, request, *args, **kwargs):
-        context = self.get_context_data()
+    def get_queryset(self):
+        return resume.models.Resume.objects.get(user=self.request.user).skills
 
-        form = context["form"]
+    def post(self, request: django.http.HttpRequest, *args, **kwargs):
+        if "resume" in request.POST:
+            form = self.get_resume_form()
+            if form.is_valid():
+                form.save()
+        elif "skill" in request.POST:
+            form = resume.forms.SkillAddForm(request.POST or None)
+            user_resume = resume.models.Resume.objects.get(user=request.user)
+            skill, was_created = form.save()
 
-        if "form" in request.POST and form.is_valid():
-            form.save()
-        else:
-            return django.shortcuts.render(
-                request,
-                self.template_name,
-                context,
-            )
+            if user_resume.skills.filter(id=skill.id).exists():
+                django.contrib.messages.error(request, f'Навык "{skill.name}" уже был добавлен!')
+            else:
+                user_resume.skills.add(skill)
+                django.contrib.messages.success(request, f'Навык "{skill.name}" успешно добавлен')
+        elif "skill_delete" in request.POST:
+            skill_name = request.POST.get("skill_delete")
+            user_resume = resume.models.Resume.objects.get(user=request.user)
+            skill = user_resume.skills.filter(name=skill_name).first()
+            if not skill:
+                django.contrib.messages.error(request, "Что-то пошло не так...")
+            else:
+                user_resume.skills.remove(skill)
+                django.contrib.messages.info(request, f'Навык "{skill.name}" был успешно удалён')
 
         return django.shortcuts.redirect(django.urls.reverse("users:resumes"))
 
@@ -332,6 +347,10 @@ class ProfileProjectsView(django.views.generic.ListView):
         context = super().get_context_data(**kwargs)
         context["button_text"] = "Удалить"
         context["tab_label"] = "Созданные мной проекты"
+        context["redirect_button"] = {
+            "text": "Изменить",
+            "base_endpoint": "jobs:edit",
+        }
         return context
 
     def get_queryset(self):

@@ -51,7 +51,7 @@ class JobEditView(django.views.generic.UpdateView):
         return super().form_valid(form)
 
     def get_success_url(self) -> str:
-        return django.urls.reverse("jobs:jobs")
+        return django.urls.reverse("users:projects")
 
 
 class JobsView(django.views.generic.ListView):

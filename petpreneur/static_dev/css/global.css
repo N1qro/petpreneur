@@ -24,8 +24,17 @@ h5, .h5 {
     text-align: center;
 }
 
+.gap1 {
+    gap: 1rem;
+}
+
 .flex-grow {
     flex-grow: 1;
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
 }
 
 .flex-col-grow {
@@ -262,10 +271,35 @@ footer {
 
 .profile--skills--container {
     min-height: 200px;
+    max-height: 300px;
+    max-width: 370px;
     
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+
+    box-sizing: border-box;
+    overflow-y: auto;
     border-radius: 10px;
     border: 2px solid black;
     background-color: var(--dark-blue-color);
+}
+
+.profile--skill {
+    padding: 2px 5px;
+    border-radius: 5px;
+    height: fit-content;
+    background-color: purple;
+}
+
+.profile--skill > button {
+    all: unset;
+}
+
+.profile--skill:has(> button:hover) {
+    background-color: red;
 }
 
 .profile--resume {
@@ -278,6 +312,7 @@ footer {
 
 .profile--resume > textarea {
     font-family: "Inter", sans-serif;
+    font-size: 1.2rem;
     background-color: var(--dark-blue-color);
     color: white;
     border: black 2px solid;

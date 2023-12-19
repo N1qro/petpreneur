@@ -5,8 +5,9 @@
         <h3 class="navbar--text">petpreneur</h3>
     </a>
     <nav>
+        {% url "jobs:jobs" as project_marketplace_url %}
         <a class="text-style-navtext" href="#">Резюме людей</a>
-        <a class="text-style-navtext" href="#">Биржа проектов</a>
+        <a class="text-style-navtext" href="{{project_marketplace_url}}">Биржа проектов</a>
     </nav>
 
     {% if request.user.is_authenticated %}

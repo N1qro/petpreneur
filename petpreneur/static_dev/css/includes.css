@@ -95,6 +95,10 @@ header > nav {
     background-color: #25bf72;
 }
 
+.message--info {
+    background-color: #63B4FF;
+}
+
 .navbar--message > * {
     display: inline;
 }

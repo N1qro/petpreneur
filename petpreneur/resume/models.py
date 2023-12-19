@@ -15,6 +15,7 @@ class Resume(
         categories.models.Skill,
         verbose_name="навыки",
         related_name="resume",
+        blank=True,
     )
 
     class Meta:
