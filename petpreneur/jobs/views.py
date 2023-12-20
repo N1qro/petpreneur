@@ -1,3 +1,4 @@
+from typing import Any
 import django.db.models
 import django.urls
 import django.views.generic
@@ -60,15 +61,42 @@ class JobsView(django.views.generic.ListView):
     context_object_name = "jobs"
     paginate_by = 20
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["search_form"] = jobs.forms.JobSearchForm(self.request.GET or None)
+        return context
+
     def get_queryset(self):
-        query = self.request.GET.get("q")
-        if query:
-            return self.model.objects.filter(
-                django.db.models.Q(title__icontains=query)
-                | django.db.models.Q(text__icontains=query),
-            )
+        form = jobs.forms.JobSearchForm(self.request.GET or None)
+        if form.is_valid():
+            category = form.cleaned_data.get("category")
+            subcategory = form.cleaned_data.get("subcategory")
+            search_query = form.cleaned_data.get("search_query")
+            queryset = self.model.objects.filter(is_active=True)
+
+            if category:
+                queryset = queryset.filter(category=category)
+                if subcategory:
+                    queryset = queryset.filter(subcategory=subcategory)
+
+            if search_query:
+                queryset = queryset.filter(
+                    django.db.models.Q(title__icontains=search_query) |
+                    django.db.models.Q(text__icontains=search_query),
+                )
+
+            return queryset  # noqa R504
 
         return self.model.objects.filter(is_active=True)
+
+        # query = self.request.GET.get("q")
+        # if query:
+        #     return self.model.objects.filter(
+        #         django.db.models.Q(title__icontains=query)
+        #         | django.db.models.Q(text__icontains=query),
+        #     )
+
+        # return self.model.objects.filter(is_active=True)
 
 
 class JobsCategoryView(JobsView):

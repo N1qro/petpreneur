@@ -18,7 +18,6 @@ import jobs.forms
 import jobs.models
 import resume.forms
 import resume.models
-import categories.models
 import users.forms
 import users.models
 
@@ -139,19 +138,31 @@ class ProfileResumeView(django.views.generic.TemplateView):
             skill, was_created = form.save()
 
             if user_resume.skills.filter(id=skill.id).exists():
-                django.contrib.messages.error(request, f'Навык "{skill.name}" уже был добавлен!')
+                django.contrib.messages.error(
+                    request,
+                    f'Навык "{skill.name}" уже был добавлен!',
+                )
             else:
                 user_resume.skills.add(skill)
-                django.contrib.messages.success(request, f'Навык "{skill.name}" успешно добавлен')
+                django.contrib.messages.success(
+                    request,
+                    f'Навык "{skill.name}" успешно добавлен',
+                )
         elif "skill_delete" in request.POST:
             skill_name = request.POST.get("skill_delete")
             user_resume = resume.models.Resume.objects.get(user=request.user)
             skill = user_resume.skills.filter(name=skill_name).first()
             if not skill:
-                django.contrib.messages.error(request, "Что-то пошло не так...")
+                django.contrib.messages.error(
+                    request,
+                    "Что-то пошло не так...",
+                )
             else:
                 user_resume.skills.remove(skill)
-                django.contrib.messages.info(request, f'Навык "{skill.name}" был успешно удалён')
+                django.contrib.messages.info(
+                    request,
+                    f'Навык "{skill.name}" был успешно удалён',
+                )
 
         return django.shortcuts.redirect(django.urls.reverse("users:resumes"))
 

@@ -24,6 +24,11 @@ h5, .h5 {
     text-align: center;
 }
 
+.container-50 {
+    width: 50%;
+    margin-inline: auto;
+}
+
 .gap1 {
     gap: 1rem;
 }
@@ -56,6 +61,13 @@ h5, .h5 {
     justify-content: space-between;
 }
 
+.form-styled input,
+.form-styled textarea,
+.form-styled select {
+    padding-block: 2px;
+    padding-left: 5px;
+}
+
 .form-styled textarea,
 .form-styled input:not([type="checkbox"]):not([type="file"])
 {
@@ -66,8 +78,16 @@ h5, .h5 {
     min-height: 34px;
 }
 
+.form-styled select {
+    width: 50%;
+    border-radius: 8px;
+    border: 2px solid rgba(0, 2, 53, 0.80);
+    background: #FFF;
+}
+
 .form-styled textarea {
     height: 100%;
+    font-size: 1.25rem;
 }
 
 .form-styled > p {
@@ -370,4 +390,21 @@ footer {
 
 .job-creation-form-container > form {
     flex: 1;
+}
+
+/* project-display */
+
+.project--display--filter {
+    margin-top: 2rem;
+    padding: 20px;
+    border-radius: 20px;
+    background-color: var(--dark-blue-color);
+
+    gap: 1rem;
+}
+
+
+.project--search--container {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(300px, 1fr));
 }

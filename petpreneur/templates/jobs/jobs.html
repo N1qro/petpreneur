@@ -2,7 +2,39 @@
 {% load buttons %}
 
 {% block content %}
-{% with request.resolver_match.view_name as view_name %}
+
+    <section class="project--display--filter">
+        <form class="container-50 form-styled gap1">
+            <h5 class="text-center">Кого мы ищем?</h5>
+            <div class="project--display--criterion">
+                {% for field in search_form %}
+                    <p>
+                        <label for="{{field.id_label_for}}">{{field.label}}</label>
+                        <br>
+                        {{field}}
+                    </p>
+                {% endfor %}
+            </div>
+            <div class="project--searchsubmit--section">
+                {% submit_button "Найти" %}
+                <p>Найдено результатов: X</p>
+                <p>Карточек на странице: X</p>
+            </div>
+        </form>
+    </section>
+
+    <section class="project--search--container">
+        {% for job in jobs %}
+            <div>{{job}}({{job.category.name}}, {{job.subcategory.name}})</div>
+        {% endfor %}
+    </section>
+
+{% endblock content %}
+
+
+
+
+{% comment %} {% with request.resolver_match.view_name as view_name %}
 {% if view_name == "jobs:jobs" %}
     <form action="{% url view_name %}" method="get">
         <input name="q" type="text" placeholder="Search...">
@@ -21,6 +53,4 @@
     </form>
 {% endif %}
 
-{% endwith %}
-{% for job in jobs %} {{ job }} {% endfor %}
-{% endblock content %}
+{% endwith %} {% endcomment %}

@@ -57,8 +57,10 @@ class Skill(core.models.AbstractNameSlugModel):
         try:
             skill = cls.objects.get(normalized_name=normalized_name)
         except cls.DoesNotExist:
-            skill = cls.objects.create(name=name,
-                                       normalized_name=normalized_name)
+            skill = cls.objects.create(
+                name=name,
+                normalized_name=normalized_name,
+            )
             did_create = True
 
         return skill, did_create
