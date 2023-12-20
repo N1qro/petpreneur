@@ -8,7 +8,7 @@ urlpatterns = [
     django.urls.path(
         "",
         resume.views.ResumeView.as_view(),
-        name="resume",
+        name="resume_list",
     ),
     django.urls.path(
         "<int:pk>/",
@@ -21,7 +21,7 @@ urlpatterns = [
         name="category",
     ),
     django.urls.path(
-        "<category>/<subcategory>",
+        "<category>/<subcategory>/",
         resume.views.ResumeSubcategoryView.as_view(),
         name="subcategory",
     ),

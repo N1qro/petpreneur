@@ -11,14 +11,14 @@ urlpatterns = [
         name="create",
     ),
     django.urls.path(
-        "edit/<int:pk>",
+        "edit/<int:pk>/",
         jobs.views.JobEditView.as_view(),
         name="edit",
     ),
     django.urls.path(
         "",
         jobs.views.JobsView.as_view(),
-        name="jobs",
+        name="jobs_list",
     ),
     django.urls.path(
         "<int:pk>/",
@@ -31,7 +31,7 @@ urlpatterns = [
         name="category",
     ),
     django.urls.path(
-        "<category>/<subcategory>",
+        "<category>/<subcategory>/",
         jobs.views.JobsSubcategoryView.as_view(),
         name="subcategory",
     ),
