@@ -403,8 +403,27 @@ footer {
     gap: 1rem;
 }
 
-
 .project--search--container {
     display: grid;
     grid-template-columns: repeat(3, minmax(300px, 1fr));
+    gap: 1rem;
+}
+
+.pagination {
+    align-self: center;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.pagination a {
+    border: 2px solid var(--main-dark-color);
+    background-color: var(--main-dark-color);
+    padding: 5px 10px;
+}
+
+.pagination .page-current {
+    background-color: #000;
+    padding: 10px 15px;
+    border-radius: 10px;
 }

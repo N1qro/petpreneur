@@ -1,0 +1,8 @@
+{% load buttons %}
+
+<div class="project--card">
+    {% url "jobs:detail" job.id as redirect_url %}
+    <p class="project--title text-center">{{job.title|truncatewords:12}}</p>
+    <p class="flex-grow">{{job.text|truncatewords:50}}</p>
+    {% link_button "Подробнее" redirect_url color="black" state="hovered" %}
+</div>

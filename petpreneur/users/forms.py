@@ -53,7 +53,9 @@ class UserContactsForm(django.forms.ModelForm):
         fields = (model.contacts.field.name,)
 
         widgets = {
-            model.contacts.field.name: django.forms.Textarea(attrs={"cols": None, "rows": 4})
+            model.contacts.field.name: django.forms.Textarea(
+                attrs={"cols": None, "rows": 4},
+            ),
         }
 
 

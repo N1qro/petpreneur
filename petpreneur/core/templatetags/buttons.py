@@ -8,6 +8,14 @@ StateType = typing.Literal["primary", "hovered", "focused"]
 ButtonColor = typing.Literal["default", "black", "red"]
 
 
+@register.simple_tag(takes_context=True)
+def query_transform(context, **kwargs):
+    query = context["request"].GET.copy()
+    for k, v in kwargs.items():
+        query[k] = v
+    return query.urlencode()
+
+
 @register.inclusion_tag("includes/button.html")
 def button(
     text: str,

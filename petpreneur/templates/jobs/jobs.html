@@ -17,17 +17,29 @@
             </div>
             <div class="project--searchsubmit--section">
                 {% submit_button "Найти" %}
-                <p>Найдено результатов: X</p>
-                <p>Карточек на странице: X</p>
+                <p>Всего результатов: {{page_obj.paginator.count}}</p>
+                <p>Карточек на странице: {{paginate_by}}</p>
             </div>
         </form>
     </section>
 
     <section class="project--search--container">
         {% for job in jobs %}
-            <div>{{job}}({{job.category.name}}, {{job.subcategory.name}})</div>
+            {% include "includes/project_card.html" with job=job %}
         {% endfor %}
     </section>
+
+    {% if is_paginated %}
+        <nav class="pagination">
+            <a {% if page_obj.has_previous %}href="?{% query_transform page=page_obj.previous_page_number %}"{% endif %} class="button button-hovered button-color-black">&lt;</a>
+
+            <p class="page-current">
+                Текущая страница {{ page_obj.number }}/{{ page_obj.paginator.num_pages }}
+            </p>
+            
+            <a {% if page_obj.has_next %}href="?{% query_transform page=page_obj.next_page_number %}"{% endif %} class="button button-hovered button-color-black">&gt;</a>
+        </nav>
+    {% endif %}
 
 {% endblock content %}
 
