@@ -2,25 +2,43 @@
 {% load buttons %}
 
 {% block content %}
-{% with request.resolver_match.view_name as view_name %}
-{% if view_name == "jobs:jobs" %}
-    <form action="{% url view_name %}" method="get">
-        <input name="q" type="text" placeholder="Search...">
-    </form>
-{% endif %}
 
-{% if view_name == "jobs:category" %}
-    <form action="{% url 'jobs:category' category %}" method="get">
-        <input name="q" type="text" placeholder="Search...">
-    </form>
-{% endif %}
+    <section class="project--display--filter">
+        <form class="container-50 form-styled gap1">
+            <h5 class="text-center">Кого мы ищем?</h5>
+            <div class="project--display--criterion">
+                {% for field in search_form %}
+                    <p>
+                        <label for="{{field.id_label_for}}">{{field.label}}</label>
+                        <br>
+                        {{field}}
+                    </p>
+                {% endfor %}
+            </div>
+            <div class="project--searchsubmit--section">
+                {% submit_button "Найти" %}
+                <p>Всего результатов: {{page_obj.paginator.count}}</p>
+                <p>Карточек на странице: {{paginate_by}}</p>
+            </div>
+        </form>
+    </section>
 
-{% if view_name == "jobs:subcategory" %}
-    <form action="{% url "jobs:subcategory" category subcategory  %}" method="get">
-        <input name="q" type="text" placeholder="Search...">
-    </form>
-{% endif %}
+    <section class="project--search--container">
+        {% for job in jobs %}
+            {% include "includes/project_card.html" with job=job %}
+        {% endfor %}
+    </section>
 
-{% endwith %}
-{% for job in jobs %} {{ job }} {% endfor %}
+    {% if is_paginated %}
+        <nav class="pagination">
+            <a {% if page_obj.has_previous %}href="?{% query_transform page=page_obj.previous_page_number %}"{% endif %} class="button button-hovered button-color-black">&lt;</a>
+
+            <p class="page-current">
+                Текущая страница {{ page_obj.number }}/{{ page_obj.paginator.num_pages }}
+            </p>
+            
+            <a {% if page_obj.has_next %}href="?{% query_transform page=page_obj.next_page_number %}"{% endif %} class="button button-hovered button-color-black">&gt;</a>
+        </nav>
+    {% endif %}
+
 {% endblock content %}

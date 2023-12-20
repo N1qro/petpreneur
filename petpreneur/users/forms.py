@@ -50,7 +50,13 @@ class UserChangeForm(
 class UserContactsForm(django.forms.ModelForm):
     class Meta:
         model = users.models.User
-        fields = (users.models.User.contacts.field.name,)
+        fields = (model.contacts.field.name,)
+
+        widgets = {
+            model.contacts.field.name: django.forms.Textarea(
+                attrs={"cols": None, "rows": 4},
+            ),
+        }
 
 
 __all__ = []

@@ -33,4 +33,15 @@ class CreateJobForm(django.forms.ModelForm):
         }
 
 
+class JobSearchForm(django.forms.ModelForm):
+    search_query = django.forms.CharField(required=False)
+
+    class Meta:
+        model = jobs.models.Job
+        fields = [
+            model.category.field.name,
+            model.subcategory.field.name,
+        ]
+
+
 __all__ = []

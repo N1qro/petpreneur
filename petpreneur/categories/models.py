@@ -7,16 +7,6 @@ import transliterate
 import core.models
 
 
-def normalize_name(name: str) -> str:
-    return (
-        django.utils.text.slugify(
-            transliterate.translit(name, "ru", reversed=True),
-        )
-        .replace("-", "")
-        .replace("_", "")
-    )
-
-
 class Category(core.models.AbstractNameSlugModel):
     class Meta:
         verbose_name = "категория"
@@ -49,8 +39,35 @@ class Skill(core.models.AbstractNameSlugModel):
         verbose_name = "навык"
         verbose_name_plural = "навыки"
 
+    @staticmethod
+    def normalize_name(name: str) -> str:
+        return (
+            django.utils.text.slugify(
+                transliterate.translit(name, "ru", reversed=True),
+            )
+            .replace("-", "")
+            .replace("_", "")
+        )
+
+    @classmethod
+    def get_or_create(cls, name: str):
+        normalized_name = cls.normalize_name(name)
+        did_create = False
+
+        try:
+            skill = cls.objects.get(normalized_name=normalized_name)
+        except cls.DoesNotExist:
+            skill = cls.objects.create(
+                name=name,
+                normalized_name=normalized_name,
+            )
+            did_create = True
+
+        return skill, did_create
+
     def clean(self):
-        normalized_name = normalize_name(self.name)
+        normalized_name = self.normalize_name(self.name)
+
         if Skill.objects.filter(normalized_name=normalized_name).exclude(
             id=self.id,
         ):
@@ -63,7 +80,8 @@ class Skill(core.models.AbstractNameSlugModel):
         super().clean()
 
     def save(self, *args, **kwargs):
-        self.normalized_name = normalize_name(self.name)
+        self.normalized_name = self.normalize_name(self.name)
+        self.slug = self.normalized_name
         super().save(*args, **kwargs)
 
 

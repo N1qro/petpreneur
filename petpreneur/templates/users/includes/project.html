@@ -14,7 +14,13 @@
     <p class="text-style-navtext">{{job.title}}</p>
     <form method="POST">
         {% csrf_token %}
-        {% submit_button button_text name="id" value=job.id color="red" %}
+        <div class="flex-row gap1">
+            {% if redirect_button %}
+                {% url redirect_button.base_endpoint pk=job.id as redirect_url %}
+                {% link_button redirect_button.text redirect_url %}
+            {% endif %}
+            {% submit_button button_text name="id" value=job.id color="red" %}
+        </div>
         <time datetime="{{job.created_at}}">{{job.created_at}}</time>
     </form>
 </div>
