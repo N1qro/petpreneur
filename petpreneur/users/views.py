@@ -378,7 +378,57 @@ class ProfileProjectsView(django.views.generic.ListView):
     name="dispatch",
 )
 class ProfileRecruitView(django.views.generic.ListView):
+    model = jobs.models.JobRequests
     template_name = "users/profile/recruit.html"
+    context_object_name = "jobs"
+
+    def post(self, request):
+        job_request_id = request.POST.get("id")
+        action = request.POST.get("action")
+
+        if job_request_id:
+            try:
+                job_request = django.shortcuts.get_object_or_404(
+                    self.model,
+                    id=job_request_id,
+                )
+                if action == "approve":
+                    job_request.status = 2
+                    message = "Заявка принята!"
+
+                else:
+                    job_request.status = 3
+                    message = "Заявка отклонена!"
+
+                job_request.save()
+
+            except django.http.Http404:
+                django.contrib.messages.error(
+                    request,
+                    "Возникла ошибка. Попробуйте позднее",
+                )
+
+            else:
+                django.contrib.messages.success(
+                    request,
+                    message,
+                )
+
+        return self.get(request)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["button_text"] = "Детали"
+        context["tab_label"] = "Проекты, в которых я состою"
+        return context
+
+    def get_queryset(self):
+        return self.model.objects.filter(
+            status=1,
+            job__in=users.models.User.objects.get_jobs(
+                user_id=self.request.user,
+            ).values("job"),
+        )
 
 
 __all__ = []
