@@ -28,9 +28,12 @@ class CreateJobForm(django.forms.ModelForm):
             model.image.field.name,
             model.is_active.field.name,
         ]
+
         labels = {
             model.is_active.field.name: "Опубликовать сразу",
         }
+
+        widgets = {model.image.field.name: django.forms.FileInput()}
 
 
 class JobSearchForm(django.forms.ModelForm):
