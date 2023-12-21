@@ -8,8 +8,8 @@ import django.shortcuts
 import django.utils.decorators
 import django.views.generic
 
-import resume.models
 import resume.forms
+import resume.models
 
 
 class ResumeView(django.views.generic.ListView):
