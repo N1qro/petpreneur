@@ -35,7 +35,9 @@ class CreateJobForm(django.forms.ModelForm):
 
         widgets = {
             model.image.field.name: django.forms.FileInput(),
-            model.text.field.name: django.forms.Textarea(attrs={"cols": None, "rows": None}),
+            model.text.field.name: django.forms.Textarea(
+                attrs={"cols": None, "rows": None},
+            ),
         }
 
 

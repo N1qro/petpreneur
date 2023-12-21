@@ -1,14 +1,12 @@
 import django.contrib.messages
 import django.db.models
-from django.db.models.query import QuerySet
 import django.http
-from django.http import HttpRequest, HttpResponse
 import django.shortcuts
 import django.urls
 import django.views.generic
 
-import categories.models
 import categories.forms
+import categories.models
 import jobs.forms
 import jobs.models
 import resume.forms
