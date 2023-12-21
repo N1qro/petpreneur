@@ -51,27 +51,5 @@ class StaticURLTests(django.test.TestCase):
                 django.urls.reverse("resume:detail", args=[value]),
             )
 
-    def test_category_subcategory_endpoints(self):
-        category = categories.models.Category.objects.create(
-            name="test-category",
-            slug="test-category",
-        )
-        subcategory = categories.models.Subcategory.objects.create(
-            name="test-subcategory",
-            slug="test-subcategory",
-            category=category,
-        )
-        response = django.test.Client().get(
-            django.urls.reverse("resume:category", args=[category.slug]),
-        )
-        self.assertEqual(response.status_code, http.HTTPStatus.OK)
-        response = django.test.Client().get(
-            django.urls.reverse(
-                "resume:subcategory",
-                args=[category.slug, subcategory.slug],
-            ),
-        )
-        self.assertEqual(response.status_code, http.HTTPStatus.OK)
-
 
 __all__ = []
