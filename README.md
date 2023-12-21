@@ -64,3 +64,6 @@ python manage.py createsuperuser
 python manage.py loaddata fixtures/data.json
 python manage.py runserver
 ```
+
+### База данных
+![DataBase](ER.jpeg)
