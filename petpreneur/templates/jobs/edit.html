@@ -15,14 +15,25 @@
                     {{field}}
                 </p>
             {% endfor %}
-            {% submit_button "Сохранить" %}
+            {% submit_button "Сохранить" name="info_change" %}
         </form>
     </div>
     <div class="flex-grow">
         <h5 class="text-center">Навыки или умения, нужные проекту</h5>
-        <p class="profile--skills--container job--creation--skills--container">
-            Навыки проекта можно добавлять только после его создания в секции "Мои проекты" профиля
-        </p>
+        <form method="POST" class="profile--skills--container job--creation--skills--container">
+            {% csrf_token %}
+            {% for skill in skills.all %}
+            <span class="profile--skill">{{skill}} <button type="submit" name="skill_delete" value="{{skill}}">X</button></span>
+            {% endfor %}
+        </form>
+        <form method="POST" class="form-styled">
+            {% csrf_token %}
+            {% for field in skill_form %}
+                <label for="{{field.id_for_label}}">{{field.label}}</label>
+                {{field}}
+            {% endfor %}
+            {% submit_button "Добавить" name="skill_add" %}
+        </form>
         <!-- Другой контент -->
         <h5 class="text-center">Предупреждение</h5>
         <ul class="text-style-navtext profile--section mt-1 list--offset">

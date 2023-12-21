@@ -29,8 +29,16 @@ h5, .h5 {
     margin-inline: auto;
 }
 
+.mt-1 {
+    margin-top: 1rem;
+}
+
 .my-05 {
     margin-block: 0.5rem;
+}
+
+.list--offset {
+    padding-left: 2rem !important;
 }
 
 .gap1 {
@@ -304,6 +312,7 @@ footer {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    align-content: start;
     gap: 0.25rem;
 
     box-sizing: border-box;
@@ -317,6 +326,7 @@ footer {
     padding: 2px 5px;
     border-radius: 5px;
     height: fit-content;
+    width: fit-content;
     background-color: purple;
 }
 
@@ -490,4 +500,10 @@ footer {
     font-size: 1.25rem;
     max-height: 200px;
     overflow-y: auto;
+}
+
+.job--creation--skills--container {
+    width: 100%;
+    max-width: none;
+    margin-block: 1rem;
 }

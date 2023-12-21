@@ -33,7 +33,10 @@ class CreateJobForm(django.forms.ModelForm):
             model.is_active.field.name: "Опубликовать сразу",
         }
 
-        widgets = {model.image.field.name: django.forms.FileInput()}
+        widgets = {
+            model.image.field.name: django.forms.FileInput(),
+            model.text.field.name: django.forms.Textarea(attrs={"cols": None, "rows": None}),
+        }
 
 
 class JobSearchForm(django.forms.ModelForm):

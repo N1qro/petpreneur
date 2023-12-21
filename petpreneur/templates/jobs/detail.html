@@ -17,7 +17,7 @@
                 <h5 class="text-style-navtext text-center">Список нужных навыков</h5>
                 <div class="profile--skills--container job--skills--container">
                     {% for skill in job.skills.all %}
-                        {{skill}}
+                    <span class="profile--skill">{{skill}}</span>
                     {% empty %}
                         <h5 class="text-center">Рекомендуемые навыки для проекта не указаны</h5>
                     {% endfor %}
@@ -25,8 +25,8 @@
             </div>
             <div>
                 <h5 class="text-style-navtext text-center">
-                    {% if not application %}
-                        Навигация
+                    {% if not application and request.user != job.user %}
+                        Подача заявки
                     {% else %}
                         Информация о заявке
                     {% endif %}

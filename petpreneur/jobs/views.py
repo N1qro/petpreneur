@@ -1,13 +1,17 @@
 import django.contrib.messages
 import django.db.models
+from django.db.models.query import QuerySet
 import django.http
+from django.http import HttpRequest, HttpResponse
 import django.shortcuts
 import django.urls
 import django.views.generic
 
 import categories.models
+import categories.forms
 import jobs.forms
 import jobs.models
+import resume.forms
 
 
 @django.utils.decorators.method_decorator(
@@ -37,24 +41,62 @@ class JobCreationView(django.views.generic.FormView):
     django.contrib.auth.decorators.login_required,
     name="dispatch",
 )
-class JobEditView(django.views.generic.UpdateView):
-    template_name = "jobs/create.html"
-    form_class = jobs.forms.CreateJobForm
-    model = jobs.models.Job
+class JobEditView(django.views.generic.TemplateView):
+    template_name = "jobs/edit.html"
+    context_object_name = "skills"
 
-    def form_valid(self, form):
-        form_data = form.save(commit=False)
-        form_data.user = self.request.user
-        form_data.save()
+    def get_job_model(self, pk):
+        return jobs.models.Job.objects.get(pk=pk)
 
-        django.contrib.messages.success(
-            self.request,
-            "Проект успешно изменен!",
-        )
-        return super().form_valid(form)
+    def post(self, request, pk):
+        if "info_change" in request.POST:
+            form = jobs.forms.CreateJobForm(
+                request.POST or None,
+                instance=self.get_job_model(pk),
+            )
+            if form.is_valid():
+                form.save()
+        elif "skill_add" in request.POST:
+            form = resume.forms.SkillAddForm(request.POST or None)
+            skill, was_created = form.save()
 
-    def get_success_url(self) -> str:
-        return django.urls.reverse("users:projects")
+            job_model = self.get_job_model(pk)
+            if job_model.skills.filter(id=skill.id).exists():
+                django.contrib.messages.error(
+                    request,
+                    "Этот навык уже был добавлен в проект!",
+                )
+            else:
+                job_model.skills.add(skill)
+                django.contrib.messages.success(
+                    request,
+                    f'Навык "{skill.name}" успешно добавлен',
+                )
+        elif "skill_delete" in request.POST:
+            skill_name = request.POST.get("skill_delete")
+            job_model = self.get_job_model(pk)
+            skill = job_model.skills.filter(name=skill_name).first()
+            if not skill:
+                django.contrib.messages.error(
+                    request,
+                    "Что-то пошло не так...",
+                )
+            else:
+                job_model.skills.remove(skill)
+                django.contrib.messages.info(
+                    request,
+                    f'Навык "{skill.name}" был успешно удалён',
+                )
+
+        return self.get(request, pk=pk)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        current_job = jobs.models.Job.objects.get(pk=context.get("pk"))
+        context["form"] = jobs.forms.CreateJobForm(instance=current_job)
+        context["skills"] = current_job.skills
+        context["skill_form"] = resume.forms.SkillAddForm()
+        return context
 
 
 class JobsView(django.views.generic.ListView):
