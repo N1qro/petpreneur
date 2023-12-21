@@ -48,9 +48,7 @@ class Job(
         verbose_name_plural = "работы"
 
     def __str__(self) -> str:
-        if len(str(self.text)) > 20:
-            return f"{self.text[:20]}..."
-        return self.text[:20]
+        return self.title
 
 
 class JobRequests(core.models.AbstractTextCreatedAtModel):

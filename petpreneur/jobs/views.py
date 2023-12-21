@@ -5,11 +5,11 @@ import django.shortcuts
 import django.urls
 import django.views.generic
 
-import categories.forms
-import categories.models
+
 import jobs.forms
 import jobs.models
 import resume.forms
+import users.models
 
 
 @django.utils.decorators.method_decorator(
@@ -45,6 +45,18 @@ class JobEditView(django.views.generic.TemplateView):
 
     def get_job_model(self, pk):
         return jobs.models.Job.objects.get(pk=pk)
+
+    def get(self, request, *args, **kwargs):
+        if (
+            jobs.models.Job.objects.get(pk=kwargs["pk"]).user
+            != self.request.user
+        ):
+            django.contrib.messages.error(
+                request,
+                "Вы не можете изменять чужие проекты",
+            )
+            return django.shortcuts.redirect("users:projects")
+        return super().get(request, *args, **kwargs)
 
     def post(self, request, pk):
         if "info_change" in request.POST:
@@ -135,53 +147,6 @@ class JobsView(django.views.generic.ListView):
         return self.model.objects.filter(is_active=True)
 
 
-class JobsCategoryView(JobsView):
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["category"] = self.kwargs["category"]
-        return context
-
-    def get_queryset(self):
-        self.category = django.shortcuts.get_object_or_404(
-            categories.models.Category,
-            name=self.kwargs["category"],
-        )
-        return (
-            super()
-            .get_queryset()
-            .filter(
-                category=self.category,
-            )
-        )
-
-
-class JobsSubcategoryView(JobsView):
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["category"] = self.kwargs["category"]
-        context["subcategory"] = self.kwargs["subcategory"]
-        return context
-
-    def get_queryset(self):
-        self.category = django.shortcuts.get_object_or_404(
-            categories.models.Category,
-            name=self.kwargs["category"],
-        )
-        self.subcategory = django.shortcuts.get_object_or_404(
-            categories.models.Subcategory,
-            name=self.kwargs["subcategory"],
-        )
-
-        return (
-            super()
-            .get_queryset()
-            .filter(
-                category=self.category,
-                subcategory=self.subcategory,
-            )
-        )
-
-
 class JobDetailView(django.views.generic.DetailView):
     model = jobs.models.Job
     template_name = "jobs/detail.html"
@@ -193,12 +158,31 @@ class JobDetailView(django.views.generic.DetailView):
         resume_object = self.request.user.resume_set.first()
 
         context["form"] = jobs.forms.JobApplyForm()
-        context["application"] = jobs.models.JobRequests.objects.filter(
-            job=job_object,
-            resume=resume_object,
-        ).first()
+        context["application"] = (
+            jobs.models.JobRequests.objects.filter(
+                job=job_object,
+                resume=resume_object,
+            )
+            .select_related("job")
+            .select_related("job__user")
+            .first()
+        )
 
         return context
+
+    def get_queryset(self):
+        return (
+            super()
+            .get_queryset()
+            .select_related(self.model.user.field.name)
+            .only(
+                self.model.text.field.name,
+                self.model.image.field.name,
+                self.model.title.field.name,
+                f"{self.model.user.field.name}"
+                f"__{users.models.User.contacts.field.name}",
+            )
+        )
 
     def post(self, request, pk):
         form = jobs.forms.JobApplyForm(request.POST or None)

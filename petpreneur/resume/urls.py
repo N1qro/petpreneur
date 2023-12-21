@@ -15,16 +15,6 @@ urlpatterns = [
         resume.views.ResumeDetailView.as_view(),
         name="detail",
     ),
-    django.urls.path(
-        "<category>/",
-        resume.views.ResumeCategoryView.as_view(),
-        name="category",
-    ),
-    django.urls.path(
-        "<category>/<subcategory>/",
-        resume.views.ResumeSubcategoryView.as_view(),
-        name="subcategory",
-    ),
 ]
 
 __all__ = []

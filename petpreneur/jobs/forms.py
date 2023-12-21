@@ -42,7 +42,7 @@ class CreateJobForm(django.forms.ModelForm):
 
 
 class JobSearchForm(django.forms.ModelForm):
-    search_query = django.forms.CharField(required=False)
+    search_query = django.forms.CharField(required=False, label="Поиск")
 
     class Meta:
         model = jobs.models.Job

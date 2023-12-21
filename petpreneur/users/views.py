@@ -216,11 +216,8 @@ class ProfileRequestsView(django.views.generic.TemplateView):
         return context
 
     def get_queryset(self):
-        user_resume = resume.models.Resume.objects.get(user=self.request.user)
-        return (
-            jobs.models.JobRequests.objects.filter(resume=user_resume)
-            .exclude(status=2)
-            .all()
+        return users.models.User.objects.get_request_jobs(
+            user=self.request.user,
         )
 
 
@@ -256,10 +253,8 @@ class ProfileParticipateView(django.views.generic.ListView):
         return context
 
     def get_queryset(self):
-        user_resume = resume.models.Resume.objects.get(user=self.request.user)
-        return jobs.models.JobRequests.objects.filter(
-            resume=user_resume,
-            status=2,
+        return users.models.User.objects.get_current_jobs(
+            user=self.request.user,
         )
 
 

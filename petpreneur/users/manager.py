@@ -14,9 +14,9 @@ class UserManager(django.contrib.auth.models.BaseUserManager):
             jobs.models.JobRequests.job.field.name,
         ).filter(resume=user_resume)
 
-    def get_current_jobs(self, user_id):
+    def get_current_jobs(self, user):
         return (
-            self.get_jobs(user_id=user_id)
+            self.get_jobs(user=user)
             .filter(status=2)
             .only(
                 f"{jobs.models.JobRequests.job.field.name}"
@@ -30,9 +30,9 @@ class UserManager(django.contrib.auth.models.BaseUserManager):
             )
         )
 
-    def get_request_jobs(self, user_id):
+    def get_request_jobs(self, user):
         return (
-            self.get_jobs(user_id=user_id)
+            self.get_jobs(user=user)
             .filter(status=1)
             .only(
                 f"{jobs.models.JobRequests.job.field.name}"

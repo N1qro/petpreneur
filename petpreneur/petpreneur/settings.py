@@ -35,13 +35,11 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django_cleanup.apps.CleanupConfig",
     "sorl.thumbnail",
-    "about.apps.AboutConfig",
     "categories.apps.CategoriesConfig",
     "core.apps.CoreConfig",
     "feedback.apps.FeedbackConfig",
     "home.apps.HomeConfig",
     "jobs.apps.JobsConfig",
-    "matcher.apps.MatcherConfig",
     "resume.apps.ResumeConfig",
     "users.apps.UsersConfig",
 ]

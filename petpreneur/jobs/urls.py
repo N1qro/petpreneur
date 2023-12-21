@@ -25,16 +25,6 @@ urlpatterns = [
         jobs.views.JobDetailView.as_view(),
         name="detail",
     ),
-    django.urls.path(
-        "<category>/",
-        jobs.views.JobsCategoryView.as_view(),
-        name="category",
-    ),
-    django.urls.path(
-        "<category>/<subcategory>/",
-        jobs.views.JobsSubcategoryView.as_view(),
-        name="subcategory",
-    ),
 ]
 
 __all__ = []
