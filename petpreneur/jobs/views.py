@@ -1,4 +1,7 @@
+import django.contrib.messages
 import django.db.models
+import django.http
+import django.shortcuts
 import django.urls
 import django.views.generic
 
@@ -142,7 +145,48 @@ class JobsSubcategoryView(JobsView):
 class JobDetailView(django.views.generic.DetailView):
     model = jobs.models.Job
     template_name = "jobs/detail.html"
-    context_object_name = "jobs"
+    context_object_name = "job"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        job_object = context[self.context_object_name]
+        resume_object = self.request.user.resume_set.first()
+
+        context["form"] = jobs.forms.JobApplyForm()
+        context["application"] = jobs.models.JobRequests.objects.filter(
+            job=job_object,
+            resume=resume_object,
+        ).first()
+
+        return context
+
+    def post(self, request, pk):
+        form = jobs.forms.JobApplyForm(request.POST or None)
+        if form.is_valid():
+            job_object = self.model.objects.get(pk=pk)
+            if job_object.user == request.user:
+                raise django.http.Http404(
+                    "Вы не можете оставить заявку на свой же проект!",
+                )
+
+            try:
+                new_request = jobs.models.JobRequests.objects.create(
+                    resume=request.user.resume_set.first(),
+                    job=job_object,
+                    text=form.cleaned_data["text"],
+                )
+                new_request.save()
+            except django.db.IntegrityError:
+                raise django.http.Http404(
+                    "Вы уже подавали заявку на этот проект!",
+                )
+            else:
+                django.contrib.messages.success(
+                    request,
+                    "Заявка на проект успешно подана!",
+                )
+                return django.shortcuts.redirect("jobs:detail", pk=pk)
+        raise Exception("VALIDATION ERROR")
 
 
 __all__ = []

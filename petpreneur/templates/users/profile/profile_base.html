@@ -53,8 +53,9 @@
 
 			{% url "users:logout" as logout_url %}
 			{% url "jobs:create" as create_url %}
+			{% url "jobs:jobs_list" as project_marketplace_url %}
 			<nav>
-				{% link_button "Найти проект" %}
+				{% link_button "Найти проект" project_marketplace_url %}
 				{% link_button "Создать проект" create_url color="black" state="hovered" %}
 				{% link_button "Выйти" logout_url color="red"%}
 			</nav>

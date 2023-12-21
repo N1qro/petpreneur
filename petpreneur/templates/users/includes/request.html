@@ -1,0 +1,21 @@
+{% load buttons %}
+{% load thumbnail %}
+
+<div class="project--small">
+    {% if resume.user.image %}
+        {% thumbnail resume.user.image "100x57" as thumb %}
+            <img src="{{thumb.url}}" alt="project-image">
+        {% endthumbnail %}
+    {% endif %}
+    <p class="text-style-navtext">{{job.title}}</p>
+    <form method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="job_request_id" value="{{job_request.id}}">
+        <div class="flex-row gap1">
+            {% link_button "Резюме" %}
+            {% submit_button accept_button_text name="accept" value=resume color="green" %}
+            {% submit_button reject_button_text name="reject" value=resume color="red" %}
+        </div>
+        <time datetime="{{job.created_at}}">{{job.created_at}}</time>
+    </form>
+</div>

@@ -4,13 +4,11 @@
     <div class="profile--project--related">
         <h5 class="text-center">{{tab_label}}</h5>
         <div class="profile--projects--container">
-            {% for job in jobs %}
-                {% include "users/includes/project.html" with job=job button_text=button_text %}
+            {% for request in requests %}
+                {% include "users/includes/accepted_project.html" with job=request.job button_text=button_text %}
             {% empty %}
                 <h5 class="text-center">
-                    Нет ни одной проекта.
-                    Для создания нового проекта
-                    нажмите на кнопку "Создать проект" в левом нижнем углу!
+                    Вы ещё не состоите ни в одном из проектов 😫
                 </h5>
             {% endfor %}
         </div>

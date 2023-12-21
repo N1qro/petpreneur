@@ -5,7 +5,7 @@ import django.template
 
 register = django.template.Library()
 StateType = typing.Literal["primary", "hovered", "focused"]
-ButtonColor = typing.Literal["default", "black", "red"]
+ButtonColor = typing.Literal["default", "black", "red", "green"]
 
 
 @register.simple_tag(takes_context=True)

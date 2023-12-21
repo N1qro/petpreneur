@@ -47,4 +47,18 @@ class JobSearchForm(django.forms.ModelForm):
         ]
 
 
+class JobApplyForm(django.forms.ModelForm):
+    class Meta:
+        model = jobs.models.JobRequests
+        fields = [
+            model.text.field.name,
+        ]
+        labels = {model.text.field.name: "Дополнительная информация"}
+        widgets = {
+            model.text.field.name: django.forms.Textarea(
+                attrs={"cols": None, "rows": None, "class": "my-05"},
+            ),
+        }
+
+
 __all__ = []

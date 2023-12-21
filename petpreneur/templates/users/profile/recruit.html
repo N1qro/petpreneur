@@ -4,11 +4,18 @@
     <div class="profile--project--related">
         <h5 class="text-center">{{tab_label}}</h5>
         <div class="profile--projects--container">
-            {% for job in jobs %}
-                {% include "users/includes/project.html" with job=job button_text=button_text %}
+            {% for job_request in requests %}
+                {% include "users/includes/request.html" with job=job_request.job resume=job_request.resume reject_button_text=reject_button_text %}
             {% empty %}
-                Пустая переменная jobs...
+                <h5 class="text-center">
+                    Заявок пока нет!
+                    Когда кто-нибудь из пользователей откликнется на ваш проект,
+                    он появится здесь
+                </p>
             {% endfor %}
         </div>
+        <br>
+        <h5 class="text-center">Принятые заявки</h5>
+        <p class="text-center">Вот тут жепа</p>
     </div>
 {% endblock profile_content %}

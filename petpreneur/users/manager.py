@@ -6,10 +6,10 @@ import resume.models
 
 
 class UserManager(django.contrib.auth.models.BaseUserManager):
-    def get_jobs(self, user_id: int):
+    def get_jobs(self, user):
         user_resume = resume.models.Resume.objects.only(
             resume.models.Resume.id.field.name,
-        ).get(user=user_id)
+        ).get(user=user)
         return jobs.models.JobRequests.objects.select_related(
             jobs.models.JobRequests.job.field.name,
         ).filter(resume=user_resume)
