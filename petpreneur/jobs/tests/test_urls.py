@@ -5,8 +5,6 @@ import django.test
 import django.urls
 import parameterized
 
-import categories.models
-
 
 class StaticURLTests(django.test.TestCase):
     def test_redirect_to_login(self):
