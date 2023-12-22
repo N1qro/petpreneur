@@ -2,5 +2,25 @@
 {% load buttons %}
 
 {% block content %}
-{{ resume }}
+    <div class="profile-container resume--detail--container">
+        <h5 class="text-center">Резюме пользователя {{resume}}</h5>
+        <div>
+            <div class="profile--section resume--resume">
+                <h5 class="text-center">Описание</h5>
+                <p class="resume--text">{{resume.text}}</p>
+            </div>
+            <div class="profile--section resume--skills">
+                <h5 class="text-center">Навыки</h5>
+                <div class="profile--skills--container">
+                    {% for skill in resume.skills.all %}
+                        <span class="profile--skill">{{skill}}</span>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="profile--section resume--contacts">
+                <h5 class="text-center">Контакты</h5>
+                <p class="resume--text">{{resume.user.contacts}}</p>
+            </div>
+        </div>
+    </div>
 {% endblock content %}
