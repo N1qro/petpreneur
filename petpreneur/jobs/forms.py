@@ -28,13 +28,21 @@ class CreateJobForm(django.forms.ModelForm):
             model.image.field.name,
             model.is_active.field.name,
         ]
+
         labels = {
             model.is_active.field.name: "Опубликовать сразу",
         }
 
+        widgets = {
+            model.image.field.name: django.forms.FileInput(),
+            model.text.field.name: django.forms.Textarea(
+                attrs={"cols": None, "rows": None},
+            ),
+        }
+
 
 class JobSearchForm(django.forms.ModelForm):
-    search_query = django.forms.CharField(required=False)
+    search_query = django.forms.CharField(required=False, label="Поиск")
 
     class Meta:
         model = jobs.models.Job
@@ -42,6 +50,20 @@ class JobSearchForm(django.forms.ModelForm):
             model.category.field.name,
             model.subcategory.field.name,
         ]
+
+
+class JobApplyForm(django.forms.ModelForm):
+    class Meta:
+        model = jobs.models.JobRequests
+        fields = [
+            model.text.field.name,
+        ]
+        labels = {model.text.field.name: "Дополнительная информация"}
+        widgets = {
+            model.text.field.name: django.forms.Textarea(
+                attrs={"cols": None, "rows": None, "class": "my-05"},
+            ),
+        }
 
 
 __all__ = []

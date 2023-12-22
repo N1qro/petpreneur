@@ -39,6 +39,10 @@
     --background-color: #FC4D4D;
 }
 
+.button-color-green {
+    --background-color: #4ae18b;
+}
+
 /* navbar */
 
 header {

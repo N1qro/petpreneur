@@ -173,39 +173,52 @@ class ProfileResumeView(django.views.generic.TemplateView):
 )
 class ProfileRequestsView(django.views.generic.TemplateView):
     model = jobs.models.JobRequests
-    template_name = "users/profile/project_view.html"
-    context_object_name = "jobs"
+    template_name = "users/profile/requests.html"
+    context_object_name = "requests"
 
     def post(self, request):
-        job_request_id = request.POST.get("id")
-        if job_request_id:
-            try:
-                job_request = django.shortcuts.get_object_or_404(
-                    self.model,
-                    id=job_request_id,
-                )
-                job_request.delete()
-            except django.http.Http404:
-                django.contrib.messages.error(
-                    request,
-                    "Во время отмены возникла ошибка. Попробуйте позднее",
-                )
-            else:
-                django.contrib.messages.success(
-                    request,
-                    "Заявка была успешно отозвана",
-                )
+        job_request_id = request.POST.get("job_request_id")
+
+        try:
+            job_request = django.shortcuts.get_object_or_404(
+                self.model,
+                id=job_request_id,
+            )
+
+            if job_request.resume.user != request.user:
+                raise django.http.Http404
+
+            message = (
+                "Заявка была успешно отозвана!"
+                if job_request.status == 1
+                else "Отклонённая заявка была убрана!"
+            )
+            job_request.delete()
+        except django.http.Http404:
+            django.contrib.messages.error(
+                request,
+                "Во время отмены возникла ошибка. Попробуйте позднее",
+            )
+        else:
+            django.contrib.messages.success(
+                request,
+                message,
+            )
 
         return self.get(request)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["button_text"] = "Отозвать"
+        context["requests"] = self.get_queryset()
+        context["delete_text"] = "Удалить"
+        context["undo_text"] = "Отозвать"
         context["tab_label"] = "Отправленные заявки"
         return context
 
     def get_queryset(self):
-        return users.models.User.objects.get_request_jobs(self.request.user.pk)
+        return users.models.User.objects.get_request_jobs(
+            user=self.request.user,
+        )
 
 
 @django.utils.decorators.method_decorator(
@@ -214,8 +227,8 @@ class ProfileRequestsView(django.views.generic.TemplateView):
 )
 class ProfileParticipateView(django.views.generic.ListView):
     model = jobs.models.JobRequests
-    template_name = "users/profile/project_view.html"
-    context_object_name = "jobs"
+    template_name = "users/profile/participating.html"
+    context_object_name = "requests"
 
     def post(self, request):
         job_id = request.POST.get("id")
@@ -240,7 +253,9 @@ class ProfileParticipateView(django.views.generic.ListView):
         return context
 
     def get_queryset(self):
-        return users.models.User.objects.get_current_jobs(self.request.user.pk)
+        return users.models.User.objects.get_current_jobs(
+            user=self.request.user,
+        )
 
 
 @django.utils.decorators.method_decorator(
@@ -378,7 +393,58 @@ class ProfileProjectsView(django.views.generic.ListView):
     name="dispatch",
 )
 class ProfileRecruitView(django.views.generic.ListView):
+    model = jobs.models.JobRequests
     template_name = "users/profile/recruit.html"
+    context_object_name = "requests"
+
+    def post(self, request):
+        accept = request.POST.get("accept", None)
+        reject = request.POST.get("reject", None)
+        job_request_id = request.POST.get("job_request_id")
+
+        user = accept or reject
+        new_status = 2 if accept == user else 3
+        message = "Заявка принята!" if new_status == 2 else "Заявка отклонена!"
+
+        try:
+            job_request = django.shortcuts.get_object_or_404(
+                self.model,
+                id=job_request_id,
+            )
+
+            if job_request.job.user != request.user:
+                raise django.http.Http404
+
+            job_request.status = new_status
+            job_request.save()
+        except django.http.Http404:
+            django.contrib.messages.error(
+                request,
+                "Возникла ошибка. Попробуйте позднее",
+            )
+        else:
+            django.contrib.messages.success(
+                request,
+                message,
+            )
+
+        return self.get(request)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["reject_button_text"] = "Отклонить"
+        context["accept_button_text"] = "Принять"
+        context["tab_label"] = "Отправленные пользователями заявки!"
+        return context
+
+    def get_queryset(self):
+        user_jobs = jobs.models.Job.objects.filter(
+            user=self.request.user,
+        ).values_list("id", flat=True)
+        return jobs.models.JobRequests.objects.filter(
+            job__id__in=user_jobs,
+            status=1,
+        )
 
 
 __all__ = []

@@ -7,6 +7,7 @@
     {% csrf_token %}
     <h5 class="text-center">Моё резюме</h5>
     {{resumeform.text}}
+    <p>{{resumeform.is_active}} {{resumeform.is_active.label}}</p>
     {% submit_button "Сохранить" name="resume" %}
 </form>
 <div class="profile--skills">

@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% load thumbnail buttons %}
+
+{% block content %}
+    <div class="profile-container job--detail">
+        <h5 class="text-center">{{job.title}}</h5>
+        <div class="job--detail--grid">
+            {% thumbnail job.get_image "500x250" as thumb %}
+                <img src="{{thumb.url}}" width="{{thumb.width}}" height="{{thumb.height}}" alt="{{job.title}}">
+            {% endthumbnail %}
+            <div>
+                <h5 class="text-style-navtext text-center">Описание</h5>
+
+                <p class="job--area--container job--description">{{job.text}}</p>
+            </div>
+            <div>
+                <h5 class="text-style-navtext text-center">Список нужных навыков</h5>
+                <div class="profile--skills--container job--skills--container">
+                    {% for skill in job.skills.all %}
+                    <span class="profile--skill">{{skill}}</span>
+                    {% empty %}
+                        <h5 class="text-center">Рекомендуемые навыки для проекта не указаны</h5>
+                    {% endfor %}
+                </div>
+            </div>
+            <div>
+                <h5 class="text-style-navtext text-center">
+                    {% if not application and request.user != job.user %}
+                        Подача заявки
+                    {% else %}
+                        Информация о заявке
+                    {% endif %}
+                </h5>
+                <form method="POST" class="job--area--container form-styled"    >
+                    {% csrf_token %}
+                    {% if job.user != request.user %}
+                        {% if application %}
+                            {% if application.status == 1 %}
+                                <p>
+                                    Вы уже подали заявку на этот проект.
+                                    После того как владелец одобрит заявку, его контакты будут отображаться тут
+                                </p>
+                            {% else %}
+                                {% if application.status == 2 %}
+                                    {% if application.job.user.contacts %}
+                                        <p>Контакты пользователя: <br>{{application.job.user.contacts}}</p>
+                                        <p>Свяжитесь с ним любым доступным способом</p>
+                                    {% else %}
+                                        <p>Пользователь не оставил контактов, ожидайте сообщение</p>
+                                    {% endif %}
+                                {% else %}
+                                    <p>Владелец отклонил вашу заявку.</p>
+                                {% endif %}
+                            {% endif %}
+                        {% else %}
+                            {% for field in form %}
+                                <label for="{{field.id_for_label}}">{{field.label}}:</label>
+                                {{field}}
+                            {% endfor %}
+                            {% submit_button "Подать заявку" %}
+                        {% endif %}
+                    {% else %}
+                        <p>Это ваш проект 😎</p>
+                    {% endif %}
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

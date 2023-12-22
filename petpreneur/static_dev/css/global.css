@@ -29,6 +29,18 @@ h5, .h5 {
     margin-inline: auto;
 }
 
+.mt-1 {
+    margin-top: 1rem;
+}
+
+.my-05 {
+    margin-block: 0.5rem;
+}
+
+.list--offset {
+    padding-left: 2rem !important;
+}
+
 .gap1 {
     gap: 1rem;
 }
@@ -88,6 +100,8 @@ h5, .h5 {
 .form-styled textarea {
     height: 100%;
     font-size: 1.25rem;
+    display: block;
+    box-sizing: border-box;
 }
 
 .form-styled > p {
@@ -298,6 +312,7 @@ footer {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    align-content: start;
     gap: 0.25rem;
 
     box-sizing: border-box;
@@ -311,6 +326,7 @@ footer {
     padding: 2px 5px;
     border-radius: 5px;
     height: fit-content;
+    width: fit-content;
     background-color: purple;
 }
 
@@ -426,4 +442,68 @@ footer {
     background-color: #000;
     padding: 10px 15px;
     border-radius: 10px;
+}
+
+/* job-detail */
+
+.job--detail {
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+
+.job--detail h5:first-of-type {
+    background-color: #00000077;
+    height: fit-content;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.job--detail--grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 2fr 2fr;
+    grid-template-areas: 
+        "job--image job--description"
+        "job--nav job--skills";
+    gap: 1rem;
+    height: 100%;
+}
+
+.job--detail--grid > div:has(div.job--skills--container) {
+    grid-area: job--skills;
+}
+
+.job--detail--grid > img:first-of-type {
+    grid-area: job--image;
+    justify-self: center;
+}
+
+.job--area--container {
+    background-color: #7B7CC0;
+    width: 100%;
+    height: 80%;
+    padding: 10px;
+    border: 2px solid black;
+    border-radius: 10px;
+    margin-top: 1rem;
+}
+
+.job--skills--container {
+    width: 100%;
+    max-width: none;
+    margin-top: 1rem;
+    background-color: #7B7CC0;
+    height: 80%;
+}
+
+.job--description {
+    font-size: 1.25rem;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.job--creation--skills--container {
+    width: 100%;
+    max-width: none;
+    margin-block: 1rem;
 }

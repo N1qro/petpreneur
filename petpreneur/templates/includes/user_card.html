@@ -1,0 +1,8 @@
+{% load buttons %}
+
+<div class="project--card">
+    {% url "resume:detail" resume.id as redirect_url %}
+    <p class="project--title text-center">{% if resume.user.first_name and resume.user.last_name %}{{resume.user.first_name}}{% else %}{{resume.user.username}}{% endif %}</p>
+    <p class="flex-grow">{{resume.text|truncatewords:50}}</p>
+    {% link_button "Подробнее" redirect_url color="black" state="hovered" %}
+</div>

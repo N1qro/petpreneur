@@ -38,14 +38,17 @@ class Job(
         related_name="job",
     )
 
+    def get_image(self):
+        if self.image:
+            return self.image
+        return self.default_image_url
+
     class Meta:
         verbose_name = "работа"
         verbose_name_plural = "работы"
 
     def __str__(self) -> str:
-        if len(str(self.text)) > 20:
-            return f"{self.text[:20]}..."
-        return self.text[:20]
+        return self.title
 
 
 class JobRequests(core.models.AbstractTextCreatedAtModel):
@@ -76,6 +79,7 @@ class JobRequests(core.models.AbstractTextCreatedAtModel):
     class Meta:
         verbose_name = "заявка"
         verbose_name_plural = "заявки"
+        unique_together = [("job", "resume")]
 
     def __str__(self) -> str:
         if len(str(self.text)) > 20:

@@ -1,0 +1,18 @@
+{% extends "users/profile/profile_base.html" %}
+
+{% block profile_content %}
+    <div class="profile--project--related">
+        <h5 class="text-center">{{tab_label}}</h5>
+        <div class="profile--projects--container">
+            {% for request in requests %}
+                {% include "users/includes/application.html" with job=request.job button_text=button_text %}
+            {% empty %}
+                <h5 class="text-center">
+                    Нет ни одной заявки.
+                    Для просмотра списка доступных проектов
+                    нажмите на кнопку "Найти проект" в левом нижнем углу!
+                </h5>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock profile_content %}
