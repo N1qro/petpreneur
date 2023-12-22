@@ -4,7 +4,7 @@
     <div class="profile--project--related">
         <h5 class="text-center">{{tab_label}}</h5>
         <div class="profile--projects--container">
-            {% for job_request in requests %}
+            {% for job_request in pending_requests %}
                 {% include "users/includes/request.html" with job=job_request.job resume=job_request.resume reject_button_text=reject_button_text %}
             {% empty %}
                 <h5 class="text-center">
@@ -16,6 +16,10 @@
         </div>
         <br>
         <h5 class="text-center">Принятые заявки</h5>
-        <p class="text-center">Вот тут жепа</p>
+        <div>
+            {% for job_request in accepted_requests %}
+                {% include "users/includes/accepted_request.html" with job=job_request.job resume=job_request.resume %}
+            {% endfor %}
+        </div>
     </div>
 {% endblock profile_content %}

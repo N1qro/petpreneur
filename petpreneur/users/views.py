@@ -432,6 +432,15 @@ class ProfileRecruitView(django.views.generic.ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        accepted_requests, pending_requests = [], []
+        for request in context[self.context_object_name]:
+            if request.status == 1:
+                pending_requests.append(request)
+            else:
+                accepted_requests.append(request)
+
+        context["accepted_requests"] = accepted_requests
+        context["pending_requests"] = pending_requests
         context["reject_button_text"] = "Отклонить"
         context["accept_button_text"] = "Принять"
         context["tab_label"] = "Отправленные пользователями заявки!"
@@ -443,7 +452,7 @@ class ProfileRecruitView(django.views.generic.ListView):
         ).values_list("id", flat=True)
         return jobs.models.JobRequests.objects.filter(
             job__id__in=user_jobs,
-            status=1,
+            status__in=(1, 2),
         )
 
 
