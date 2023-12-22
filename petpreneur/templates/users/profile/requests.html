@@ -2,7 +2,7 @@
 
 {% block profile_content %}
     <div class="profile--project--related">
-        <h5 class="text-center">{{tab_label}}</h5>
+        <h5 class="text-center project--title">{{tab_label}}</h5>
         <div class="profile--projects--container">
             {% for request in requests %}
                 {% include "users/includes/application.html" with job=request.job button_text=button_text %}

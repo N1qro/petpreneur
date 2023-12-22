@@ -66,6 +66,16 @@ class JobEditView(django.views.generic.TemplateView):
             )
             if form.is_valid():
                 form.save()
+                django.contrib.messages.success(
+                    request,
+                    "Данные о проекте успешно изменены!",
+                )
+            else:
+                django.contrib.messages.error(
+                    request,
+                    "Что-то пошло не так...",
+                )
+            return django.shortcuts.redirect("users:projects")
         elif "skill_add" in request.POST:
             form = resume.forms.SkillAddForm(request.POST or None)
             skill, was_created = form.save()

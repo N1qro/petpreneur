@@ -19,11 +19,13 @@
             <span class="profile--skill">{{skill}} <button type="submit" name="skill_delete" value="{{skill}}">X</button></span>
         {% endfor %}
     </form>
-    <form method="POST" class="form-styled flex-row">
+    <form method="POST" class="form-styled skill-add-form flex-row">
         {% csrf_token %}
         {% for field in skillform %}
-            <label for="{{field.id_for_field}}">{{field.label}}</label>
-            {{field}}
+            <div>
+                <label for="{{field.id_for_field}}">{{field.label}}</label>
+                {{field}}
+            </div>
         {% endfor %}
         {% submit_button "Добавить" name="skill" %}
     </form>

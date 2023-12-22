@@ -19,7 +19,14 @@
             </div>
             <div class="profile--section resume--contacts">
                 <h5 class="text-center">Контакты</h5>
-                <p class="resume--text">{{resume.user.contacts}}</p>
+                <p class="resume--text">
+                    {% if resume.user.contacts %}
+                        {{resume.user.contacts}}
+                    {% else %}
+                        Пользователь не оставил контактов.
+                        В скором времени он свяжется с вами сам
+                    {% endif %}
+                </p>
             </div>
         </div>
     </div>

@@ -2,8 +2,8 @@
 
 {% block profile_content %}
     <div class="profile--project--related">
-        <h5 class="text-center">{{tab_label}}</h5>
-        <div class="profile--projects--container">
+        <h5 class="text-center project--title">{{tab_label}}</h5>
+        <section class="profile--projects--container">
             {% for job_request in pending_requests %}
                 {% include "users/includes/request.html" with job=job_request.job resume=job_request.resume reject_button_text=reject_button_text %}
             {% empty %}
@@ -11,15 +11,19 @@
                     Заявок пока нет!
                     Когда кто-нибудь из пользователей откликнется на ваш проект,
                     он появится здесь
-                </p>
+                </h5>
             {% endfor %}
-        </div>
+        </section>
         <br>
-        <h5 class="text-center">Принятые заявки</h5>
-        <div>
+        <h5 class="text-center project--title">Принятые заявки</h5>
+        <section>
             {% for job_request in accepted_requests %}
                 {% include "users/includes/accepted_request.html" with job=job_request.job resume=job_request.resume %}
+            {% empty %}
+                <h5 class="text-center">
+                    Вы ещё не приняли ни одного человека на работу
+                </h5>
             {% endfor %}
-        </div>
+        </section>
     </div>
 {% endblock profile_content %}
