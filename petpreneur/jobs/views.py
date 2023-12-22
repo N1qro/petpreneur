@@ -59,7 +59,7 @@ class JobEditView(django.views.generic.TemplateView):
         return super().get(request, *args, **kwargs)
 
     def post(self, request, pk):
-        if "info_change" in request.POST:
+        if "info_change" in request.POST:  # noqa R505
             form = jobs.forms.CreateJobForm(
                 request.POST or None,
                 instance=self.get_job_model(pk),
