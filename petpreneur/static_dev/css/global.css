@@ -507,3 +507,49 @@ footer {
     max-width: none;
     margin-block: 1rem;
 }
+
+/* resume */
+
+.resume--detail--container {
+    display: block;
+}
+
+.resume--detail--container > h5:first-of-type {
+    width: 100%;
+    height: fit-content;
+}
+
+.resume--detail--container > div:first-of-type {
+    display: grid;
+    margin-top: 1rem;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas: 
+        "resume skills"
+        "resume contacts";
+    gap: 1rem;
+    height: max-content;
+}
+
+.resume--text {
+    padding: 5px;
+    margin-top: 5px;
+    width: fit-content;
+    margin-inline: auto;
+}
+
+.resume--contacts .resume--text {
+    padding: 5px;
+} 
+
+.resume--resume {
+    grid-area: resume;
+}
+
+.resume--skills {
+    grid-area: skills;
+}
+
+.resume--contacts {
+    grid-area: contacts;
+}

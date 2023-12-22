@@ -11,8 +11,9 @@
     <form method="POST">
         {% csrf_token %}
         <input type="hidden" name="job_request_id" value="{{job_request.id}}">
+        {% url "resume:detail" resume.id as resume_redirect_url %}
         <div class="flex-row gap1">
-            {% link_button "Резюме" %}
+            {% link_button "Резюме" resume_redirect_url %}
             {% submit_button accept_button_text name="accept" value=resume color="green" %}
             {% submit_button reject_button_text name="reject" value=resume color="red" %}
         </div>
