@@ -23,9 +23,11 @@
         </form>
     </section>
 
-    <section class="project--search--container">
+    <section class="project--search--container removable-grid">
         {% for job in jobs %}
             {% include "includes/project_card.html" with job=job %}
+        {% empty %}
+            <h2 class="text-center remove-grid">Не найдено ни одного проекта</h2>
         {% endfor %}
     </section>
 

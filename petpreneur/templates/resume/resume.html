@@ -23,9 +23,13 @@
         </form>
     </section>
 
-    <section class="project--search--container">
+    <section class="project--search--container removable-grid">
         {% for resume in resumes %}
             {% include "includes/user_card.html" with resume=resume %}
+        {% empty %}
+            <h2 class="text-center remove-grid">
+                Не найдено ни одного резюме
+            </h2>
         {% endfor %}
     </section>
 

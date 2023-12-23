@@ -27,10 +27,7 @@ class ResumeSearchForm(django.forms.ModelForm):
 
     class Meta:
         model = resume.models.Resume
-        fields = [
-            model.category.field.name,
-            model.subcategory.field.name,
-        ]
+        fields = []
 
 
 class SkillAddForm(django.forms.ModelForm):

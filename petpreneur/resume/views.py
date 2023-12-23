@@ -1,7 +1,11 @@
+import functools
+import operator
+
 import django.contrib.auth.decorators
 import django.contrib.auth.forms
 import django.contrib.auth.models
 import django.contrib.messages
+import django.db
 import django.forms
 import django.http
 import django.shortcuts
@@ -32,7 +36,9 @@ class ResumeView(django.views.generic.ListView):
             category = form.cleaned_data.get("category")
             subcategory = form.cleaned_data.get("subcategory")
             search_query = form.cleaned_data.get("search_query")
-            queryset = self.model.objects.filter(is_active=True)
+            queryset = self.model.objects.filter(is_active=True).exclude(
+                user_id=self.request.user.id,
+            )
 
             if category:
                 queryset = queryset.filter(category=category)
@@ -41,13 +47,20 @@ class ResumeView(django.views.generic.ListView):
 
             if search_query:
                 queryset = queryset.filter(
-                    django.db.models.Q(title__icontains=search_query)
-                    | django.db.models.Q(text__icontains=search_query),
+                    functools.reduce(
+                        operator.and_,
+                        (
+                            django.db.models.Q(text__icontains=x)
+                            for x in search_query.split()
+                        ),
+                    ),
                 )
 
             return queryset  # noqa R504
 
-        return self.model.objects.filter(is_active=True)
+        return self.model.objects.filter(is_active=True).exclude(
+            user_id=self.request.user.id,
+        )
 
 
 class ResumeDetailView(django.views.generic.DetailView):
