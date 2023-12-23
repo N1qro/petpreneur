@@ -25,12 +25,12 @@ class StaticURLTests(django.test.TestCase):
 
     @parameterized.parameterized.expand(
         [
-            ("0", http.HTTPStatus.NOT_FOUND),
-            ("01", http.HTTPStatus.NOT_FOUND),
-            ("010", http.HTTPStatus.NOT_FOUND),
-            (10, http.HTTPStatus.NOT_FOUND),
-            (100, http.HTTPStatus.NOT_FOUND),
-            (random.randint(1, 100000), http.HTTPStatus.NOT_FOUND),
+            ("0", http.HTTPStatus.FOUND),
+            ("01", http.HTTPStatus.FOUND),
+            ("010", http.HTTPStatus.FOUND),
+            (10, http.HTTPStatus.FOUND),
+            (100, http.HTTPStatus.FOUND),
+            (random.randint(1, 100000), http.HTTPStatus.FOUND),
         ],
     )
     def test_jobs_deatail_positive_endpoint(self, value, status_code):

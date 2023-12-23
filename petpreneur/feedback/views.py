@@ -35,10 +35,23 @@ class FeedbackView(django.views.generic.TemplateView):
         feedback_extra_form = context["feedback_extra_form"]
 
         if feedback_form.is_valid() and feedback_extra_form.is_valid():
+            mail = feedback_extra_form.cleaned_data.get("mail")
+            text = feedback_form.cleaned_data.get("text")
+
             feedback_extra_form.save()
             fb = feedback_form.save(commit=False)
             fb.extra = feedback_extra_form.instance
             fb.save()
+
+            django.core.mail.send_mail(
+                "Обращение",
+                text,
+                django.conf.settings.MAILTO_EMAIL,
+                [
+                    mail,
+                ],
+                fail_silently=False,
+            )
 
             django.contrib.messages.success(request, "Обращение отправлено!")
 

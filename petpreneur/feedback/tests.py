@@ -50,7 +50,7 @@ class FormTests(django.test.TestCase):
             follow=True,
         )
 
-        self.assertIn("form", response.context)
+        self.assertIn("feedback_form", response.context)
 
         self.assertRedirects(
             response,
