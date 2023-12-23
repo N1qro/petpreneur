@@ -387,6 +387,11 @@ footer {
     flex: 1;
 }
 
+.project--card > * {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .profile--projects--container {
     margin-top: 1rem;
     overflow-y: auto;

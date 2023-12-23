@@ -27,9 +27,10 @@
 {% if messages %}
 {% for message in messages %}
 {% if forloop.first %}
-<article class="navbar--message message--{{message.tags}}">
+<article class="navbar--message message--{{message.tags}}" id="navbar--message">
     <i class="fi fi-rr-info"></i>
     <p>{{message}}</p>
+    <button id="navbar--message--close--button">X</button>
 </article>
 {% endif %}
 {% endfor %}

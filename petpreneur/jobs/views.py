@@ -1,3 +1,4 @@
+import django.contrib.auth
 import django.contrib.messages
 import django.db.models
 import django.http
@@ -157,6 +158,10 @@ class JobsView(django.views.generic.ListView):
         return self.model.objects.filter(is_active=True)
 
 
+@django.utils.decorators.method_decorator(
+    django.contrib.auth.decorators.login_required,
+    name="dispatch",
+)
 class JobDetailView(django.views.generic.DetailView):
     model = jobs.models.Job
     template_name = "jobs/detail.html"
