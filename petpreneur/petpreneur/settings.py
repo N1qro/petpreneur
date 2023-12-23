@@ -1,6 +1,7 @@
 import os
 import pathlib
 
+import django.urls
 import dotenv
 
 dotenv.load_dotenv()
@@ -73,6 +74,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "core.context_processors.mailto_processor",
             ],
         },
     },
@@ -112,7 +114,7 @@ AUTH_PASSWORD_VALIDATORS = [
 AUTH_USER_MODEL = "users.User"
 
 LOGIN_URL = "/auth/login/"
-LOGIN_REDIRECT_URL = "/"
+LOGIN_REDIRECT_URL = django.urls.reverse_lazy("users:profile")
 LOGOUT_REDIRECT_URL = LOGIN_URL
 
 LANGUAGE_CODE = "ru"
@@ -127,6 +129,10 @@ STATIC_URL = "static/"
 STATIC_ROOT = BASE_DIR / "static"
 STATICFILES_DIRS = [BASE_DIR / "static_dev"]
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+MAILTO_EMAIL = "petpreneur@django.ru"
+MAILTO_SUBJECT = "Вопрос по работе сайта"
+MAILTO_BODY = "Опишите вашу проблему подробно, не упуская детали"
 
 EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
 
