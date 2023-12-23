@@ -102,6 +102,7 @@ h5, .h5 {
     font-size: 1.25rem;
     display: block;
     box-sizing: border-box;
+    resize: none;
 }
 
 .form-styled > p {
@@ -649,4 +650,17 @@ footer {
 
 .box--signup {
     right: 15%;
+}
+
+
+/* feedback */
+
+.feedback--form {
+    width: 33%;
+    margin: auto;
+    padding: 25px;
+}
+
+.feedback--form textarea {
+    height: 15vh;
 }
