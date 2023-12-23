@@ -25,6 +25,11 @@
                         {{field}}
                     </p>
                 {% endfor %}
+                {% for field, errors in form.errors.items %}
+                    {% for error in errors %}
+                        <p class="my-05">{{error}}</p>
+                    {% endfor %}
+                {% endfor %}
             </div>
             {% submit_button "Войти" %}
         </form>
