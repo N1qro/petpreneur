@@ -20,6 +20,10 @@ h5, .h5 {
     line-height: normal;
 }
 
+.removable-grid:has(.remove-grid) {
+    display: block;
+}
+
 .text-center {
     text-align: center;
 }
@@ -652,7 +656,6 @@ footer {
     right: 15%;
 }
 
-
 /* feedback */
 
 .feedback--form {
@@ -663,4 +666,10 @@ footer {
 
 .feedback--form textarea {
     height: 15vh;
+}
+
+.div-center {
+    margin: auto;
+    width: 100%;
+    height: 100%;
 }

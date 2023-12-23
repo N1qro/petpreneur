@@ -6,7 +6,8 @@
     </a>
     <nav>
         {% url "jobs:jobs_list" as project_marketplace_url %}
-        <a class="text-style-navtext" href="#">Резюме людей</a>
+        {% url "resume:resume_list" as resume_list_url %}
+        <a class="text-style-navtext" href="{{resume_list_url}}">Резюме людей</a>
         <a class="text-style-navtext" href="{{project_marketplace_url}}">Биржа проектов</a>
     </nav>
 

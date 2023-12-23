@@ -140,7 +140,9 @@ class JobsView(django.views.generic.ListView):
             category = form.cleaned_data.get("category")
             subcategory = form.cleaned_data.get("subcategory")
             search_query = form.cleaned_data.get("search_query")
-            queryset = self.model.objects.filter(is_active=True)
+            queryset = self.model.objects.filter(is_active=True).exclude(
+                user_id=self.request.user.id,
+            )
 
             if category:
                 queryset = queryset.filter(category=category)
@@ -155,7 +157,9 @@ class JobsView(django.views.generic.ListView):
 
             return queryset  # noqa R504
 
-        return self.model.objects.filter(is_active=True)
+        return self.model.objects.filter(is_active=True).exclude(
+            user_id=self.request.user.id,
+        )
 
 
 @django.utils.decorators.method_decorator(
@@ -166,6 +170,9 @@ class JobDetailView(django.views.generic.DetailView):
     model = jobs.models.Job
     template_name = "jobs/detail.html"
     context_object_name = "job"
+
+    def get(self, request, *args, **kwargs):
+        return super().get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -182,6 +189,11 @@ class JobDetailView(django.views.generic.DetailView):
             .select_related("job__user")
             .first()
         )
+
+        if not job_object.is_active and not context["application"]:
+            raise django.http.Http404(
+                "Такого проекта не существует или автор скрыл к ней доступ",
+            )
 
         return context
 
