@@ -764,11 +764,10 @@
     }
 },
 {
-    "model": "sessions.session",
-    "pk": "6xywpihub08i5akuqt9mr8ucoz1brtv6",
+    "model": "thumbnail.kvstore",
+    "pk": "sorl-thumbnail||image||0ab7103eb5fd215c5b031cbcd1535e94",
     "fields": {
-        "session_data": ".eJxVjEEOwiAQRe_C2hBpOxRcuu8ZyMwwSNVAUtqV8e7apAvd_vfef6mA25rD1mQJc1QXZdTpdyPkh5QdxDuWW9Vcy7rMpHdFH7TpqUZ5Xg_37yBjy996cJhScizWjoOQTyIRgMgwWuexM8YLWmB2vViM3Rl49CwMJN72BOr9AR0bOTs:1rH0TS:pEWKdwrRVOapM3sovOHrAkszNtlrI_Ert1_cfBFIuwM",
-        "expire_date": "2024-01-06T11:47:22.944Z"
+        "value": "{\"name\": \"cache/73/12/7312e7d89bff3c84015f9c74dc634f04.jpg\", \"storage\": \"django.core.files.storage.filesystem.FileSystemStorage\", \"size\": [333, 250]}"
     }
 },
 {
@@ -776,6 +775,13 @@
     "pk": "sorl-thumbnail||image||3502e5b8a245e37e65cab7b94006446b",
     "fields": {
         "value": "{\"name\": \"cache/d4/5a/d45ad8c8891abb15bfee363c58499c67.jpg\", \"storage\": \"django.core.files.storage.filesystem.FileSystemStorage\", \"size\": [85, 57]}"
+    }
+},
+{
+    "model": "thumbnail.kvstore",
+    "pk": "sorl-thumbnail||image||37f9adf6ead47dab2781e4b643c59728",
+    "fields": {
+        "value": "{\"name\": \"cache/3f/c8/3fc873bc6200beec7de7520e55b98dfd.jpg\", \"storage\": \"django.core.files.storage.filesystem.FileSystemStorage\", \"size\": [375, 250]}"
     }
 },
 {
@@ -838,7 +844,7 @@
     "model": "thumbnail.kvstore",
     "pk": "sorl-thumbnail||thumbnails||41f8e0d3b6fc7500211dc60b0479294c",
     "fields": {
-        "value": "[\"3502e5b8a245e37e65cab7b94006446b\"]"
+        "value": "[\"3502e5b8a245e37e65cab7b94006446b\", \"37f9adf6ead47dab2781e4b643c59728\"]"
     }
 },
 {
@@ -859,7 +865,7 @@
     "model": "thumbnail.kvstore",
     "pk": "sorl-thumbnail||thumbnails||b97b0c7335bbfc584e9ed93de2fb0d72",
     "fields": {
-        "value": "[\"b4e6341b821d98fcd3a05c31a5430562\"]"
+        "value": "[\"0ab7103eb5fd215c5b031cbcd1535e94\", \"b4e6341b821d98fcd3a05c31a5430562\"]"
     }
 },
 {
@@ -1059,6 +1065,177 @@
     }
 },
 {
+    "model": "categories.skill",
+    "pk": 17,
+    "fields": {
+        "name": "React",
+        "slug": "react",
+        "normalized_name": "react"
+    }
+},
+{
+    "model": "categories.skill",
+    "pk": 18,
+    "fields": {
+        "name": "Flask",
+        "slug": "flask",
+        "normalized_name": "flask"
+    }
+},
+{
+    "model": "categories.skill",
+    "pk": 19,
+    "fields": {
+        "name": "FastAPI",
+        "slug": "fastapi",
+        "normalized_name": "fastapi"
+    }
+},
+{
+    "model": "categories.skill",
+    "pk": 20,
+    "fields": {
+        "name": "Kotlin",
+        "slug": "kotlin",
+        "normalized_name": "kotlin"
+    }
+},
+{
+    "model": "categories.skill",
+    "pk": 21,
+    "fields": {
+        "name": "Android Studio",
+        "slug": "androidstudio",
+        "normalized_name": "androidstudio"
+    }
+},
+{
+    "model": "categories.skill",
+    "pk": 22,
+    "fields": {
+        "name": "Github",
+        "slug": "github",
+        "normalized_name": "github"
+    }
+},
+{
+    "model": "categories.skill",
+    "pk": 23,
+    "fields": {
+        "name": "Gitlab",
+        "slug": "gitlab",
+        "normalized_name": "gitlab"
+    }
+},
+{
+    "model": "categories.skill",
+    "pk": 24,
+    "fields": {
+        "name": "Java",
+        "slug": "java",
+        "normalized_name": "java"
+    }
+},
+{
+    "model": "categories.skill",
+    "pk": 25,
+    "fields": {
+        "name": "XML",
+        "slug": "xml",
+        "normalized_name": "xml"
+    }
+},
+{
+    "model": "categories.skill",
+    "pk": 26,
+    "fields": {
+        "name": "Firebase",
+        "slug": "firebase",
+        "normalized_name": "firebase"
+    }
+},
+{
+    "model": "categories.skill",
+    "pk": 27,
+    "fields": {
+        "name": "RESTful",
+        "slug": "restful",
+        "normalized_name": "restful"
+    }
+},
+{
+    "model": "categories.skill",
+    "pk": 28,
+    "fields": {
+        "name": "ML",
+        "slug": "ml",
+        "normalized_name": "ml"
+    }
+},
+{
+    "model": "categories.skill",
+    "pk": 29,
+    "fields": {
+        "name": "PyTorch",
+        "slug": "pytorch",
+        "normalized_name": "pytorch"
+    }
+},
+{
+    "model": "categories.skill",
+    "pk": 30,
+    "fields": {
+        "name": "Scikit-learn",
+        "slug": "scikitlearn",
+        "normalized_name": "scikitlearn"
+    }
+},
+{
+    "model": "categories.skill",
+    "pk": 31,
+    "fields": {
+        "name": "Tensorflow",
+        "slug": "tensorflow",
+        "normalized_name": "tensorflow"
+    }
+},
+{
+    "model": "categories.skill",
+    "pk": 32,
+    "fields": {
+        "name": "Deep learning",
+        "slug": "deeplearning",
+        "normalized_name": "deeplearning"
+    }
+},
+{
+    "model": "categories.skill",
+    "pk": 33,
+    "fields": {
+        "name": "Data science",
+        "slug": "datascience",
+        "normalized_name": "datascience"
+    }
+},
+{
+    "model": "categories.skill",
+    "pk": 34,
+    "fields": {
+        "name": "Excel",
+        "slug": "excel",
+        "normalized_name": "excel"
+    }
+},
+{
+    "model": "categories.skill",
+    "pk": 35,
+    "fields": {
+        "name": "Google collab",
+        "slug": "googlecollab",
+        "normalized_name": "googlecollab"
+    }
+},
+{
     "model": "jobs.job",
     "pk": 1,
     "fields": {
@@ -1159,6 +1336,79 @@
     }
 },
 {
+    "model": "resume.resume",
+    "pk": 3,
+    "fields": {
+        "text": "Опытный Fullstack-разработчик с сильными навыками в разработке веб-приложений с использованием React и Django REST Framework.\r\n\r\nУверенно работаю с SQL и NoSQL базами данных, а также имею опыт работы с инструментами CI/CD.\r\n\r\nОчень целеустремленный и организованный профессионал, способный работать в команде или самостоятельно.",
+        "created_at": "2023-12-23T12:16:11.073Z",
+        "is_active": true,
+        "user": 3,
+        "category": null,
+        "subcategory": null,
+        "skills": [
+            1,
+            2,
+            5,
+            6,
+            7,
+            8,
+            9,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23
+        ]
+    }
+},
+{
+    "model": "resume.resume",
+    "pk": 4,
+    "fields": {
+        "text": "Опытный Android-разработчик с сильными навыками в разработке мобильных приложений на Android с использованием языков Java и Kotlin.\r\n\r\nУверенно работаю с фреймворками Espresso и JUnit для создания автоматизированных тестовых скриптов.\r\n\r\nОчень целеустремленный и организованный профессионал, способный работать в команде или самостоятельно",
+        "created_at": "2023-12-23T12:16:29.019Z",
+        "is_active": true,
+        "user": 4,
+        "category": null,
+        "subcategory": null,
+        "skills": [
+            3,
+            4,
+            20,
+            21,
+            24,
+            25,
+            26,
+            27
+        ]
+    }
+},
+{
+    "model": "resume.resume",
+    "pk": 5,
+    "fields": {
+        "text": "Я – опытный ML-разработчик, специализирующийся на работе с PyTorch. Моя карьера началась с того, что я работал над разработкой и тестированием моделей, способных обучаться на данных разных клиентов. Это включало в себя создание предиктивных моделей для DSP, оптимизацию стоимости закупки на аукционе и создание Look alike моделей и механизмов сбора аудиторных сегментов.\r\n\r\nЯ также активно работал над автоматизацией работы сервиса, включая получение данных, обработку данных, создание и обучение моделей, мониторинг работы моделей и дообучение моделей. Я всегда стремился быть в курсе развития рынка и генерировать идеи для улучшения продукта.",
+        "created_at": "2023-12-23T12:16:39.731Z",
+        "is_active": true,
+        "user": 5,
+        "category": null,
+        "subcategory": null,
+        "skills": [
+            2,
+            28,
+            29,
+            30,
+            31,
+            32,
+            33,
+            34,
+            35
+        ]
+    }
+},
+{
     "model": "users.user",
     "pk": 1,
     "fields": {
@@ -1183,7 +1433,7 @@
     "pk": 2,
     "fields": {
         "password": "pbkdf2_sha256$600000$SmpMkA18B0IB0m5E3GDDu9$MSlHRsf/rgRyo2iN66S3qEoxhbgcZhyfgdqq5evucFc=",
-        "last_login": "2023-12-23T11:44:57.105Z",
+        "last_login": "2023-12-23T12:27:58.711Z",
         "is_superuser": true,
         "username": "SuperUser",
         "first_name": "",
@@ -1194,6 +1444,66 @@
         "email": "andrey777-novikov777@yandex.ru",
         "image": "",
         "contacts": null,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.user",
+    "pk": 3,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$kDddWrIt1MtOvMcBeFWReW$Nhv/NjEAz9UACJ1AfFwdClSWTqi5gCF2QL5aJjhGBvU=",
+        "last_login": "2023-12-23T12:17:32.422Z",
+        "is_superuser": false,
+        "username": "DummyUser1",
+        "first_name": "Дамми",
+        "last_name": "Пользователь",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2023-12-23T12:16:10.759Z",
+        "email": "DummyMail1@yandex.ru",
+        "image": "",
+        "contacts": "WhatsApp:\r\n7(968)-7773-53-35\r\n\r\nTelegram:\r\n@BestUserEver",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.user",
+    "pk": 4,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$Jji4pXNIJSe6Cc5yoHxf9B$H0B3OVJnRdtmNdfLIJ+78rX4hEgTakrZyQlhbRzF848=",
+        "last_login": "2023-12-23T12:21:15.805Z",
+        "is_superuser": false,
+        "username": "DummyUser2",
+        "first_name": "Дамми 2",
+        "last_name": "Пользователь 2",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2023-12-23T12:16:28.712Z",
+        "email": "DummyMail2@yandex.ru",
+        "image": "",
+        "contacts": "Mail:\r\nbest_email@yandex.ru\r\n\r\nDiscord:\r\n@enterpreneur",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.user",
+    "pk": 5,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$HarPL9kkxk432IxeycgfSh$wVnk1aAP/dypdmPqJ073bi6IfF0iMkIS915ZJWnuqpg=",
+        "last_login": "2023-12-23T12:25:05.450Z",
+        "is_superuser": false,
+        "username": "DummyUser3",
+        "first_name": "Дамми 3",
+        "last_name": "Пользователь 3",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2023-12-23T12:16:39.422Z",
+        "email": "DummyMail3@yandex.ru",
+        "image": "",
+        "contacts": "Discord:\r\n@SQLEngineer\r\n\r\nTelegram:\r\n@CSSEngineer",
         "groups": [],
         "user_permissions": []
     }

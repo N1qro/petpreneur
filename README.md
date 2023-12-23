@@ -57,13 +57,30 @@ pip install -r requirements/test.txt
 cd petpreneur
 ```
 
-# Запуск проекта
+# Подготовка проекта
+1. Наполнить БД объектами
 ```
 python manage.py migrate
-python manage.py createsuperuser
 python manage.py loaddata fixtures/data.json
+```
+2. Загрузить картинки из media
+```
+Нужно переименовать папку media_fixture в media*
+```
+
+
+# Запуск проекта
+```
 python manage.py runserver
 ```
+
+### Уже созданные в фиктурах пользователи (Пароль test0000):
+
+* ProjectGiver
+* ProjectParticipator
+* DummyUser1
+* DummyUser2
+* DummyUser3
 
 ### База данных
 ![DataBase](ER.jpeg)
