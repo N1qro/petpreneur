@@ -2,8 +2,8 @@
 {% load thumbnail %}
 
 <div class="project--small">
-    {% if resume.user.image %}
-        {% thumbnail resume.user.image "100x57" as thumb %}
+    {% if job.image %}
+        {% thumbnail job.image "100x57" as thumb %}
             <img src="{{thumb.url}}" alt="project-image">
         {% endthumbnail %}
     {% endif %}
