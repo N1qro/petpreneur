@@ -102,6 +102,7 @@ h5, .h5 {
     font-size: 1.25rem;
     display: block;
     box-sizing: border-box;
+    resize: none;
 }
 
 .form-styled > p {
@@ -239,6 +240,10 @@ footer {
     width: fit-content;
 }
 
+.call-to-action a {
+    margin-inline: auto;
+}
+
 .call-to-action > h1 {
     font-size: min(5vw, 3rem);
     max-width: 50%;
@@ -330,6 +335,23 @@ footer {
     background-color: purple;
 }
 
+.skill-add-form {
+    flex-direction: row;
+    align-items: baseline;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.skill-add-form > button[type="submit"] {
+    width: fit-content;
+    height: fit-content;
+    margin-top: auto;
+}
+
+.skill-add-form > div:has(input[type="text"]) {
+    flex-grow: 1;
+}
+
 .profile--skill > button {
     all: unset;
 }
@@ -364,6 +386,11 @@ footer {
 
 .profile--project--related {
     flex: 1;
+}
+
+.project--card > * {
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .profile--projects--container {
@@ -447,6 +474,7 @@ footer {
 /* job-detail */
 
 .job--detail {
+    overflow-y: hidden;
     flex-direction: column;
     flex-wrap: nowrap;
 }
@@ -552,4 +580,87 @@ footer {
 
 .resume--contacts {
     grid-area: contacts;
+}
+
+/* signup / login */
+
+.signup--form--container {
+    height: 40vh;
+    padding: 20px 45px;
+
+    border-radius: 45px;
+    border: 5px solid #1B1A68;
+    background: linear-gradient(180deg, #3A38BE 0%, #63B4FF 100%);
+}
+
+.vertical--rectangle {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 45%;
+    padding: 2.5%;
+    border-radius: 45px;
+    border: 5px solid #1B1A68;
+    background: #6F6BF9;
+}
+
+.signup--wrapper > form > div:first-of-type {
+    margin-block: 5rem;
+}
+
+.vertical--rectangle > *:first-child {
+    margin-top: 0.5rem;
+}
+
+.vertical--rectangle > *:last-child {
+    margin-bottom: 0.5rem;
+}
+
+
+.signup--wrapper {
+    position: relative;
+    width: 80%;
+    margin: auto;
+    margin-top: 20%;
+}
+
+.signup--second--box {
+    position: absolute;
+    top: 50%;
+    transform: translate(25%, -50%);
+}
+
+.signup--second--box > a {
+    margin-top: 0.25rem;
+    margin-inline: auto;
+} 
+
+.rectangle--signup {
+    left: 15%;
+}
+
+.rectangle--login {
+    right: 15%;
+    height: 50vh;
+}
+
+.box--login {
+    left: 10%;
+}
+
+.box--signup {
+    right: 15%;
+}
+
+
+/* feedback */
+
+.feedback--form {
+    width: 33%;
+    margin: auto;
+    padding: 25px;
+}
+
+.feedback--form textarea {
+    height: 15vh;
 }

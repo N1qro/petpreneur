@@ -1,21 +1,25 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n buttons %}
 
 {% block content %}
-    <div class="container">
-        {% if messages %}
-            {% for message in messages %}
-                <div class="alert alert-success" role="alert">
-                    {{ message }}
-                </div>
-            {% endfor %}
-        {% endif %}
-        <h1>ЭТО ТЕСТОВАЯ ФОРМА</h1>
-        <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ feedback_form.as_p }}
-            {{ feedback_extra_form.as_p }}
-            <button type="submit" class="btn btn-primary">{% trans "Send" %}</button>
-        </form>
-    </div>
+    <form method="POST" class="profile--section form-styled feedback--form">
+        <h5 class="text-center">Обратная связь</h5>
+        {% csrf_token %}
+        {% for field in feedback_extra_form %}
+            <p>
+                <label for="{{field.id_for_label}}">{{field.label}}</label>
+                <br>
+                {{field}}
+            </p>
+        {% endfor %}
+        {% for field in feedback_form %}
+            <p>
+                <label for="{{field.id_for_label}}">{{field.label}}</label>
+                <br>
+                {{field}}
+            </p>
+        {% endfor %}
+        <p class="text-center">Время ожидание ответа составляет от 1 до 5 рабочих дней</p>
+        {% submit_button "Отправить" %}
+    </form>
 {% endblock %}

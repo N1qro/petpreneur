@@ -12,6 +12,10 @@ class UserCreationForm(
         model = users.models.User
         fields = (model.username.field.name, model.email.field.name)
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["password2"].label = "Повторите пароль"
+
 
 class PictureWidget(django.forms.widgets.FileInput):
     def render(self, name, value, attrs=None, **kwargs):

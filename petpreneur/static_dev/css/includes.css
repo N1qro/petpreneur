@@ -83,6 +83,7 @@ header > nav {
 }
 
 .navbar--message {
+    position: relative;
     text-align: center;
     font-size: 1.1rem;
     border-radius: 10px;
@@ -174,4 +175,23 @@ header > nav {
     background-color: #0000005d;
     border-radius: 5px;
     padding: 2px;
+}
+
+#navbar--message--close--button {
+    all: unset;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform: translate(-50%, 10%);
+    width: 20px;
+    height: fit-content;
+
+    color: white;
+    /* background-color: white; */
+    padding: 5px;
+
+    border: 2px solid white;
+    border-radius: 50%;    
+
+    text-align: center;
 }

@@ -1,0 +1,18 @@
+{% load buttons %}
+{% load thumbnail %}
+
+<div class="project--small">
+    {% if resume.user.image %}
+        {% thumbnail resume.user.image "100x57" as thumb %}
+            <img src="{{thumb.url}}" alt="project-image">
+        {% endthumbnail %}
+    {% endif %}
+    <p class="text-style-navtext">{{job.title}}</p>
+    <div method="POST">
+        {% url "resume:detail" resume.id as resume_redirect_url %}
+        <div class="flex-row gap1">
+            {% link_button "Резюме" resume_redirect_url %}
+        </div>
+        <time datetime="{{job.created_at}}">{{job.created_at}}</time>
+    </div>
+</div>

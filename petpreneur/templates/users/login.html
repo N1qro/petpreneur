@@ -1,14 +1,32 @@
 {% extends "base.html" %}
+{% load buttons %}
+
 {% block title %}
-    Войти
+    Регистрация
 {% endblock %}
 {% block content %}
-    {% if messages %}
-        {% for message in messages %}
-            <div class="alert alert-success" role="alert">
-                {{ message }}
+    <div class="signup--wrapper">
+        <div class="signup--form--container">
+            
+        </div>
+        <div class="signup--second--box box--login">
+            {% url "users:signup" as signup_url %}
+            <p class="text-center">Впервые здесь?</p>
+            {% link_button "Регистрация" signup_url color="black" state="hovered" %}
+        </div>
+        <form method="POST" class="vertical--rectangle rectangle--login form-styled">
+            <h5 class="text-center">Авторизация</h5>
+            {% csrf_token %}
+            <div class="">
+                {% for field in form %}
+                    <p>
+                        <label for="{{field.id_for_label}}">{{field.label}}</label>
+                        <br>
+                        {{field}}
+                    </p>
+                {% endfor %}
             </div>
-        {% endfor %}
-    {% endif %}
-    {% include "includes/users_form.html" with label="Вход в аккаунт" btn_text="Войти" %}
+            {% submit_button "Войти" %}
+        </form>
+    </div>
 {% endblock content %}

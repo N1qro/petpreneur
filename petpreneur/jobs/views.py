@@ -1,3 +1,4 @@
+import django.contrib.auth
 import django.contrib.messages
 import django.db.models
 import django.http
@@ -59,13 +60,23 @@ class JobEditView(django.views.generic.TemplateView):
         return super().get(request, *args, **kwargs)
 
     def post(self, request, pk):
-        if "info_change" in request.POST:
+        if "info_change" in request.POST:  # noqa R505
             form = jobs.forms.CreateJobForm(
                 request.POST or None,
                 instance=self.get_job_model(pk),
             )
             if form.is_valid():
                 form.save()
+                django.contrib.messages.success(
+                    request,
+                    "Данные о проекте успешно изменены!",
+                )
+            else:
+                django.contrib.messages.error(
+                    request,
+                    "Что-то пошло не так...",
+                )
+            return django.shortcuts.redirect("users:projects")
         elif "skill_add" in request.POST:
             form = resume.forms.SkillAddForm(request.POST or None)
             skill, was_created = form.save()
@@ -147,6 +158,10 @@ class JobsView(django.views.generic.ListView):
         return self.model.objects.filter(is_active=True)
 
 
+@django.utils.decorators.method_decorator(
+    django.contrib.auth.decorators.login_required,
+    name="dispatch",
+)
 class JobDetailView(django.views.generic.DetailView):
     model = jobs.models.Job
     template_name = "jobs/detail.html"

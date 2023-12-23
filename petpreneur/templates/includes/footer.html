@@ -1,7 +1,8 @@
 <footer>
     <p>Petpreneur © 2023. All rights reserved.</p>
     <nav>
-        <a href="#">Обратная связь</a>
-        <a href="#">Связаться с нами</a>
+        {% url "feedback:feedback" as feedback_url %}
+        <a href="{{feedback_url}}">Обратная связь</a>
+        <a href="{{mailto_link}}">Связаться с нами</a>
     </nav>
 </footer>

@@ -1,14 +1,49 @@
 {% extends "base.html" %}
+{% load buttons %}
+
 {% block title %}
     Регистрация
 {% endblock %}
 {% block content %}
-    {% if messages %}
-        {% for message in messages %}
-            <div class="alert alert-success" role="alert">
-                {{ message }}
+    <div class="signup--wrapper">
+        <div class="signup--form--container">
+            
+        </div>
+        <div class="signup--second--box box--signup">
+            {% url "users:login" as login_url %}
+            <p>Уже есть учётная запись?</p>
+            {% link_button "Войти" login_url color="black" state="hovered" %}
+        </div>
+        <form method="POST" class="vertical--rectangle rectangle--signup form-styled">
+            <h5 class="text-center">Регистрация</h5>
+            {% csrf_token %}
+            <div class="">
+                {% for field in form %}
+                    {% if field.field.widget.input_type != "password" %}
+                        <p>
+                            <label for="{{field.id_for_label}}">{{field.label}}</label>
+                            <br>
+                            {{field}}
+                        </p>
+                    {% endif %}
+                {% endfor %}
+                <div class="flex-row gap1">
+                    <p>
+                        <label for="{{form.password1.id_for_label}}">{{form.password1.label}}</label>
+                        <br>
+                        {{form.password1}}
+                    </p>
+                    <p>
+                        <label for="{{form.password2.id_for_label}}">{{form.password2.label}}</label>
+                        <br>
+                        {{form.password2}}
+                    </p>
+                </div>
             </div>
-        {% endfor %}
-    {% endif %}
-    {% include "includes/users_form.html" with label="Регистрация" btn_text="Зарегистрироваться" %}
+            <div>
+                {% submit_button "Зарегистрироваться" %}
+                <p class="text-center">Создав аккаунт, вы принимаете <span>условия пользования*</span></p>
+            </div>
+        </form>
+    </div>
 {% endblock content %}

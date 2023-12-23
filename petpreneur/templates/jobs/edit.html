@@ -4,7 +4,7 @@
 {% block content %}
 <div class="profile-container job-creation">
     <div class="flex-grow job-creation-form-container">
-        <h5 class="text-center">Информация</h5>
+        <h5 class="text-center project--title">Информация</h5>
         <form method="POST" enctype="multipart/form-data" class="form-styled">
             {% csrf_token %}
             {% for field in form %}
@@ -19,23 +19,25 @@
         </form>
     </div>
     <div class="flex-grow">
-        <h5 class="text-center">Навыки или умения, нужные проекту</h5>
+        <h5 class="text-center project--title">Навыки или умения, нужные проекту</h5>
         <form method="POST" class="profile--skills--container job--creation--skills--container">
             {% csrf_token %}
             {% for skill in skills.all %}
             <span class="profile--skill">{{skill}} <button type="submit" name="skill_delete" value="{{skill}}">X</button></span>
             {% endfor %}
         </form>
-        <form method="POST" class="form-styled">
+        <form method="POST" class="form-styled skill-add-form">
             {% csrf_token %}
             {% for field in skill_form %}
-                <label for="{{field.id_for_label}}">{{field.label}}</label>
-                {{field}}
+                <div>
+                    <label for="{{field.id_for_label}}">{{field.label}}</label>
+                    {{field}}
+                </div>
             {% endfor %}
             {% submit_button "Добавить" name="skill_add" %}
         </form>
         <!-- Другой контент -->
-        <h5 class="text-center">Предупреждение</h5>
+        <h5 class="text-center project--title mt-1">Предупреждение</h5>
         <ul class="text-style-navtext profile--section mt-1 list--offset">
             <li>Не использовать NSFW изображения для фотографий проекта</li>
             <li>Описание не должно содержать никаких ссылок</li>
