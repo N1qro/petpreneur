@@ -1,0 +1,1201 @@
+[
+{
+    "model": "admin.logentry",
+    "pk": 1,
+    "fields": {
+        "action_time": "2023-12-23T11:32:00.976Z",
+        "user": 2,
+        "content_type": 7,
+        "object_id": "1",
+        "object_repr": "IT",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 2,
+    "fields": {
+        "action_time": "2023-12-23T11:32:03.992Z",
+        "user": 2,
+        "content_type": 7,
+        "object_id": "2",
+        "object_repr": "Design",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 3,
+    "fields": {
+        "action_time": "2023-12-23T11:32:12.599Z",
+        "user": 2,
+        "content_type": 8,
+        "object_id": "1",
+        "object_repr": "Frontend",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 4,
+    "fields": {
+        "action_time": "2023-12-23T11:32:18.318Z",
+        "user": 2,
+        "content_type": 8,
+        "object_id": "2",
+        "object_repr": "Backend",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 5,
+    "fields": {
+        "action_time": "2023-12-23T11:32:23.519Z",
+        "user": 2,
+        "content_type": 8,
+        "object_id": "3",
+        "object_repr": "Fullstack",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 6,
+    "fields": {
+        "action_time": "2023-12-23T11:32:28.415Z",
+        "user": 2,
+        "content_type": 8,
+        "object_id": "4",
+        "object_repr": "ML",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 7,
+    "fields": {
+        "action_time": "2023-12-23T11:38:54.923Z",
+        "user": 2,
+        "content_type": 14,
+        "object_id": "2",
+        "object_repr": "SuperUser",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"\\u0422\\u0435\\u043a\\u0441\\u0442\", \"\\u0410\\u043a\\u0442\\u0438\\u0432\\u043d\\u043e\", \"\\u041d\\u0430\\u0432\\u044b\\u043a\\u0438\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 8,
+    "fields": {
+        "action_time": "2023-12-23T11:39:01.109Z",
+        "user": 2,
+        "content_type": 14,
+        "object_id": "2",
+        "object_repr": "SuperUser",
+        "action_flag": 2,
+        "change_message": "[]"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 1,
+    "fields": {
+        "name": "Can add log entry",
+        "content_type": 1,
+        "codename": "add_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 2,
+    "fields": {
+        "name": "Can change log entry",
+        "content_type": 1,
+        "codename": "change_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 3,
+    "fields": {
+        "name": "Can delete log entry",
+        "content_type": 1,
+        "codename": "delete_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 4,
+    "fields": {
+        "name": "Can view log entry",
+        "content_type": 1,
+        "codename": "view_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 5,
+    "fields": {
+        "name": "Can add permission",
+        "content_type": 2,
+        "codename": "add_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 6,
+    "fields": {
+        "name": "Can change permission",
+        "content_type": 2,
+        "codename": "change_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 7,
+    "fields": {
+        "name": "Can delete permission",
+        "content_type": 2,
+        "codename": "delete_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 8,
+    "fields": {
+        "name": "Can view permission",
+        "content_type": 2,
+        "codename": "view_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 9,
+    "fields": {
+        "name": "Can add group",
+        "content_type": 3,
+        "codename": "add_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 10,
+    "fields": {
+        "name": "Can change group",
+        "content_type": 3,
+        "codename": "change_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 11,
+    "fields": {
+        "name": "Can delete group",
+        "content_type": 3,
+        "codename": "delete_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 12,
+    "fields": {
+        "name": "Can view group",
+        "content_type": 3,
+        "codename": "view_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 13,
+    "fields": {
+        "name": "Can add content type",
+        "content_type": 4,
+        "codename": "add_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 14,
+    "fields": {
+        "name": "Can change content type",
+        "content_type": 4,
+        "codename": "change_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 15,
+    "fields": {
+        "name": "Can delete content type",
+        "content_type": 4,
+        "codename": "delete_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 16,
+    "fields": {
+        "name": "Can view content type",
+        "content_type": 4,
+        "codename": "view_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 17,
+    "fields": {
+        "name": "Can add session",
+        "content_type": 5,
+        "codename": "add_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 18,
+    "fields": {
+        "name": "Can change session",
+        "content_type": 5,
+        "codename": "change_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 19,
+    "fields": {
+        "name": "Can delete session",
+        "content_type": 5,
+        "codename": "delete_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 20,
+    "fields": {
+        "name": "Can view session",
+        "content_type": 5,
+        "codename": "view_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 21,
+    "fields": {
+        "name": "Can add kv store",
+        "content_type": 6,
+        "codename": "add_kvstore"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 22,
+    "fields": {
+        "name": "Can change kv store",
+        "content_type": 6,
+        "codename": "change_kvstore"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 23,
+    "fields": {
+        "name": "Can delete kv store",
+        "content_type": 6,
+        "codename": "delete_kvstore"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 24,
+    "fields": {
+        "name": "Can view kv store",
+        "content_type": 6,
+        "codename": "view_kvstore"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 25,
+    "fields": {
+        "name": "Can add категория",
+        "content_type": 7,
+        "codename": "add_category"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 26,
+    "fields": {
+        "name": "Can change категория",
+        "content_type": 7,
+        "codename": "change_category"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 27,
+    "fields": {
+        "name": "Can delete категория",
+        "content_type": 7,
+        "codename": "delete_category"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 28,
+    "fields": {
+        "name": "Can view категория",
+        "content_type": 7,
+        "codename": "view_category"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 29,
+    "fields": {
+        "name": "Can add подкатегория",
+        "content_type": 8,
+        "codename": "add_subcategory"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 30,
+    "fields": {
+        "name": "Can change подкатегория",
+        "content_type": 8,
+        "codename": "change_subcategory"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 31,
+    "fields": {
+        "name": "Can delete подкатегория",
+        "content_type": 8,
+        "codename": "delete_subcategory"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 32,
+    "fields": {
+        "name": "Can view подкатегория",
+        "content_type": 8,
+        "codename": "view_subcategory"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 33,
+    "fields": {
+        "name": "Can add навык",
+        "content_type": 9,
+        "codename": "add_skill"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 34,
+    "fields": {
+        "name": "Can change навык",
+        "content_type": 9,
+        "codename": "change_skill"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 35,
+    "fields": {
+        "name": "Can delete навык",
+        "content_type": 9,
+        "codename": "delete_skill"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 36,
+    "fields": {
+        "name": "Can view навык",
+        "content_type": 9,
+        "codename": "view_skill"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 37,
+    "fields": {
+        "name": "Can add данные к обращению",
+        "content_type": 10,
+        "codename": "add_feedbackextra"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 38,
+    "fields": {
+        "name": "Can change данные к обращению",
+        "content_type": 10,
+        "codename": "change_feedbackextra"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 39,
+    "fields": {
+        "name": "Can delete данные к обращению",
+        "content_type": 10,
+        "codename": "delete_feedbackextra"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 40,
+    "fields": {
+        "name": "Can view данные к обращению",
+        "content_type": 10,
+        "codename": "view_feedbackextra"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 41,
+    "fields": {
+        "name": "Can add обращение",
+        "content_type": 11,
+        "codename": "add_feedback"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 42,
+    "fields": {
+        "name": "Can change обращение",
+        "content_type": 11,
+        "codename": "change_feedback"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 43,
+    "fields": {
+        "name": "Can delete обращение",
+        "content_type": 11,
+        "codename": "delete_feedback"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 44,
+    "fields": {
+        "name": "Can view обращение",
+        "content_type": 11,
+        "codename": "view_feedback"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 45,
+    "fields": {
+        "name": "Can add работа",
+        "content_type": 12,
+        "codename": "add_job"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 46,
+    "fields": {
+        "name": "Can change работа",
+        "content_type": 12,
+        "codename": "change_job"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 47,
+    "fields": {
+        "name": "Can delete работа",
+        "content_type": 12,
+        "codename": "delete_job"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 48,
+    "fields": {
+        "name": "Can view работа",
+        "content_type": 12,
+        "codename": "view_job"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 49,
+    "fields": {
+        "name": "Can add заявка",
+        "content_type": 13,
+        "codename": "add_jobrequests"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 50,
+    "fields": {
+        "name": "Can change заявка",
+        "content_type": 13,
+        "codename": "change_jobrequests"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 51,
+    "fields": {
+        "name": "Can delete заявка",
+        "content_type": 13,
+        "codename": "delete_jobrequests"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 52,
+    "fields": {
+        "name": "Can view заявка",
+        "content_type": 13,
+        "codename": "view_jobrequests"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 53,
+    "fields": {
+        "name": "Can add резюме",
+        "content_type": 14,
+        "codename": "add_resume"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 54,
+    "fields": {
+        "name": "Can change резюме",
+        "content_type": 14,
+        "codename": "change_resume"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 55,
+    "fields": {
+        "name": "Can delete резюме",
+        "content_type": 14,
+        "codename": "delete_resume"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 56,
+    "fields": {
+        "name": "Can view резюме",
+        "content_type": 14,
+        "codename": "view_resume"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 57,
+    "fields": {
+        "name": "Can add user",
+        "content_type": 15,
+        "codename": "add_user"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 58,
+    "fields": {
+        "name": "Can change user",
+        "content_type": 15,
+        "codename": "change_user"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 59,
+    "fields": {
+        "name": "Can delete user",
+        "content_type": 15,
+        "codename": "delete_user"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 60,
+    "fields": {
+        "name": "Can view user",
+        "content_type": 15,
+        "codename": "view_user"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 1,
+    "fields": {
+        "app_label": "admin",
+        "model": "logentry"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 2,
+    "fields": {
+        "app_label": "auth",
+        "model": "permission"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 3,
+    "fields": {
+        "app_label": "auth",
+        "model": "group"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 4,
+    "fields": {
+        "app_label": "contenttypes",
+        "model": "contenttype"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 5,
+    "fields": {
+        "app_label": "sessions",
+        "model": "session"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 6,
+    "fields": {
+        "app_label": "thumbnail",
+        "model": "kvstore"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 7,
+    "fields": {
+        "app_label": "categories",
+        "model": "category"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 8,
+    "fields": {
+        "app_label": "categories",
+        "model": "subcategory"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 9,
+    "fields": {
+        "app_label": "categories",
+        "model": "skill"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 10,
+    "fields": {
+        "app_label": "feedback",
+        "model": "feedbackextra"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 11,
+    "fields": {
+        "app_label": "feedback",
+        "model": "feedback"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 12,
+    "fields": {
+        "app_label": "jobs",
+        "model": "job"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 13,
+    "fields": {
+        "app_label": "jobs",
+        "model": "jobrequests"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 14,
+    "fields": {
+        "app_label": "resume",
+        "model": "resume"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 15,
+    "fields": {
+        "app_label": "users",
+        "model": "user"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "6xywpihub08i5akuqt9mr8ucoz1brtv6",
+    "fields": {
+        "session_data": ".eJxVjEEOwiAQRe_C2hBpOxRcuu8ZyMwwSNVAUtqV8e7apAvd_vfef6mA25rD1mQJc1QXZdTpdyPkh5QdxDuWW9Vcy7rMpHdFH7TpqUZ5Xg_37yBjy996cJhScizWjoOQTyIRgMgwWuexM8YLWmB2vViM3Rl49CwMJN72BOr9AR0bOTs:1rH0TS:pEWKdwrRVOapM3sovOHrAkszNtlrI_Ert1_cfBFIuwM",
+        "expire_date": "2024-01-06T11:47:22.944Z"
+    }
+},
+{
+    "model": "thumbnail.kvstore",
+    "pk": "sorl-thumbnail||image||3502e5b8a245e37e65cab7b94006446b",
+    "fields": {
+        "value": "{\"name\": \"cache/d4/5a/d45ad8c8891abb15bfee363c58499c67.jpg\", \"storage\": \"django.core.files.storage.filesystem.FileSystemStorage\", \"size\": [85, 57]}"
+    }
+},
+{
+    "model": "thumbnail.kvstore",
+    "pk": "sorl-thumbnail||image||41f8e0d3b6fc7500211dc60b0479294c",
+    "fields": {
+        "value": "{\"name\": \"jobs/images/1_23/plof.png\", \"storage\": \"django.core.files.storage.filesystem.FileSystemStorage\", \"size\": [1200, 800]}"
+    }
+},
+{
+    "model": "thumbnail.kvstore",
+    "pk": "sorl-thumbnail||image||8c200528cca259237c03b44b61294eeb",
+    "fields": {
+        "value": "{\"name\": \"users/images/1/danya.webp\", \"storage\": \"django.core.files.storage.filesystem.FileSystemStorage\", \"size\": [296, 320]}"
+    }
+},
+{
+    "model": "thumbnail.kvstore",
+    "pk": "sorl-thumbnail||image||a7d705c1e64b5e1939415dc3a140d46a",
+    "fields": {
+        "value": "{\"name\": \"cache/c6/3b/c63b66cb47dd373d8c82ec5337dbc40c.jpg\", \"storage\": \"django.core.files.storage.filesystem.FileSystemStorage\", \"size\": [300, 300]}"
+    }
+},
+{
+    "model": "thumbnail.kvstore",
+    "pk": "sorl-thumbnail||image||a92104210f6671b10142929bedf98687",
+    "fields": {
+        "value": "{\"name\": \"cache/86/86/8686b6ec7409deb5a1a0dcca42873f41.jpg\", \"storage\": \"django.core.files.storage.filesystem.FileSystemStorage\", \"size\": [86, 57]}"
+    }
+},
+{
+    "model": "thumbnail.kvstore",
+    "pk": "sorl-thumbnail||image||b4e6341b821d98fcd3a05c31a5430562",
+    "fields": {
+        "value": "{\"name\": \"cache/a2/a5/a2a5afcdb2183e235f8502274faab039.jpg\", \"storage\": \"django.core.files.storage.filesystem.FileSystemStorage\", \"size\": [76, 57]}"
+    }
+},
+{
+    "model": "thumbnail.kvstore",
+    "pk": "sorl-thumbnail||image||b90ce11a2e43d642ef2fa07949abb64d",
+    "fields": {
+        "value": "{\"name\": \"jobs/images/1_23/enots.jpeg\", \"storage\": \"django.core.files.storage.filesystem.FileSystemStorage\", \"size\": [1620, 1080]}"
+    }
+},
+{
+    "model": "thumbnail.kvstore",
+    "pk": "sorl-thumbnail||image||b97b0c7335bbfc584e9ed93de2fb0d72",
+    "fields": {
+        "value": "{\"name\": \"jobs/images/1_23/yl.jpg\", \"storage\": \"django.core.files.storage.filesystem.FileSystemStorage\", \"size\": [960, 720]}"
+    }
+},
+{
+    "model": "thumbnail.kvstore",
+    "pk": "sorl-thumbnail||image||ed24ba74fd8396e835c1c4d0e2474191",
+    "fields": {
+        "value": "{\"name\": \"cache/02/23/0223db652f060c81a1a700de8e41a62d.jpg\", \"storage\": \"django.core.files.storage.filesystem.FileSystemStorage\", \"size\": [375, 250]}"
+    }
+},
+{
+    "model": "thumbnail.kvstore",
+    "pk": "sorl-thumbnail||thumbnails||41f8e0d3b6fc7500211dc60b0479294c",
+    "fields": {
+        "value": "[\"3502e5b8a245e37e65cab7b94006446b\"]"
+    }
+},
+{
+    "model": "thumbnail.kvstore",
+    "pk": "sorl-thumbnail||thumbnails||8c200528cca259237c03b44b61294eeb",
+    "fields": {
+        "value": "[\"a7d705c1e64b5e1939415dc3a140d46a\"]"
+    }
+},
+{
+    "model": "thumbnail.kvstore",
+    "pk": "sorl-thumbnail||thumbnails||b90ce11a2e43d642ef2fa07949abb64d",
+    "fields": {
+        "value": "[\"a92104210f6671b10142929bedf98687\", \"ed24ba74fd8396e835c1c4d0e2474191\"]"
+    }
+},
+{
+    "model": "thumbnail.kvstore",
+    "pk": "sorl-thumbnail||thumbnails||b97b0c7335bbfc584e9ed93de2fb0d72",
+    "fields": {
+        "value": "[\"b4e6341b821d98fcd3a05c31a5430562\"]"
+    }
+},
+{
+    "model": "categories.category",
+    "pk": 1,
+    "fields": {
+        "name": "IT",
+        "slug": "it"
+    }
+},
+{
+    "model": "categories.category",
+    "pk": 2,
+    "fields": {
+        "name": "Design",
+        "slug": "design"
+    }
+},
+{
+    "model": "categories.subcategory",
+    "pk": 1,
+    "fields": {
+        "name": "Frontend",
+        "slug": "frontend",
+        "category": 1
+    }
+},
+{
+    "model": "categories.subcategory",
+    "pk": 2,
+    "fields": {
+        "name": "Backend",
+        "slug": "backend",
+        "category": 1
+    }
+},
+{
+    "model": "categories.subcategory",
+    "pk": 3,
+    "fields": {
+        "name": "Fullstack",
+        "slug": "fullstack",
+        "category": 1
+    }
+},
+{
+    "model": "categories.subcategory",
+    "pk": 4,
+    "fields": {
+        "name": "ML",
+        "slug": "ml",
+        "category": 1
+    }
+},
+{
+    "model": "categories.skill",
+    "pk": 1,
+    "fields": {
+        "name": "Django",
+        "slug": "django",
+        "normalized_name": "django"
+    }
+},
+{
+    "model": "categories.skill",
+    "pk": 2,
+    "fields": {
+        "name": "Python",
+        "slug": "python",
+        "normalized_name": "python"
+    }
+},
+{
+    "model": "categories.skill",
+    "pk": 3,
+    "fields": {
+        "name": "UnitTest",
+        "slug": "unittest",
+        "normalized_name": "unittest"
+    }
+},
+{
+    "model": "categories.skill",
+    "pk": 4,
+    "fields": {
+        "name": "CI/CD",
+        "slug": "cicd",
+        "normalized_name": "cicd"
+    }
+},
+{
+    "model": "categories.skill",
+    "pk": 5,
+    "fields": {
+        "name": "Figma",
+        "slug": "figma",
+        "normalized_name": "figma"
+    }
+},
+{
+    "model": "categories.skill",
+    "pk": 6,
+    "fields": {
+        "name": "HTML",
+        "slug": "html",
+        "normalized_name": "html"
+    }
+},
+{
+    "model": "categories.skill",
+    "pk": 7,
+    "fields": {
+        "name": "CSS",
+        "slug": "css",
+        "normalized_name": "css"
+    }
+},
+{
+    "model": "categories.skill",
+    "pk": 8,
+    "fields": {
+        "name": "JS",
+        "slug": "js",
+        "normalized_name": "js"
+    }
+},
+{
+    "model": "categories.skill",
+    "pk": 9,
+    "fields": {
+        "name": "Photoshop",
+        "slug": "photoshop",
+        "normalized_name": "photoshop"
+    }
+},
+{
+    "model": "categories.skill",
+    "pk": 10,
+    "fields": {
+        "name": "DRF",
+        "slug": "drf",
+        "normalized_name": "drf"
+    }
+},
+{
+    "model": "categories.skill",
+    "pk": 11,
+    "fields": {
+        "name": "Стрессоустойчивость",
+        "slug": "stressoustojchivost",
+        "normalized_name": "stressoustojchivost"
+    }
+},
+{
+    "model": "categories.skill",
+    "pk": 12,
+    "fields": {
+        "name": "Жестокость",
+        "slug": "zhestokost",
+        "normalized_name": "zhestokost"
+    }
+},
+{
+    "model": "categories.skill",
+    "pk": 13,
+    "fields": {
+        "name": "Беспощадность",
+        "slug": "besposchadnost",
+        "normalized_name": "besposchadnost"
+    }
+},
+{
+    "model": "categories.skill",
+    "pk": 14,
+    "fields": {
+        "name": "Умение готовить плов",
+        "slug": "umeniegotovitplov",
+        "normalized_name": "umeniegotovitplov"
+    }
+},
+{
+    "model": "categories.skill",
+    "pk": 15,
+    "fields": {
+        "name": "Готовка",
+        "slug": "gotovka",
+        "normalized_name": "gotovka"
+    }
+},
+{
+    "model": "categories.skill",
+    "pk": 16,
+    "fields": {
+        "name": "Искусственный Интеллект",
+        "slug": "iskusstvennyjintellekt",
+        "normalized_name": "iskusstvennyjintellekt"
+    }
+},
+{
+    "model": "jobs.job",
+    "pk": 1,
+    "fields": {
+        "text": "Ищу в команду Python Django разработчика и UI/UX дизайнера. Это будет небольшой проект в пару страничек, где пользователю смогут обмениваться фотографиями енотов и создавать статьи об их личной жизни.",
+        "created_at": "2023-12-23T11:36:48.163Z",
+        "is_active": true,
+        "user": 1,
+        "category": 1,
+        "subcategory": 2,
+        "title": "Django-проект интернет магазина \"Шальные ручки\"",
+        "image": "jobs/images/1_23/enots.jpeg",
+        "skills": [
+            1,
+            2,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+        ]
+    }
+},
+{
+    "model": "jobs.job",
+    "pk": 2,
+    "fields": {
+        "text": "Ищу в команду разработчиков-тестеров, готовых создать решение, развертывающее Django-проекты учеников локально и проверяя их работоспособность по заранее заготовленным тестам.",
+        "created_at": "2023-12-23T11:51:39.247Z",
+        "is_active": true,
+        "user": 1,
+        "category": 1,
+        "subcategory": 2,
+        "title": "Создать автоматическую проверку LMS заданий",
+        "image": "jobs/images/1_23/yl.jpg",
+        "skills": [
+            1,
+            2,
+            3,
+            11,
+            12,
+            13,
+            14
+        ]
+    }
+},
+{
+    "model": "jobs.job",
+    "pk": 3,
+    "fields": {
+        "text": "Я очень люблю своих учеников, но иногда они не сортируют зависимости по алфавиту, заставляя меня переживать за будущее производительности проекта. Таких учеников я хочу наказывать, но так как мера наказания в виде взыскивания полцарства и коней уже не актуальна, я бы хотел научиться делать из них плов. В команду нужны искусные шеф повара и джангисты, чтобы выявлять вкус..уязвимые точки учеников и превращать их в изысканный плов",
+        "created_at": "2023-12-23T12:08:37.834Z",
+        "is_active": true,
+        "user": 1,
+        "category": 1,
+        "subcategory": 4,
+        "title": "Создать технологию по приготовлению плова из джангистов",
+        "image": "jobs/images/1_23/plof.png",
+        "skills": [
+            1,
+            13,
+            15,
+            16
+        ]
+    }
+},
+{
+    "model": "resume.resume",
+    "pk": 1,
+    "fields": {
+        "text": "Умею писать самые сильные тесты в мире.\r\n\r\nКогда писал их для Яндекс LMS, ребята, которые испытывали их на себе, почти никогда не вписывались в дедлайны, но их программы зато были на самом высоком уровне! 😉\r\n\r\nЛид и лектор,\r\nGoogle 🤠",
+        "created_at": "2023-12-23T11:15:25.668Z",
+        "is_active": true,
+        "user": 1,
+        "category": null,
+        "subcategory": null,
+        "skills": [
+            1,
+            2,
+            3,
+            4
+        ]
+    }
+},
+{
+    "model": "resume.resume",
+    "pk": 2,
+    "fields": {
+        "text": "Как ты сюда попал? Чаво 🤨",
+        "created_at": "2023-12-23T11:31:16.612Z",
+        "is_active": false,
+        "user": 2,
+        "category": null,
+        "subcategory": null,
+        "skills": [
+            3
+        ]
+    }
+},
+{
+    "model": "users.user",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$qKcwsripFFDFdxqUBwt7OQ$OoF+OPSgzBhRsRW/VnZHJE33dcj46C0WIqwdYXnkRls=",
+        "last_login": "2023-12-23T11:47:22.918Z",
+        "is_superuser": false,
+        "username": "ProjectGiver",
+        "first_name": "Данила",
+        "last_name": "Ерёмин",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2023-12-23T11:15:25.361Z",
+        "email": "danya_is_a_great_man@yandex.ru",
+        "image": "users/images/1/danya.webp",
+        "contacts": "telegram:\r\n@danilaeremin\r\n\r\nemail:\r\nipupil@yandex.ru",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.user",
+    "pk": 2,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$SmpMkA18B0IB0m5E3GDDu9$MSlHRsf/rgRyo2iN66S3qEoxhbgcZhyfgdqq5evucFc=",
+        "last_login": "2023-12-23T11:44:57.105Z",
+        "is_superuser": true,
+        "username": "SuperUser",
+        "first_name": "",
+        "last_name": "",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2023-12-23T11:31:16.312Z",
+        "email": "andrey777-novikov777@yandex.ru",
+        "image": "",
+        "contacts": null,
+        "groups": [],
+        "user_permissions": []
+    }
+}
+]

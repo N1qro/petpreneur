@@ -7,7 +7,7 @@
         <div>
             <div class="profile--section resume--resume">
                 <h5 class="text-center">Описание</h5>
-                <p class="resume--text">{{resume.text}}</p>
+                <p class="resume--text">{{resume.text|linebreaksbr|linebreaksbr}}</p>
             </div>
             <div class="profile--section resume--skills">
                 <h5 class="text-center">Навыки</h5>
@@ -25,7 +25,7 @@
                 <h5 class="text-center">Контакты</h5>
                 <p class="resume--text">
                     {% if resume.user.contacts %}
-                        {{resume.user.contacts}}
+                        {{resume.user.contacts|linebreaksbr|linebreaksbr}}
                     {% else %}
                         Пользователь не оставил контактов.
                         В скором времени он свяжется с вами сам
