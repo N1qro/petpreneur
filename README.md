@@ -10,7 +10,7 @@
 # Установка 
 ## Клонирование репозитория
 ```
-git clone https://gitlab.crja72.ru/django_2023/projects/petpreneur
+git clone https://github.com/N1qro/petpreneur.git
 ```
 ## Создание виртуального окружения
 ### Для Linux
