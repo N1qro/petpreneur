@@ -1,5 +1,3 @@
-![Pipeline Status](https://gitlab.crja72.ru/django_2023/projects/petpreneur/badges/main/pipeline.svg)
-
 # Petpreneur
 
 Сайт для объединения энтузиастов и единомышленников из разных сфер деятельности.
